@@ -16,10 +16,19 @@ namespace EindOpdrachtCsharp
         
 
         public bool drawer = false;
-        
+        public string answer = null;
 
         public GameClient(TcpClient client) : base(client)
         {
+        }
+
+        public override void sendMessage(CommandsToSend command, object data)
+        {
+            base.sendMessage(command, data);
+            if (command == CommandsToSend.ANSWER)
+                answer = data + "";
+
+            Console.WriteLine("SENDING " + data);
         }
 
         public override void parseReceivedObject(object obj)

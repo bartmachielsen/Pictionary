@@ -17,7 +17,7 @@ namespace EindOpdrachtCsharp.ConnectionManagers
         private TcpClient client;
         private bool connected = true;
 
-        public delegate void DataReceived(object data);
+        public delegate void DataReceived(object data, object sender);
         public DataReceived notifyOnData;
 
         public TCPConnector(TcpClient client)
@@ -42,8 +42,7 @@ namespace EindOpdrachtCsharp.ConnectionManagers
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine(e);
-                Console.Beep(100,1);
+                Console.WriteLine(e);
             }
         }
 
@@ -74,11 +73,11 @@ namespace EindOpdrachtCsharp.ConnectionManagers
         public virtual void parseReceivedObject(object obj)
         {
             if(notifyOnData != null)
-                notifyOnData.Invoke(obj);
+                notifyOnData.Invoke(obj,this);
         }
 
     }
-
+    [Serializable]
     public struct message
     {
         public CommandsToSend command;

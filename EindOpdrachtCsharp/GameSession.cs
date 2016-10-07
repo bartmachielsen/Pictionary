@@ -35,6 +35,15 @@ namespace EindOpdrachtCsharp
             server.notifyOnData += parseDataFromDrawer;
             server.sendData(CommandsToSend.DRAWER);
             drawer = server.ToString();
+
+            foreach (var watcher in participants)
+            {
+                if (watcher != server)
+                {
+                    watcher.notifyOnData += parseDataFromWatchers;
+                }
+            }
+
         }
 
         public bool allReady()
@@ -57,7 +66,34 @@ namespace EindOpdrachtCsharp
             }
         }
 
-        public void parseDataFromDrawer(object obj)
+        public void parseDataFromWatchers(object obj, object sender)
+        {
+            Console.WriteLine(sender);
+            GameServer gameSender = (GameServer) sender;
+            if (obj is message)
+            {
+                message messag = (message)obj;
+                switch ((CommandsToSend)messag.command)
+                {
+                    
+
+                    case CommandsToSend.GUESS:
+                        if (answer == messag.data.ToString())
+                        {
+                            gameSender.sendMessage(CommandsToSend.WRONGANSWER,messag.data);
+                        }
+                        else
+                        {
+                            gameSender.sendMessage(CommandsToSend.CORRECTANSWER, messag.data);
+                        }
+                        break;
+                }
+            }
+        }
+
+
+
+        public void parseDataFromDrawer(object obj,object sender)
         {
             if (obj is DrawPoint)
                 pointDrawn((DrawPoint) obj);
@@ -78,7 +114,10 @@ namespace EindOpdrachtCsharp
                 {
                         case CommandsToSend.ANSWER:
                         answer = messag.data + "";
-                        return;
+                        Console.WriteLine("ANSWER SETTED AS " + answer);
+                        break;
+
+                       
                 }
             }
         }

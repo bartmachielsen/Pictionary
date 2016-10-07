@@ -79,7 +79,10 @@ namespace EindOpdrachtCsharp
         DRAWER,
         CONNECT,
         CLEARPANEL,
-        ANSWER
+        ANSWER,
+        GUESS,
+        WRONGANSWER,
+        CORRECTANSWER
     }
 
 }
