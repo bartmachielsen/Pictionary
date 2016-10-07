@@ -131,5 +131,10 @@ namespace EindOpdrachtCsharp
                 colorPanel.BackColor = color;
             }
         }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            client.sendMessage(CommandsToSend.ANSWER,listBox1.SelectedItem);
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace EindOpdrachtCsharp.ConnectionManagers
 {
@@ -23,6 +24,11 @@ namespace EindOpdrachtCsharp.ConnectionManagers
         {
             this.client = client;
             stream = client.GetStream();
+        }
+
+        public virtual void sendMessage(CommandsToSend command, object data)
+        {
+            sendData(new message(command,data));
         }
 
         public virtual void sendData(object data)
@@ -71,5 +77,17 @@ namespace EindOpdrachtCsharp.ConnectionManagers
                 notifyOnData.Invoke(obj);
         }
 
+    }
+
+    public struct message
+    {
+        public CommandsToSend command;
+        public object data;
+
+        public message(CommandsToSend command, object data)
+        {
+            this.command = command;
+            this.data = data;
+        }
     }
 }

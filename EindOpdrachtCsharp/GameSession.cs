@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using EindOpdrachtCsharp.ConnectionManagers;
 
 namespace EindOpdrachtCsharp
 {
@@ -20,7 +21,7 @@ namespace EindOpdrachtCsharp
         {
             options = new string[] {"Test1", "Test2" , "Test3" , "Real Answer"};
             hints = new string[] { "Hint1", "Hint2", "Hint3"};
-            answer = "Real Answer";
+            
             
             
         }
@@ -70,7 +71,16 @@ namespace EindOpdrachtCsharp
                         break;
                 }
             }
-        
+            if (obj is message)
+            {
+                message messag = (message) obj;
+                switch ((CommandsToSend)messag.command)
+                {
+                        case CommandsToSend.ANSWER:
+                        answer = messag.data + "";
+                        return;
+                }
+            }
         }
 
         public void sendAllParticipants(object send)
