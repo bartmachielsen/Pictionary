@@ -9,16 +9,17 @@ namespace EindOpdrachtCsharp
 {
     class GameConnector: ServerConnector
     {
-        private GameServer gameServer;
+        private DataServer dataServer;
         public GameConnector(int port) : base(port)
         {
-            gameServer = new GameServer();
+            dataServer = new DataServer();
             startChecking();
         }
 
         public override void addServer(TcpClient client)
         {
-            //gameServer.AddServer(new GameServer(client));
+            Console.WriteLine("ADDED NEW SERVER !");
+            dataServer.addServer(new GameServer(client));
         }
     }
 }
