@@ -42,7 +42,7 @@ namespace EindOpdrachtCsharp
                         break;
                 }
             }
-            if (obj is SessionDetails)
+            if (obj is SessionDetails && notifyOnSession != null)
             {
                 notifyOnSession.Invoke((SessionDetails)obj);
             }
