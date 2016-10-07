@@ -25,6 +25,11 @@ namespace EindOpdrachtCsharp
             
         }
 
+        public void listenToDrawer(object data)
+        {
+            
+        }
+
         public void selectDrawer()
         {
             Random random = new Random();

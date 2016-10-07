@@ -81,7 +81,8 @@ namespace EindOpdrachtCsharp
     {
         NEW_SESSION,
         DRAWER,
-        CONNECT
+        CONNECT,
+        CLEARPANEL
     }
 
 }

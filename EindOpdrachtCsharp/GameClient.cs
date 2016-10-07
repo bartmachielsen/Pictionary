@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -11,15 +12,11 @@ namespace EindOpdrachtCsharp
 {
     public class GameClient : TCPConnector
     {
-        public GameServer.PointDrawn drawNotifier;
-
-        public delegate void SessionReceived(SessionDetails details);
-        public delegate void DataReceived(object data);
-
         
+        
+
         public bool drawer = false;
-        public SessionReceived notifyOnSession;
-        public DataReceived notifyOnData;
+        
 
         public GameClient(TcpClient client) : base(client)
         {
@@ -27,8 +24,7 @@ namespace EindOpdrachtCsharp
 
         public override void parseReceivedObject(object obj)
         {
-            
-            if (obj is DrawPoint) drawNotifier.Invoke((DrawPoint)obj);
+            base.parseReceivedObject(obj);
             if (obj is CommandsToSend)
             {
                 switch ((CommandsToSend)obj)
@@ -40,13 +36,11 @@ namespace EindOpdrachtCsharp
                         case CommandsToSend.NEW_SESSION:
                         drawer = false;
                         break;
+                        
                 }
             }
-            if (obj is SessionDetails && notifyOnSession != null)
-            {
-                notifyOnSession.Invoke((SessionDetails)obj);
-            }
         }
+
     }
     [Serializable]
     public struct SessionDetails
@@ -73,12 +67,15 @@ namespace EindOpdrachtCsharp
         public double prevx { get; set; }
         public double prevy { get; set; }
 
-        public DrawPoint(double x, double y, double prevx, double prevy)
+        public Color color { get; set; }
+
+        public DrawPoint(double x, double y, double prevx, double prevy, Color color)
         {
             this.x = x;
             this.y = y;
             this.prevx = prevx;
             this.prevy = prevy;
+            this.color = color;
         }
     }
 }

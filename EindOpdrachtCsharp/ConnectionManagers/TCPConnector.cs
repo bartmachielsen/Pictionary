@@ -15,6 +15,10 @@ namespace EindOpdrachtCsharp.ConnectionManagers
         private Stream stream;
         private TcpClient client;
         private bool connected = true;
+
+        public delegate void DataReceived(object data);
+        public DataReceived notifyOnData;
+
         public TCPConnector(TcpClient client)
         {
             this.client = client;
@@ -63,6 +67,8 @@ namespace EindOpdrachtCsharp.ConnectionManagers
 
         public virtual void parseReceivedObject(object obj)
         {
+            if(notifyOnData != null)
+                notifyOnData.Invoke(obj);
         }
 
     }

@@ -35,8 +35,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.colorPanel = new System.Windows.Forms.Panel();
+            this.colorPicker = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -46,7 +46,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.startSession = new System.Windows.Forms.Button();
+            this.clearPanel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -121,8 +121,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.panel2);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.colorPanel);
+            this.groupBox2.Controls.Add(this.colorPicker);
             this.groupBox2.Location = new System.Drawing.Point(0, 473);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(83, 157);
@@ -130,22 +130,23 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Colors";
             // 
-            // panel2
+            // colorPanel
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panel2.Location = new System.Drawing.Point(6, 50);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(57, 28);
-            this.panel2.TabIndex = 5;
+            this.colorPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.colorPanel.Location = new System.Drawing.Point(6, 50);
+            this.colorPanel.Name = "colorPanel";
+            this.colorPanel.Size = new System.Drawing.Size(57, 28);
+            this.colorPanel.TabIndex = 5;
             // 
-            // button1
+            // colorPicker
             // 
-            this.button1.Location = new System.Drawing.Point(6, 84);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(57, 26);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "pick";
-            this.button1.UseVisualStyleBackColor = true;
+            this.colorPicker.Location = new System.Drawing.Point(6, 84);
+            this.colorPicker.Name = "colorPicker";
+            this.colorPicker.Size = new System.Drawing.Size(57, 26);
+            this.colorPicker.TabIndex = 0;
+            this.colorPicker.Text = "pick";
+            this.colorPicker.UseVisualStyleBackColor = true;
+            this.colorPicker.Click += new System.EventHandler(this.colorpicker_Click);
             // 
             // groupBox3
             // 
@@ -224,22 +225,22 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Connected players";
             // 
-            // startSession
+            // clearPanel
             // 
-            this.startSession.Location = new System.Drawing.Point(919, 485);
-            this.startSession.Name = "startSession";
-            this.startSession.Size = new System.Drawing.Size(133, 111);
-            this.startSession.TabIndex = 9;
-            this.startSession.Text = "Connect Lobby";
-            this.startSession.UseVisualStyleBackColor = true;
-            this.startSession.Click += new System.EventHandler(this.startSession_Click);
+            this.clearPanel.Location = new System.Drawing.Point(919, 485);
+            this.clearPanel.Name = "clearPanel";
+            this.clearPanel.Size = new System.Drawing.Size(133, 55);
+            this.clearPanel.TabIndex = 9;
+            this.clearPanel.Text = "Clear Panel";
+            this.clearPanel.UseVisualStyleBackColor = true;
+            this.clearPanel.Click += new System.EventHandler(this.clearPanel_click);
             // 
             // GameGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1355, 642);
-            this.Controls.Add(this.startSession);
+            this.Controls.Add(this.clearPanel);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -272,8 +273,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel colorPanel;
+        private System.Windows.Forms.Button colorPicker;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button3;
@@ -283,6 +284,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button startSession;
+        private System.Windows.Forms.Button clearPanel;
     }
 }

@@ -21,12 +21,41 @@ namespace EindOpdrachtCsharp
             InitializeComponent();
             panel1.MouseMove += mouseEvent;
             this.client = client;
-            client.drawNotifier += DrawPoint;
-
+            client.notifyOnData += parseData;
             client.sendData(CommandsToSend.CONNECT);
         }
 
-       
+        public void parseData(object data)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(() => parseData(data)));
+            
+            }
+            else
+            {
+                if (data is CommandsToSend)
+                {
+                    switch ((CommandsToSend) data)
+                    {
+                        case CommandsToSend.CLEARPANEL:
+                            Console.WriteLine("CLEARING PANEL");
+                            panel1.CreateGraphics().Clear(Color.White);
+                            break;
+                    }
+                }
+                if (data is DrawPoint)
+                    DrawPoint((DrawPoint)data);
+                if (data is SessionDetails)
+                    LoadSessionDetails((SessionDetails)data);
+            }
+        }
+
+
+        public void LoadSessionDetails(SessionDetails sessionDetails)
+        {
+           //TODO LOAD SESSION DETAILS 
+        }
 
         private void GameGUI_Load(object sender, EventArgs e)
         {
@@ -44,7 +73,7 @@ namespace EindOpdrachtCsharp
                     if ((currentx != x) || (currenty != y))
                         if ((currentx >= 0) && (currenty >= 0) && (currenty <= 100.0) && (currentx <= 100.0))
                         {
-                            var point = new DrawPoint(currentx, currenty, x, y);
+                            var point = new DrawPoint(currentx, currenty, x, y,color);
                             if(client.drawer)client.sendData(point);
                             DrawPoint(point);
                             x = currentx;
@@ -70,7 +99,7 @@ namespace EindOpdrachtCsharp
             {
 
                 var g = panel1.CreateGraphics();
-                var pen = new Pen(color, paintWidth);
+                var pen = new Pen(drawpoint.color, paintWidth);
 
                 var totalx = (int) (drawpoint.x/100.0*panel1.Width);
                 var totaly = (int) (drawpoint.y/100.0*panel1.Height);
@@ -86,9 +115,21 @@ namespace EindOpdrachtCsharp
             }
         }
 
-        private void startSession_Click(object sender, EventArgs e)
+        private void clearPanel_click(object sender, EventArgs e)
         {
-            
+            panel1.CreateGraphics().Clear(Color.White);
+            if(client.drawer)   client.sendData(CommandsToSend.CLEARPANEL);
+        }
+
+        private void colorpicker_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                Color color = colorDialog.Color;
+                this.color = color;
+                colorPanel.BackColor = color;
+            }
         }
     }
 }
