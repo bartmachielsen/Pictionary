@@ -25,11 +25,11 @@ namespace EindOpdrachtCsharp
             client.sendData(CommandsToSend.CONNECT);
         }
 
-        public void parseData(object data)
+        public void parseData(object data,object sender)
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new MethodInvoker(() => parseData(data)));
+                this.Invoke(new MethodInvoker(() => parseData(data,sender)));
             
             }
             else
@@ -130,6 +130,15 @@ namespace EindOpdrachtCsharp
                 Color color = colorDialog.Color;
                 this.color = color;
                 colorPanel.BackColor = color;
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(client.drawer)client.sendMessage(CommandsToSend.ANSWER,listBox1.SelectedItem);
+            else
+            {
+                client.sendMessage(CommandsToSend.GUESS, listBox1.SelectedItem);
             }
         }
     }

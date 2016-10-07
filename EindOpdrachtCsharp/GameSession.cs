@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using EindOpdrachtCsharp.ConnectionManagers;
 
 namespace EindOpdrachtCsharp
 {
@@ -21,24 +22,27 @@ namespace EindOpdrachtCsharp
         {
             options = File.ReadAllLines("../../Resources/options.txt");
             hints = new string[] { "Hint1", "Hint2", "Hint3"};
-            answer = "Real Answer";
-        }
-
-        public void listenToDrawer(object data)
-        {
             
         }
+
+        
 
         public void selectDrawer()
         {
             Random random = new Random();
             GameServer server = participants.ElementAt(random.Next(0,participants.Count));
-            server.drawNotifier += pointDrawn;
+            server.notifyOnData += parseDataFromDrawer;
             server.sendData(CommandsToSend.DRAWER);
             drawer = server.ToString();
-            // TODO notify drawer with answer!
-            // TODO block other persons ability to draw (and send)
-            // TODO set the previous drawer on not drawable
+
+            foreach (var watcher in participants)
+            {
+                if (watcher != server)
+                {
+                    watcher.notifyOnData += parseDataFromWatchers;
+                }
+            }
+
         }
 
         public bool allReady()
@@ -60,6 +64,69 @@ namespace EindOpdrachtCsharp
                 
             }
         }
+
+        public void parseDataFromWatchers(object obj, object sender)
+        {
+            Console.WriteLine(sender);
+            GameServer gameSender = (GameServer) sender;
+            if (obj is message)
+            {
+                message messag = (message)obj;
+                switch ((CommandsToSend)messag.command)
+                {
+                    
+
+                    case CommandsToSend.GUESS:
+                        if (answer == messag.data.ToString())
+                        {
+                            gameSender.sendMessage(CommandsToSend.WRONGANSWER,messag.data);
+                        }
+                        else
+                        {
+                            gameSender.sendMessage(CommandsToSend.CORRECTANSWER, messag.data);
+                        }
+                        break;
+                }
+            }
+        }
+
+
+
+        public void parseDataFromDrawer(object obj,object sender)
+        {
+            if (obj is DrawPoint)
+                pointDrawn((DrawPoint) obj);
+
+            if (obj is CommandsToSend)
+            {
+                switch ((CommandsToSend) obj)
+                {
+                    case CommandsToSend.CLEARPANEL:
+                        sendAllParticipants(obj);
+                        break;
+                }
+            }
+            if (obj is message)
+            {
+                message messag = (message) obj;
+                switch ((CommandsToSend)messag.command)
+                {
+                        case CommandsToSend.ANSWER:
+                        answer = messag.data + "";
+                        Console.WriteLine("ANSWER SETTED AS " + answer);
+                        break;
+
+                       
+                }
+            }
+        }
+
+        public void sendAllParticipants(object send)
+        {
+            foreach (var server in participants)
+                server.sendData(send);
+        }
+
 
         public void pointDrawn(DrawPoint draw)
         {

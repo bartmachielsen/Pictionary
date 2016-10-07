@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace EindOpdrachtCsharp.ConnectionManagers
 {
@@ -16,13 +17,18 @@ namespace EindOpdrachtCsharp.ConnectionManagers
         private TcpClient client;
         private bool connected = true;
 
-        public delegate void DataReceived(object data);
+        public delegate void DataReceived(object data, object sender);
         public DataReceived notifyOnData;
 
         public TCPConnector(TcpClient client)
         {
             this.client = client;
             stream = client.GetStream();
+        }
+
+        public virtual void sendMessage(CommandsToSend command, object data)
+        {
+            sendData(new message(command,data));
         }
 
         public virtual void sendData(object data)
@@ -36,8 +42,7 @@ namespace EindOpdrachtCsharp.ConnectionManagers
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine(e);
-                Console.Beep(100,1);
+                Console.WriteLine(e);
             }
         }
 
@@ -68,8 +73,20 @@ namespace EindOpdrachtCsharp.ConnectionManagers
         public virtual void parseReceivedObject(object obj)
         {
             if(notifyOnData != null)
-                notifyOnData.Invoke(obj);
+                notifyOnData.Invoke(obj,this);
         }
 
+    }
+    [Serializable]
+    public struct message
+    {
+        public CommandsToSend command;
+        public object data;
+
+        public message(CommandsToSend command, object data)
+        {
+            this.command = command;
+            this.data = data;
+        }
     }
 }
