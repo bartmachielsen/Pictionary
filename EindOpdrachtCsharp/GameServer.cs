@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace EindOpdrachtCsharp
 {
-    class Program
+    public List<Server> servers = new List<Server>();
+    class GameServer
     {
-        static void Main(string[] args)
-        {
-        }
+    }
+
+    public void addServer(Server server)
+    {
+    
     }
 }
