@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -18,11 +19,9 @@ namespace EindOpdrachtCsharp
 
         public GameSession()
         {
-            options = new string[] {"Test1", "Test2" , "Test3" , "Real Answer"};
+            options = File.ReadAllLines("../../Resources/options.txt");
             hints = new string[] { "Hint1", "Hint2", "Hint3"};
             answer = "Real Answer";
-            
-            
         }
 
         public void listenToDrawer(object data)

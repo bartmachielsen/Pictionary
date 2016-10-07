@@ -54,7 +54,8 @@ namespace EindOpdrachtCsharp
 
         public void LoadSessionDetails(SessionDetails sessionDetails)
         {
-           //TODO LOAD SESSION DETAILS 
+            listBox1.Items.Clear();
+            listBox1.Items.AddRange(sessionDetails.options);
         }
 
         private void GameGUI_Load(object sender, EventArgs e)
