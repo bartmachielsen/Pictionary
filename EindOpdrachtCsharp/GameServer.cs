@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace EindOpdrachtCsharp
@@ -10,23 +11,77 @@ namespace EindOpdrachtCsharp
 
     class DataServer
     {
-        
-        public List<GameServer> servers = new List<GameServer>();
+        public const int amountNeeded = 3;
+        public const int amountToStart = 3;
+        public const int maxAmount = 20;
 
+        public List<GameServer> servers = new List<GameServer>();
+        public List<GameSession> sessions = new List<GameSession>();
         
+
+        public void sendToAll(object obj)
+        {
+            
+        }
 
         public void addServer(GameServer server)
         {
             servers.Add(server);
-            server.drawNotifier += pointDrawn;
+            Console.WriteLine($"ADDING GAMESERVER {servers.Count} of {amountNeeded}");
+            if (ready() && sessions.Count == 0 && allSessionsFinished()) 
+            {
+                
+                Console.WriteLine($"CREATED SESSION {sessions.Count}");
+                GameSession session = new GameSession();
+                session.participants = servers;
+                session.selectDrawer();
+                sessions.Add(session);
+                sendToAll(CommandsToSend.NEW_SESSION);
+                new Thread(()=>waitUntilReady(session)).Start();
+            }
         }
 
-        public void pointDrawn(DrawPoint draw)
+        public void waitUntilReady(GameSession session)
         {
-            foreach (var server in servers)
-                if(!server.drawer)
-                    server.sendData(draw);
-            
+            Console.WriteLine("WAITING TILL READY");
+            while (!session.allReady())
+            {
+                
+            }
+            Console.WriteLine("ALL READY! START PLAYING MOTHAFOCKAS!");
+            session.notifyAllParticipants();
         }
+
+        public bool allSessionsFinished()
+        {
+            foreach (var session in sessions)
+                if (!session.finished) return false;
+            return true;
+        }
+
+        public bool startReady()
+        {
+            return servers.Count >= amountToStart;
+        }
+
+        public bool ready()
+        {
+            return servers.Count >= amountNeeded;
+        }
+
+        public bool full()
+        {
+            return servers.Count >= maxAmount;
+        }
+
     }
+
+    [Serializable]
+    public enum CommandsToSend
+    {
+        NEW_SESSION,
+        DRAWER,
+        CONNECT
+    }
+
 }

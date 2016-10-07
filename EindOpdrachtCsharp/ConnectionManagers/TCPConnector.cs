@@ -21,10 +21,9 @@ namespace EindOpdrachtCsharp.ConnectionManagers
             stream = client.GetStream();
         }
 
-        public void sendData(object data)
+        public virtual void sendData(object data)
         {
             if (!data.GetType().IsSerializable) return;
-            Console.WriteLine("SENDING " + data);
             try
 
             {
@@ -64,7 +63,6 @@ namespace EindOpdrachtCsharp.ConnectionManagers
 
         public virtual void parseReceivedObject(object obj)
         {
-            Console.WriteLine("RECEIVED " + obj);
         }
 
     }

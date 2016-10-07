@@ -10,6 +10,8 @@ namespace EindOpdrachtCsharp
         private double x = -1;
         private double y = -1;
 
+        
+
         private int paintWidth = 1;
         private Color color = Color.Black;
         private GameClient client;
@@ -20,9 +22,11 @@ namespace EindOpdrachtCsharp
             panel1.MouseMove += mouseEvent;
             this.client = client;
             client.drawNotifier += DrawPoint;
+
+            client.sendData(CommandsToSend.CONNECT);
         }
 
-
+       
 
         private void GameGUI_Load(object sender, EventArgs e)
         {
@@ -40,9 +44,8 @@ namespace EindOpdrachtCsharp
                     if ((currentx != x) || (currenty != y))
                         if ((currentx >= 0) && (currenty >= 0) && (currenty <= 100.0) && (currentx <= 100.0))
                         {
-                            //DrawPoint(currentx, currenty);
                             var point = new DrawPoint(currentx, currenty, x, y);
-                            client.sendData(point);
+                            if(client.drawer)client.sendData(point);
                             DrawPoint(point);
                             x = currentx;
                             y = currenty;
@@ -53,31 +56,39 @@ namespace EindOpdrachtCsharp
                     x = -1;
                     y = -1;
                 }
+               
             }
         }
 
         public void DrawPoint(DrawPoint drawpoint)
         {
-            
-            var g = panel1.CreateGraphics();
-            var pen = new Pen(color, paintWidth);
-            
-            var totalx = (int) (drawpoint.x/100.0*panel1.Width);
-            var totaly = (int) (drawpoint.y/100.0*panel1.Height);
-            var prevx = totalx;
-            var prevy = totaly;
-
-            if (drawpoint.prevx != -1)
+            if (this.InvokeRequired)
             {
-                prevx = (int) (drawpoint.prevx/100.0*panel1.Width);
-                prevy = (int) ((drawpoint.prevy / 100.0)*panel1.Height);
+                this.Invoke(new MethodInvoker(() => DrawPoint(drawpoint)));
             }
-            //g.FillEllipse(new SolidBrush(color),x,y,10,10);
-            g.DrawLine(pen,totalx,totaly,prevx,prevy);
+            else
+            {
+
+                var g = panel1.CreateGraphics();
+                var pen = new Pen(color, paintWidth);
+
+                var totalx = (int) (drawpoint.x/100.0*panel1.Width);
+                var totaly = (int) (drawpoint.y/100.0*panel1.Height);
+                var prevx = totalx;
+                var prevy = totaly;
+
+                if (drawpoint.prevx != -1)
+                {
+                    prevx = (int) (drawpoint.prevx/100.0*panel1.Width);
+                    prevy = (int) ((drawpoint.prevy/100.0)*panel1.Height);
+                }
+                g.DrawLine(pen, totalx, totaly, prevx, prevy);
+            }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void startSession_Click(object sender, EventArgs e)
         {
+            
         }
     }
 }

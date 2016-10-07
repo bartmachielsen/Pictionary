@@ -30,7 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.StateLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,6 +46,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.startSession = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -61,7 +62,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1088, 463);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // listBox1
             // 
@@ -80,15 +80,15 @@
             this.listBox1.Size = new System.Drawing.Size(249, 584);
             this.listBox1.TabIndex = 1;
             // 
-            // label1
+            // StateLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1116, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(198, 26);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "teken een Varken";
+            this.StateLabel.AutoSize = true;
+            this.StateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StateLabel.Location = new System.Drawing.Point(1116, 3);
+            this.StateLabel.Name = "StateLabel";
+            this.StateLabel.Size = new System.Drawing.Size(183, 26);
+            this.StateLabel.TabIndex = 2;
+            this.StateLabel.Text = "Drawer/Watcher";
             // 
             // groupBox1
             // 
@@ -224,17 +224,28 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Connected players";
             // 
+            // startSession
+            // 
+            this.startSession.Location = new System.Drawing.Point(919, 485);
+            this.startSession.Name = "startSession";
+            this.startSession.Size = new System.Drawing.Size(133, 111);
+            this.startSession.TabIndex = 9;
+            this.startSession.Text = "Connect Lobby";
+            this.startSession.UseVisualStyleBackColor = true;
+            this.startSession.Click += new System.EventHandler(this.startSession_Click);
+            // 
             // GameGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1355, 642);
+            this.Controls.Add(this.startSession);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.StateLabel);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.panel1);
             this.Name = "GameGUI";
@@ -256,7 +267,7 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label StateLabel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -272,5 +283,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button startSession;
     }
 }
