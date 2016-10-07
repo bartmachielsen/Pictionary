@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace EindOpdrachtCsharp
@@ -19,7 +20,10 @@ namespace EindOpdrachtCsharp
         public override void addServer(TcpClient client)
         {
             Console.WriteLine("ADDED NEW SERVER !");
-            dataServer.addServer(new GameServer(client));
+            GameServer server = new GameServer(client);
+            new Thread(() => server.checkInfinite()).Start();
+            dataServer.addServer(server);
+
         }
     }
 }

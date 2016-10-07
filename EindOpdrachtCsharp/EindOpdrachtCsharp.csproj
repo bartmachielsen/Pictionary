@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionManagers\TCPConnector.cs" />
+    <Compile Include="GameClient.cs" />
     <Compile Include="GameConnector.cs" />
     <Compile Include="GameGUI.cs">
       <SubType>Form</SubType>

@@ -8,10 +8,25 @@ using EindOpdrachtCsharp.ConnectionManagers;
 
 namespace EindOpdrachtCsharp
 {
-    class GameServer : TCPConnector
+    public class GameServer : TCPConnector
     {
+        public delegate void PointDrawn(DrawPoint drawpoint);
+        public PointDrawn drawNotifier;
+        public bool drawer = false;
+
         public GameServer(TcpClient client) : base(client)
         {
+
         }
+
+        public override void parseReceivedObject(object obj)
+        {
+            if (obj is DrawPoint)
+            {
+                drawer = true;
+                drawNotifier.Invoke((DrawPoint) obj);
+            }
+        }
+        
     }
 }

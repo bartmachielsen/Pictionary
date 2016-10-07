@@ -17,8 +17,15 @@ namespace EindOpdrachtCsharp
 
             new Thread(()=> new GameConnector(180)).Start();
 
-            new Thread(() => new TCPConnector(new TcpClient("127.0.0.1",180)));
+            GameClient connector = new GameClient(new TcpClient(ServerConnector.LocalIPAddress().ToString(),180));
+            new Thread(() => connector.checkInfinite()).Start();
 
+            GameClient connector2 = new GameClient(new TcpClient(ServerConnector.LocalIPAddress().ToString(), 180));
+            new Thread(() => connector2.checkInfinite()).Start();
+
+
+            new Thread(()=>Application.Run(new GameGUI(connector))).Start();
+            new Thread(() => Application.Run(new GameGUI(connector2))).Start();
         }
     }
 }
