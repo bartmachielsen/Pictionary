@@ -25,21 +25,15 @@ namespace EindOpdrachtCsharp
             
         }
 
-        public void listenToDrawer(object data)
-        {
-            
-        }
+        
 
         public void selectDrawer()
         {
             Random random = new Random();
             GameServer server = participants.ElementAt(random.Next(0,participants.Count));
-            server.drawNotifier += pointDrawn;
+            server.notifyOnData += parseDataFromDrawer;
             server.sendData(CommandsToSend.DRAWER);
             drawer = server.ToString();
-            // TODO notify drawer with answer!
-            // TODO block other persons ability to draw (and send)
-            // TODO set the previous drawer on not drawable
         }
 
         public bool allReady()
@@ -61,6 +55,30 @@ namespace EindOpdrachtCsharp
                 
             }
         }
+
+        public void parseDataFromDrawer(object obj)
+        {
+            if (obj is DrawPoint)
+                pointDrawn((DrawPoint) obj);
+
+            if (obj is CommandsToSend)
+            {
+                switch ((CommandsToSend) obj)
+                {
+                    case CommandsToSend.CLEARPANEL:
+                        sendAllParticipants(obj);
+                        break;
+                }
+            }
+        
+        }
+
+        public void sendAllParticipants(object send)
+        {
+            foreach (var server in participants)
+                server.sendData(send);
+        }
+
 
         public void pointDrawn(DrawPoint draw)
         {

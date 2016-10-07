@@ -10,13 +10,7 @@ namespace EindOpdrachtCsharp
 {
     public class GameServer : TCPConnector
     {
-        public delegate void PointDrawn(DrawPoint drawpoint);
-
-        public delegate void AnswerEvent(Answer answer);
-
-        public PointDrawn drawNotifier;
-        public AnswerEvent notifyOnTry;
-
+        
         public bool ready { get; set; }
         public bool drawer { get; set; }
 
@@ -34,13 +28,8 @@ namespace EindOpdrachtCsharp
 
         public override void parseReceivedObject(object obj)
         {
-            if (obj is DrawPoint)
-            {
-                drawNotifier.Invoke((DrawPoint) obj);
-            }
-
-            if (obj is Answer) 
-                notifyOnTry.Invoke((Answer)obj);
+            base.parseReceivedObject(obj);
+            
             if (obj is CommandsToSend)
             {
                 switch ((CommandsToSend)obj)

@@ -19,10 +19,7 @@ namespace EindOpdrachtCsharp
         public List<GameSession> sessions = new List<GameSession>();
         
 
-        public void sendToAll(object obj)
-        {
-            
-        }
+       
 
         public void addServer(GameServer server)
         {
@@ -36,7 +33,6 @@ namespace EindOpdrachtCsharp
                 session.participants = servers;
                 session.selectDrawer();
                 sessions.Add(session);
-                sendToAll(CommandsToSend.NEW_SESSION);
                 new Thread(()=>waitUntilReady(session)).Start();
             }
         }
