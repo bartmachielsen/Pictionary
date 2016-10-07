@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace EindOpdrachtCsharp
 {
-    public List<Server> servers = new List<Server>();
-    class GameServer
-    {
-    }
+   
 
-    public void addServer(Server server)
+    class DataServer
     {
-    
+        public List<GameServer> servers = new List<GameServer>();
+
+        public void addServer(GameServer server)
+        {
+
+        }
     }
 }
