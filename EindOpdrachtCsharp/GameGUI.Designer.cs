@@ -62,9 +62,9 @@
             // 
             this.drawPanel.BackColor = System.Drawing.Color.White;
             this.drawPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.drawPanel.Location = new System.Drawing.Point(0, 3);
+            this.drawPanel.Location = new System.Drawing.Point(-12, -9);
             this.drawPanel.Name = "drawPanel";
-            this.drawPanel.Size = new System.Drawing.Size(1088, 463);
+            this.drawPanel.Size = new System.Drawing.Size(1100, 475);
             this.drawPanel.TabIndex = 0;
             // 
             // StateLabel
@@ -90,7 +90,7 @@
             // highScores
             // 
             this.highScores.AllowColumnReorder = true;
-            this.highScores.BackColor = System.Drawing.SystemColors.Control;
+            this.highScores.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.highScores.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.highScores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
@@ -137,6 +137,7 @@
             // 
             // widthBox
             // 
+            this.widthBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.widthBox.Location = new System.Drawing.Point(12, 79);
             this.widthBox.Name = "widthBox";
             this.widthBox.Size = new System.Drawing.Size(82, 26);
@@ -232,6 +233,7 @@
             // 
             // listBox2
             // 
+            this.listBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 20;
             this.listBox2.Location = new System.Drawing.Point(9, 25);
@@ -264,6 +266,7 @@
             // 
             this.selectItems.Alignment = System.Windows.Forms.ListViewAlignment.Default;
             this.selectItems.AutoArrange = false;
+            this.selectItems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.selectItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Option});
             this.selectItems.FullRowSelect = true;
