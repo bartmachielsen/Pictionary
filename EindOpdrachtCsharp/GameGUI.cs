@@ -18,8 +18,7 @@ namespace EindOpdrachtCsharp
 
         private enum mode { DRAW, RECT, TRIANGLE, LINE, GUM };
         mode currentmode = mode.DRAW;
-
-        private int paintWidth = 1;
+        
         private Color color = Color.Black;
         private GameClient client;
 
@@ -267,7 +266,7 @@ namespace EindOpdrachtCsharp
                             switch (currentmode)
                             {
                                 case mode.DRAW:
-                                    var point = new DrawPoint(currentx, currenty, x, y, color);
+                                    var point = new DrawPoint(currentx, currenty, x, y, color,30);
                                     if (client.drawer) client.sendData(point);
                                     DrawPoint(point);
                                     x = currentx;
@@ -275,7 +274,11 @@ namespace EindOpdrachtCsharp
                                     break;
 
                                 case mode.GUM:
-
+                                    var point2 = new DrawPoint(currentx, currenty, x, y, Color.White, 30);
+                                    if (client.drawer) client.sendData(point2);
+                                    DrawPoint(point2);
+                                    x = currentx;
+                                    y = currenty;
 
                                     break;
 
@@ -300,8 +303,9 @@ namespace EindOpdrachtCsharp
             else
             {
                 var g = drawPanel.CreateGraphics();
-                var pen = new Pen(drawpoint.color, paintWidth);
-
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                var pen = new Pen(drawpoint.color, drawpoint.width);
+                pen.SetLineCap(LineCap.Round, LineCap.Round, DashCap.Round);
                 var totalx = (int) (drawpoint.x/100.0*drawPanel.Width);
                 var totaly = (int) (drawpoint.y/100.0*drawPanel.Height);
                 var prevx = totalx;
@@ -313,16 +317,11 @@ namespace EindOpdrachtCsharp
                     prevy = (int) ((drawpoint.prevy/100.0)*drawPanel.Height);
                 }
                 g.DrawLine(pen, totalx, totaly, prevx, prevy);
+                
             }
         }
 
-        public void DrawLine(Point pointA, Point pointB)
-        {
-            var g = drawPanel.CreateGraphics();
-            var pen = new Pen(Color.Blue, paintWidth);
-            g.DrawLine(pen, pointA, pointB);
-        }
-
+        
         private void clearPanel_click(object sender, EventArgs e)
         {
             drawPanel.CreateGraphics().Clear(Color.White);

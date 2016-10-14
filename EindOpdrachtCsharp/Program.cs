@@ -22,7 +22,11 @@ namespace EindOpdrachtCsharp
                 GameClient connector = new GameClient(new TcpClient(ServerConnector.LocalIPAddress().ToString(), 180));
                 new Thread(() => connector.checkInfinite()).Start();
 
-                new Thread(() => new GameGUI(connector).ShowDialog()).Start();
+                new Thread(() =>
+                {
+                    Application.EnableVisualStyles();
+                    Application.Run(new GameGUI(connector));
+                }).Start();
             }
         }
     }

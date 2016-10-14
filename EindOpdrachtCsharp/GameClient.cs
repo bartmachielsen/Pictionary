@@ -80,6 +80,8 @@ namespace EindOpdrachtCsharp
         public double y { get; set; }
         public double prevx { get; set; }
         public double prevy { get; set; }
+        
+        public int width { get; set; }
 
         public Color color { get; set; }
 
@@ -89,9 +91,10 @@ namespace EindOpdrachtCsharp
             this.y = y;
         }
 
-        public DrawPoint(double x, double y, double prevx, double prevy, Color color)
+        public DrawPoint(double x, double y, double prevx, double prevy, Color color, int width = 1)
         {
             this.x = x;
+            this.width = width;
             this.y = y;
             this.prevx = prevx;
             this.prevy = prevy;
