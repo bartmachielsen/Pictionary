@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
             this.drawPanel = new System.Windows.Forms.Panel();
             this.StateLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -96,7 +96,7 @@
             this.columnHeader1});
             this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem7});
             this.highScores.Location = new System.Drawing.Point(7, 27);
             this.highScores.MultiSelect = false;
             this.highScores.Name = "highScores";
@@ -275,7 +275,7 @@
             this.selectItems.Location = new System.Drawing.Point(1106, 32);
             this.selectItems.MultiSelect = false;
             this.selectItems.Name = "selectItems";
-            this.selectItems.Size = new System.Drawing.Size(237, 592);
+            this.selectItems.Size = new System.Drawing.Size(165, 592);
             this.selectItems.TabIndex = 10;
             this.selectItems.UseCompatibleStateImageBehavior = false;
             this.selectItems.View = System.Windows.Forms.View.Details;
@@ -290,7 +290,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1355, 642);
+            this.ClientSize = new System.Drawing.Size(1289, 642);
             this.Controls.Add(this.selectItems);
             this.Controls.Add(this.clearPanel);
             this.Controls.Add(this.groupBox5);
