@@ -12,9 +12,11 @@ namespace EindOpdrachtCsharp
     {
         private double x = -1;
         private double y = -1;
-        private Point pointA, pointB;
+        
 
-        private enum mode { DRAW, RECT, CIRC, LINE };
+        private List<DrawPoint> alreadySelected = new List<DrawPoint>();
+
+        private enum mode { DRAW, RECT, TRIANGLE, LINE };
         mode currentmode = mode.DRAW;
 
         private int paintWidth = 1;
@@ -27,6 +29,7 @@ namespace EindOpdrachtCsharp
         {
             InitializeComponent();
             drawPanel.MouseMove += mouseEvent;
+            drawPanel.MouseClick += mouseClick;
             this.client = client;
             client.notifyOnData += parseData;
             client.sendData(CommandsToSend.CONNECT);
@@ -144,38 +147,123 @@ namespace EindOpdrachtCsharp
             selectItems.GridLines = false;
         }
 
+        private void mouseClick(object sender, EventArgs args)
+        {
+            var args2 = (MouseEventArgs)args;
+            var currentx = getPoints(args2)[0];
+            var currenty = getPoints(args2)[1];
+            alreadySelected.Add(new DrawPoint(currentx, currenty));
+            switch (currentmode)
+            {
+                case mode.LINE:
+                    if (alreadySelected.Count > 1)
+                    {
+
+                        DrawPoint a = alreadySelected.ElementAt(0);
+                        DrawPoint b = alreadySelected.ElementAt(1);
+                        DrawPoint c = new DrawPoint(b.x,b.y, a.x, a.y, color);
+                        DrawPoint(c);
+                        if (client.drawer) client.sendData(c);
+                        
+
+                        x = currentx;
+                        y = currenty;
+
+                        alreadySelected.Clear();
+                    }
+                    break;
+
+                case mode.TRIANGLE:
+                    if (alreadySelected.Count > 1)
+                    {
+                        DrawPoint a = alreadySelected.ElementAt(0);
+                        DrawPoint b = alreadySelected.ElementAt(1);
+
+
+                        DrawPoint line1 = new DrawPoint(a.x, a.y, b.x, a.y, color);
+                        DrawPoint line2 = new DrawPoint(b.x, a.y, b.x, b.y, color);
+                        DrawPoint line3 = new DrawPoint(b.x, b.y, a.x, a.y, color);
+
+                        DrawPoint(line1);
+                        DrawPoint(line2);
+                        DrawPoint(line3);
+
+                        client.sendData(line1);
+                        client.sendData(line2);
+                        client.sendData(line3);
+
+                        alreadySelected.Clear();
+                    }
+
+                    break;
+
+
+
+
+                case mode.RECT:
+                    if (alreadySelected.Count > 1)
+                    {
+                        DrawPoint a = alreadySelected.ElementAt(0);
+                        DrawPoint b = alreadySelected.ElementAt(1);
+
+
+
+                        DrawPoint line1 = new DrawPoint(a.x, a.y, a.x, b.y, color);
+                        DrawPoint line2 = new DrawPoint(a.x, b.y, b.x, b.y, color);
+                        DrawPoint line3 = new DrawPoint(b.x, b.y, b.x, a.y, color);
+                        DrawPoint line4 = new DrawPoint(b.x, a.y, a.x, a.y, color);
+
+                        DrawPoint(line1);
+                        DrawPoint(line2);
+                        DrawPoint(line3);
+                        DrawPoint(line4);
+
+                        client.sendData(line1);
+                        client.sendData(line2);
+                        client.sendData(line3);
+                        client.sendData(line4);
+
+                        alreadySelected.Clear();
+                    }
+
+                    break;
+            }
+
+        }
+
+        private double[] getPoints(MouseEventArgs args)
+        {
+            var args2 = (MouseEventArgs)args;
+            var currentx = args2.X / (double)drawPanel.Width * 100;
+            var currenty = args2.Y / (double)drawPanel.Height * 100;
+            return new[] {currentx, currenty};
+        }
+
+
         private void mouseEvent(object sender, EventArgs args)
         {
             if (args is MouseEventArgs)
             {
                 var args2 = (MouseEventArgs) args;
-                var currentx = args2.X/(double) drawPanel.Width*100;
-                var currenty = args2.Y/(double) drawPanel.Height*100;
+                var currentx = getPoints(args2)[0];
+                var currenty = getPoints(args2)[1];
                 if ((args2.Button & MouseButtons.Left) != 0)
                 {
                     if ((currentx != x) || (currenty != y))
                         if ((currentx >= 0) && (currenty >= 0) && (currenty <= 100.0) && (currentx <= 100.0))
                         {
-                            if(currentmode == mode.DRAW)
+                            switch (currentmode)
                             {
-                                var point = new DrawPoint(currentx, currenty, x, y, color);
-                                if(client.drawer)client.sendData(point);
-                                DrawPoint(point);
-                                x = currentx;
-                                y = currenty;
+                                case mode.DRAW:
+                                    var point = new DrawPoint(currentx, currenty, x, y, color);
+                                    if (client.drawer) client.sendData(point);
+                                    DrawPoint(point);
+                                    x = currentx;
+                                    y = currenty;
+                                    break;
+                               
                             }
-                            if(currentmode == mode.RECT)
-                            {
-                                
-                            }
-                            if(currentmode == mode.CIRC)
-                            {
-
-                            }
-                            if(currentmode == mode.LINE)
-                            {
-                                
-                            }
+                            
                         }
                 }
                 else
@@ -269,14 +357,24 @@ namespace EindOpdrachtCsharp
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
+        {
+            currentmode = mode.DRAW;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             currentmode = mode.LINE;
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
+            currentmode = mode.RECT;
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            currentmode = mode.TRIANGLE;
         }
     }
 }

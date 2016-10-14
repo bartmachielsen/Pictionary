@@ -28,15 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
             this.drawPanel = new System.Windows.Forms.Panel();
             this.StateLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.highScores = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.colorPanel = new System.Windows.Forms.Panel();
             this.colorPicker = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -47,8 +51,6 @@
             this.clearPanel = new System.Windows.Forms.Button();
             this.selectItems = new System.Windows.Forms.ListView();
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.highScores = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -85,6 +87,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Highscores";
             // 
+            // highScores
+            // 
+            this.highScores.AllowColumnReorder = true;
+            this.highScores.BackColor = System.Drawing.SystemColors.Control;
+            this.highScores.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.highScores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem2});
+            this.highScores.Location = new System.Drawing.Point(7, 27);
+            this.highScores.MultiSelect = false;
+            this.highScores.Name = "highScores";
+            this.highScores.Size = new System.Drawing.Size(239, 124);
+            this.highScores.TabIndex = 0;
+            this.highScores.UseCompatibleStateImageBehavior = false;
+            this.highScores.View = System.Windows.Forms.View.Details;
+            this.highScores.SelectedIndexChanged += new System.EventHandler(this.highScores_SelectedIndexChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.colorPanel);
@@ -116,6 +137,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button4);
+            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.button3);
             this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Location = new System.Drawing.Point(89, 473);
@@ -125,6 +148,26 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Shapes";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 121);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(94, 29);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "draw";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 26);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "lijn";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(6, 58);
@@ -133,6 +176,7 @@
             this.button3.TabIndex = 6;
             this.button3.Text = "rechthoek";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -140,8 +184,9 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(94, 27);
             this.button2.TabIndex = 0;
-            this.button2.Text = "cirkel";
+            this.button2.Text = "driehoek";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox4
             // 
@@ -200,8 +245,6 @@
             this.clearPanel.Text = "Clear Panel";
             this.clearPanel.UseVisualStyleBackColor = true;
             this.clearPanel.Click += new System.EventHandler(this.clearPanel_click);
-           
-          
             // 
             // selectItems
             // 
@@ -224,25 +267,6 @@
             // Option
             // 
             this.Option.Width = 100;
-            // 
-            // highScores
-            // 
-            this.highScores.AllowColumnReorder = true;
-            this.highScores.BackColor = System.Drawing.SystemColors.Control;
-            this.highScores.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.highScores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
-            this.highScores.Location = new System.Drawing.Point(7, 27);
-            this.highScores.MultiSelect = false;
-            this.highScores.Name = "highScores";
-            this.highScores.Size = new System.Drawing.Size(239, 124);
-            this.highScores.TabIndex = 0;
-            this.highScores.UseCompatibleStateImageBehavior = false;
-            this.highScores.View = System.Windows.Forms.View.Details;
-            this.highScores.SelectedIndexChanged += new System.EventHandler(this.highScores_SelectedIndexChanged);
             // 
             // GameGUI
             // 
@@ -294,5 +318,7 @@
         private System.Windows.Forms.ColumnHeader Option;
         private System.Windows.Forms.ListView highScores;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button1;
     }
 }

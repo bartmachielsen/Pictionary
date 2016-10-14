@@ -83,6 +83,12 @@ namespace EindOpdrachtCsharp
 
         public Color color { get; set; }
 
+        public DrawPoint(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
         public DrawPoint(double x, double y, double prevx, double prevy, Color color)
         {
             this.x = x;
