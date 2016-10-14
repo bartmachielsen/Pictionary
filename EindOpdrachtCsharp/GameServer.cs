@@ -12,10 +12,13 @@ namespace EindOpdrachtCsharp
     class DataServer
     {
         public const int amountNeeded = 3;
-        public const int amountToStart = 3;
         public const int maxAmount = 3;
 
         public List<GameServer> servers = new List<GameServer>();
+
+
+        public List<GameServer> waiting = new List<GameServer>();
+
         public List<GameSession> sessions = new List<GameSession>();
        
 
@@ -23,19 +26,45 @@ namespace EindOpdrachtCsharp
         {
             servers.Add(server);
             Console.WriteLine($"ADDING GAMESERVER {servers.Count} of {amountNeeded}");
-            if (ready() && sessions.Count == 0 && allSessionsFinished()) 
-            {
-                
-                Console.WriteLine($"CREATED SESSION {sessions.Count}");
-                GameSession session = new GameSession();
-                session.uploadParticipants(servers);
-               
-                sessions.Add(session);
-                new Thread(()=>waitUntilReady(session)).Start();
-                session.sendAllParticipants(CommandsToSend.NEW_SESSION);
-                session.selectDrawer();
+            
+            waiting.Add(server);
 
+            
+            if (waiting.Count >= amountNeeded)
+            {
+                newSessionFromOldSession();
             }
+        }
+
+        public void newSessionFromOldSession()
+        {
+            Console.WriteLine($"CREATED SESSION {sessions.Count}");
+
+            GameSession session = new GameSession();
+            session.id = sessions.Count;
+            if (waiting.Count > maxAmount)
+            {
+                List<GameServer> added = new List<GameServer>();
+                added.AddRange(waiting.GetRange(0,maxAmount));
+                added.RemoveRange(0,maxAmount);
+                session.uploadParticipants(added);
+            }
+            else
+            {
+                session.uploadParticipants(waiting);
+                waiting = new List<GameServer>();
+            }
+            sessions.Add(session);
+            new Thread(() => waitUntilReady(session)).Start();
+            session.sendAllParticipants(CommandsToSend.NEW_SESSION);
+            session.selectDrawer();
+            session.stateListener += clearSessionandNew;
+        }
+
+        public void clearSessionandNew(GameSession session)
+        {
+            waiting.AddRange(session.participants);
+            newSessionFromOldSession();
         }
 
         public void waitUntilReady(GameSession session)
@@ -56,16 +85,7 @@ namespace EindOpdrachtCsharp
             return true;
         }
 
-        public bool startReady()
-        {
-            return servers.Count >= amountToStart;
-        }
-
-        public bool ready()
-        {
-            return servers.Count >= amountNeeded;
-        }
-
+        
         public bool full()
         {
             return servers.Count >= maxAmount;
@@ -84,17 +104,41 @@ namespace EindOpdrachtCsharp
         GUESS,
         WRONGANSWER,
         CORRECTANSWER,
-        BLOCKEDFROMGUESSING
+        BLOCKEDFROMGUESSING,
+        STARTGUESSING
     }
 
-
+    [Serializable]
     public class SessionScore
     {
         public string winner;
         public TimeSpan totalTime;
+        public List<PlayerScore> players  = new List<PlayerScore>();
 
+
+        public PlayerScore[] playerScore()
+        {
+            players.Sort((delegate(PlayerScore score, PlayerScore score1)
+            {
+                if (score.totalScore == score1.totalScore) return 0;
+                if(score.totalScore > score1.totalScore) return -1;
+                return 1;
+            }));
+
+            return players.ToArray();
+        }
+
+        public override string ToString()
+        {
+            string text = "";
+            foreach (var player in players)
+            {
+                text += player.ToString() + "\n";
+            }
+            return text;
+        }
     }
-
+    [Serializable]
     public class PlayerScore
     {
         public string name;
@@ -103,6 +147,11 @@ namespace EindOpdrachtCsharp
         public List<string> wrongguesses = new List<string>();
         public int totalScore => ((wrongguesses.Count+hintGuessed)*-200) + timeScore;
         public int timeScore = 0;
+
+        public override string ToString()
+        {
+            return $"{name}:\t{totalScore}";
+        }
     }
 
 }

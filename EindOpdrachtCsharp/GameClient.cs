@@ -59,9 +59,13 @@ namespace EindOpdrachtCsharp
         public string[] hints;
         public string drawer;
         public string name;
+        public int id;
+        public int participants;
 
-        public SessionDetails(string[] options, string[] hints, string drawer, string name)
+        public SessionDetails(int id, int participants, string[] options, string[] hints, string drawer, string name)
         {
+            this.id = id;
+            this.participants = participants;
             this.options = options;
             this.hints = hints;
             this.drawer = drawer;

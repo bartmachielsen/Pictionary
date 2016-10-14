@@ -18,7 +18,7 @@ namespace EindOpdrachtCsharp
         private Color color = Color.Black;
         private GameClient client;
 
-        private bool canGues = true;
+        private bool canGues = false;
 
         public GameGUI(GameClient client)
         {
@@ -50,6 +50,10 @@ namespace EindOpdrachtCsharp
                             canGues = false;
                             break;
 
+                        case CommandsToSend.STARTGUESSING:
+                            canGues = true;
+                            break;
+
 
                     }
                 }
@@ -69,16 +73,29 @@ namespace EindOpdrachtCsharp
                     }
                 
                 }
-                    
 
+                if (data is SessionScore)
+                {
+                    updateScore((SessionScore) data);
+                    canGues = false;
+                }
                 if (data is DrawPoint)
                     DrawPoint((DrawPoint) data);
                 if (data is SessionDetails)
                 {
                     LoadSessionDetails((SessionDetails) data);
-                    canGues = true;
                 }
 
+            }
+        }
+
+        public void updateScore(SessionScore score)
+        {
+            highScores.Items.Clear();
+            highScores.Columns[0].Width = highScores.Width;
+            foreach (var playerscore in score.playerScore())
+            {
+                highScores.Items.Add(playerscore.ToString());
             }
         }
 
@@ -97,13 +114,15 @@ namespace EindOpdrachtCsharp
 
         public void LoadSessionDetails(SessionDetails sessionDetails)
         {
+            client.answer = null;
             selectItems.Items.Clear();
             foreach (var value in sessionDetails.options)
             {
                 selectItems.Items.Add(value);
             }
 
-
+            this.sessionDetails.Text = $"sessie {sessionDetails.id}";
+            this.playerCount.Text = $"{sessionDetails.participants} deelnemers";
             this.Text = sessionDetails.name;
             if (client.drawer)
             {
@@ -212,13 +231,19 @@ namespace EindOpdrachtCsharp
             if (client.drawer)
             {
                 setAsAnswer(selected.Text);
-                selected.ForeColor = Color.Green;
+                if(client.answer != null)
+                    selected.ForeColor = Color.Green;
             }
             else
             {
                 if (canGues)
                     client.sendMessage(CommandsToSend.GUESS, selected.Text);
             }
+        }
+
+        private void highScores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

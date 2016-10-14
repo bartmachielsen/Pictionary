@@ -31,7 +31,7 @@ namespace EindOpdrachtCsharp
         public override void sendData(object data)
         {
             base.sendData(data);
-            if (data == (object) CommandsToSend.DRAWER) drawer = true;
+            
 
         }
 

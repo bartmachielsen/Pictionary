@@ -24,9 +24,16 @@ namespace EindOpdrachtCsharp
             listener.Start();
             while (true)
             {
-                Task<TcpClient> task = listener.AcceptTcpClientAsync();
-                task.ContinueWith(data => addServer(data.Result));
+                //Task<TcpClient> task = listener.AcceptTcpClientAsync();       DIEDED
+                //task.ContinueWith(data => addServer(data.Result));
 
+                //TcpClient client = listener.AcceptTcpClient();                UGLY FIX
+                //addServer(client);
+
+
+                var task = listener.AcceptTcpClientAsync();                     // LESSS DIED?
+                TcpClient client = task.Result;
+                addServer(client);
             }
 
         }

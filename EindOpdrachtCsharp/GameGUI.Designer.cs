@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
             this.drawPanel = new System.Windows.Forms.Panel();
             this.StateLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.colorPanel = new System.Windows.Forms.Panel();
             this.colorPicker = new System.Windows.Forms.Button();
@@ -41,13 +40,15 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.playerCount = new System.Windows.Forms.Label();
+            this.sessionDetails = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.clearPanel = new System.Windows.Forms.Button();
             this.selectItems = new System.Windows.Forms.ListView();
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.highScores = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -76,32 +77,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.highScores);
             this.groupBox1.Location = new System.Drawing.Point(201, 473);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(209, 157);
+            this.groupBox1.Size = new System.Drawing.Size(252, 157);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Highscores";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 58);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(156, 20);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "2) SPELER 2   8.000";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(165, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "1) SPELER 1   10.000";
             // 
             // groupBox2
             // 
@@ -163,32 +145,32 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Location = new System.Drawing.Point(417, 473);
+            this.groupBox4.Controls.Add(this.playerCount);
+            this.groupBox4.Controls.Add(this.sessionDetails);
+            this.groupBox4.Location = new System.Drawing.Point(459, 473);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(234, 157);
+            this.groupBox4.Size = new System.Drawing.Size(192, 157);
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Lobby Info";
             // 
-            // label5
+            // playerCount
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(31, 64);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(139, 20);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "{0} players in lobby";
+            this.playerCount.AutoSize = true;
+            this.playerCount.Location = new System.Drawing.Point(31, 64);
+            this.playerCount.Name = "playerCount";
+            this.playerCount.Size = new System.Drawing.Size(139, 20);
+            this.playerCount.TabIndex = 1;
+            this.playerCount.Text = "{0} players in lobby";
             // 
-            // label4
+            // sessionDetails
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 33);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(154, 20);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Server conn: 15 ping";
+            this.sessionDetails.AutoSize = true;
+            this.sessionDetails.Location = new System.Drawing.Point(27, 33);
+            this.sessionDetails.Name = "sessionDetails";
+            this.sessionDetails.Size = new System.Drawing.Size(80, 20);
+            this.sessionDetails.TabIndex = 0;
+            this.sessionDetails.Text = "Sessie {0}";
             // 
             // listBox2
             // 
@@ -231,7 +213,7 @@
             this.selectItems.Location = new System.Drawing.Point(1094, 32);
             this.selectItems.MultiSelect = false;
             this.selectItems.Name = "selectItems";
-            this.selectItems.Size = new System.Drawing.Size(205, 612);
+            this.selectItems.Size = new System.Drawing.Size(249, 612);
             this.selectItems.TabIndex = 10;
             this.selectItems.UseCompatibleStateImageBehavior = false;
             this.selectItems.View = System.Windows.Forms.View.Details;
@@ -240,6 +222,25 @@
             // Option
             // 
             this.Option.Width = 100;
+            // 
+            // highScores
+            // 
+            this.highScores.AllowColumnReorder = true;
+            this.highScores.BackColor = System.Drawing.SystemColors.Control;
+            this.highScores.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.highScores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem2});
+            this.highScores.Location = new System.Drawing.Point(7, 27);
+            this.highScores.MultiSelect = false;
+            this.highScores.Name = "highScores";
+            this.highScores.Size = new System.Drawing.Size(239, 124);
+            this.highScores.TabIndex = 0;
+            this.highScores.UseCompatibleStateImageBehavior = false;
+            this.highScores.View = System.Windows.Forms.View.Details;
+            this.highScores.SelectedIndexChanged += new System.EventHandler(this.highScores_SelectedIndexChanged);
             // 
             // GameGUI
             // 
@@ -259,7 +260,6 @@
             this.Text = "GameGUI";
             this.Load += new System.EventHandler(this.GameGUI_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -275,8 +275,6 @@
         private System.Windows.Forms.Panel drawPanel;
         private System.Windows.Forms.Label StateLabel;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel colorPanel;
         private System.Windows.Forms.Button colorPicker;
@@ -285,12 +283,14 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label playerCount;
+        private System.Windows.Forms.Label sessionDetails;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button clearPanel;
         private System.Windows.Forms.ListView selectItems;
         private System.Windows.Forms.ColumnHeader Option;
+        private System.Windows.Forms.ListView highScores;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

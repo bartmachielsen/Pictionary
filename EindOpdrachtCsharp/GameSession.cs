@@ -12,6 +12,10 @@ namespace EindOpdrachtCsharp
 {
     class GameSession
     {
+        public delegate void SessionListener(GameSession session);
+
+
+        public SessionListener stateListener;
 
         public const int maximumGuesses = 3;
 
@@ -20,6 +24,7 @@ namespace EindOpdrachtCsharp
         public string[] options = new string[100];
         public string[] hints;
         public Timer timer;
+        public int id { get; set; }
         public Random random = new Random();
         public string answer;
         public bool finished = false;
@@ -56,7 +61,7 @@ namespace EindOpdrachtCsharp
 
                 if (participant.name == null)
                     participant.name = getRandomUserName();
-
+                participant.latestScore().name = participant.name;
             }
 
         }
@@ -99,6 +104,7 @@ namespace EindOpdrachtCsharp
             GameServer server = participants.ElementAt(random.Next(0,participants.Count));
             server.notifyOnData += parseDataFromDrawer;
             server.sendData(CommandsToSend.DRAWER);
+            server.drawer = true;
             drawer = server.ToString();
 
             foreach (var watcher in participants)
@@ -120,14 +126,12 @@ namespace EindOpdrachtCsharp
 
         public void notifyAllParticipants()
         {
-
+            SessionDetails details = new SessionDetails(this.id, participants.Count, options, hints, drawer, null);
             foreach (var participant in participants)
             {
-                if(participant.drawer)
-                    participant.sendData(new SessionDetails(options, hints, drawer,participant.name));
-                else
-                    participant.sendData(new SessionDetails(options, hints, drawer, participant.name));
-                
+                details.name = participant.name;
+                participant.sendData(details);
+
             }
         }
 
@@ -141,7 +145,7 @@ namespace EindOpdrachtCsharp
                 switch ((CommandsToSend)messag.command)
                 {
                     case CommandsToSend.GUESS:
-                        if (gameSender.latestScore().wrongguesses.Count >= 3)
+                        if (gameSender.latestScore().wrongguesses.Count >= 3 || finished)
                         {
                             gameSender.sendData(CommandsToSend.BLOCKEDFROMGUESSING);
                             return;
@@ -175,10 +179,19 @@ namespace EindOpdrachtCsharp
                 winner.latestScore().timeScore = 200;
 
             foreach (var participant in participants)
-                if (winner != participant)
-                    if (participant.drawer)
-                        participant.latestScore().timeScore = winner.latestScore().timeScore;
+            {
+                if (participant.drawer)
+                {
+                    participant.latestScore().timeScore = winner.latestScore().timeScore;
+                }
+                score.players.Add(participant.latestScore());
+            }
+
+            
+            sendAllParticipants(score);
+
             finished = true;
+            stateListener.Invoke(this);
         }
 
         public void parseDataFromDrawer(object obj,object sender)
@@ -201,6 +214,7 @@ namespace EindOpdrachtCsharp
                 switch ((CommandsToSend)messag.command)
                 {
                         case CommandsToSend.ANSWER:
+                        sendAllParticipants(CommandsToSend.STARTGUESSING);
                         answer = messag.data + "";
                         timer = new Timer(1000);
                         timer.Elapsed += updatetime;
