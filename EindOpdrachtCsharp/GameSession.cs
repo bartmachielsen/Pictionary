@@ -12,17 +12,22 @@ namespace EindOpdrachtCsharp
     class GameSession
     {
         public List<GameServer> participants = new List<GameServer>();
-        public string[] options;
+        public string[] alloptions;
+        public string[] options = new string[100];
         public string[] hints;
+        public Random random = new Random();
         public string answer;
         public bool finished = false;
         public string drawer;
 
         public GameSession()
         {
-            options = File.ReadAllLines("../../Resources/options.txt");
-            hints = new string[] { "Hint1", "Hint2", "Hint3"};
-            
+            alloptions = File.ReadAllLines("../../Resources/options.txt");
+            for (int i = 0; i < options.Length; i++)
+            {
+                int index = random.Next(0, alloptions.Length);
+                options[i] = alloptions[index];
+            }
         }
 
         
