@@ -10,9 +10,10 @@ namespace EindOpdrachtCsharp
 {
     class GameConnector: ServerConnector
     {
-        private List<DataServer> dataServers = new List<DataServer>();
+        private DataServer server;
         public GameConnector(int port) : base(port)
         {
+            this.server = new DataServer();
             startChecking();
         }
 
@@ -22,22 +23,14 @@ namespace EindOpdrachtCsharp
             
 
             GameServer server = new GameServer(client);
+
             new Thread(() => server.checkInfinite()).Start();
-            DataServer dataServer = searchOpenServer();
-            dataServers.Add(dataServer);
 
-            dataServer.addServer(server);
 
-            Console.WriteLine("ADDED NEW SERVER !");
+            this.server.addServer(server);
+
         }
 
-        public DataServer searchOpenServer()
-        {
-            foreach (var server in dataServers)
-                if (!server.full())
-                    return server;
-                
-            return new DataServer();
-        }
+       
     }
 }
