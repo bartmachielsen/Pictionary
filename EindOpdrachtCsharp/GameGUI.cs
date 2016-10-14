@@ -245,5 +245,10 @@ namespace EindOpdrachtCsharp
         {
 
         }
+
+        private void drawPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

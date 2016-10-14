@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
             this.drawPanel = new System.Windows.Forms.Panel();
             this.StateLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -64,6 +64,7 @@
             this.drawPanel.Name = "drawPanel";
             this.drawPanel.Size = new System.Drawing.Size(1088, 463);
             this.drawPanel.TabIndex = 0;
+            this.drawPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.drawPanel_Paint);
             // 
             // StateLabel
             // 
@@ -232,7 +233,7 @@
             this.columnHeader1});
             this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem3});
             this.highScores.Location = new System.Drawing.Point(7, 27);
             this.highScores.MultiSelect = false;
             this.highScores.Name = "highScores";
