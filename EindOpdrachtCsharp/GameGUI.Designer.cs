@@ -35,13 +35,14 @@
             this.highScores = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.colorPanel = new System.Windows.Forms.Panel();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.button4 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.colorPanel = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.playerCount = new System.Windows.Forms.Label();
             this.sessionDetails = new System.Windows.Forms.Label();
@@ -50,12 +51,11 @@
             this.clearPanel = new System.Windows.Forms.Button();
             this.selectItems = new System.Windows.Forms.ListView();
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // drawPanel
@@ -71,7 +71,7 @@
             // 
             this.StateLabel.AutoSize = true;
             this.StateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StateLabel.Location = new System.Drawing.Point(1116, 3);
+            this.StateLabel.Location = new System.Drawing.Point(1112, 3);
             this.StateLabel.Name = "StateLabel";
             this.StateLabel.Size = new System.Drawing.Size(183, 26);
             this.StateLabel.TabIndex = 2;
@@ -124,26 +124,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Brush";
             // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(12, 117);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(82, 34);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "Eraser";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // colorPanel
-            // 
-            this.colorPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.colorPanel.Location = new System.Drawing.Point(12, 27);
-            this.colorPanel.Name = "colorPanel";
-            this.colorPanel.Size = new System.Drawing.Size(82, 45);
-            this.colorPanel.TabIndex = 5;
-            this.colorPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.colorPanel_Paint);
-            // 
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.White;
@@ -155,16 +135,48 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button1
+            // numericUpDown1
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(113, 25);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 59);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Line";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.numericUpDown1.Location = new System.Drawing.Point(12, 79);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(82, 26);
+            this.numericUpDown1.TabIndex = 7;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.Location = new System.Drawing.Point(12, 117);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(82, 34);
+            this.button5.TabIndex = 6;
+            this.button5.Text = "Eraser";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(230, 90);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(94, 59);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Triangle";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // colorPanel
+            // 
+            this.colorPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.colorPanel.Location = new System.Drawing.Point(12, 27);
+            this.colorPanel.Name = "colorPanel";
+            this.colorPanel.Size = new System.Drawing.Size(82, 45);
+            this.colorPanel.TabIndex = 5;
+            this.colorPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.colorPanel_Paint);
             // 
             // button3
             // 
@@ -177,16 +189,16 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button2
+            // button1
             // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(230, 90);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 59);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Triangle";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(113, 25);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 59);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Line";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // groupBox4
             // 
@@ -232,7 +244,7 @@
             this.groupBox5.Controls.Add(this.listBox2);
             this.groupBox5.Location = new System.Drawing.Point(792, 473);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(214, 157);
+            this.groupBox5.Size = new System.Drawing.Size(187, 157);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Connected players";
@@ -240,9 +252,9 @@
             // clearPanel
             // 
             this.clearPanel.BackColor = System.Drawing.Color.White;
-            this.clearPanel.Location = new System.Drawing.Point(985, 486);
+            this.clearPanel.Location = new System.Drawing.Point(998, 486);
             this.clearPanel.Name = "clearPanel";
-            this.clearPanel.Size = new System.Drawing.Size(103, 138);
+            this.clearPanel.Size = new System.Drawing.Size(90, 138);
             this.clearPanel.TabIndex = 9;
             this.clearPanel.Text = "Clear Panel";
             this.clearPanel.UseVisualStyleBackColor = false;
@@ -257,10 +269,10 @@
             this.selectItems.FullRowSelect = true;
             this.selectItems.GridLines = true;
             this.selectItems.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.selectItems.Location = new System.Drawing.Point(1094, 32);
+            this.selectItems.Location = new System.Drawing.Point(1106, 32);
             this.selectItems.MultiSelect = false;
             this.selectItems.Name = "selectItems";
-            this.selectItems.Size = new System.Drawing.Size(249, 612);
+            this.selectItems.Size = new System.Drawing.Size(237, 592);
             this.selectItems.TabIndex = 10;
             this.selectItems.UseCompatibleStateImageBehavior = false;
             this.selectItems.View = System.Windows.Forms.View.Details;
@@ -269,18 +281,6 @@
             // Option
             // 
             this.Option.Width = 100;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(12, 79);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(82, 26);
-            this.numericUpDown1.TabIndex = 7;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // GameGUI
             // 
@@ -302,10 +302,10 @@
             this.Load += new System.EventHandler(this.GameGUI_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
