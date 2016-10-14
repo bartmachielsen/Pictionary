@@ -16,7 +16,7 @@ namespace EindOpdrachtCsharp
 
         private List<DrawPoint> alreadySelected = new List<DrawPoint>();
 
-        private enum mode { DRAW, RECT, TRIANGLE, LINE };
+        private enum mode { DRAW, RECT, TRIANGLE, LINE, GUM };
         mode currentmode = mode.DRAW;
 
         private int paintWidth = 1;
@@ -30,9 +30,21 @@ namespace EindOpdrachtCsharp
             InitializeComponent();
             drawPanel.MouseMove += mouseEvent;
             drawPanel.MouseClick += mouseClick;
+            colorPanel.MouseClick += selectColor;
             this.client = client;
             client.notifyOnData += parseData;
             client.sendData(CommandsToSend.CONNECT);
+        }
+
+        public void selectColor(object sender, EventArgs args)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                Color color = colorDialog.Color;
+                this.color = color;
+                colorPanel.BackColor = color;
+            }
         }
 
         public void parseData(object data, object sender)
@@ -197,7 +209,7 @@ namespace EindOpdrachtCsharp
 
                     break;
 
-
+            
 
 
                 case mode.RECT:
@@ -261,7 +273,12 @@ namespace EindOpdrachtCsharp
                                     x = currentx;
                                     y = currenty;
                                     break;
-                               
+
+                                case mode.GUM:
+
+
+                                    break;
+
                             }
                             
                         }
@@ -375,6 +392,16 @@ namespace EindOpdrachtCsharp
         private void button2_Click(object sender, EventArgs e)
         {
             currentmode = mode.TRIANGLE;
+        }
+
+        private void colorPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            currentmode = mode.GUM;
         }
     }
 }

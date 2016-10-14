@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
             this.drawPanel = new System.Windows.Forms.Panel();
             this.StateLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -36,7 +36,6 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.colorPanel = new System.Windows.Forms.Panel();
-            this.colorPicker = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -51,6 +50,7 @@
             this.clearPanel = new System.Windows.Forms.Button();
             this.selectItems = new System.Windows.Forms.ListView();
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -96,7 +96,7 @@
             this.columnHeader1});
             this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem5});
             this.highScores.Location = new System.Drawing.Point(7, 27);
             this.highScores.MultiSelect = false;
             this.highScores.Name = "highScores";
@@ -108,8 +108,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.colorPanel);
-            this.groupBox2.Controls.Add(this.colorPicker);
             this.groupBox2.Location = new System.Drawing.Point(0, 473);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(83, 157);
@@ -120,20 +120,11 @@
             // colorPanel
             // 
             this.colorPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.colorPanel.Location = new System.Drawing.Point(6, 39);
+            this.colorPanel.Location = new System.Drawing.Point(25, 25);
             this.colorPanel.Name = "colorPanel";
-            this.colorPanel.Size = new System.Drawing.Size(57, 28);
+            this.colorPanel.Size = new System.Drawing.Size(35, 28);
             this.colorPanel.TabIndex = 5;
-            // 
-            // colorPicker
-            // 
-            this.colorPicker.Location = new System.Drawing.Point(6, 73);
-            this.colorPicker.Name = "colorPicker";
-            this.colorPicker.Size = new System.Drawing.Size(57, 26);
-            this.colorPicker.TabIndex = 0;
-            this.colorPicker.Text = "pick";
-            this.colorPicker.UseVisualStyleBackColor = true;
-            this.colorPicker.Click += new System.EventHandler(this.colorpicker_Click);
+            this.colorPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.colorPanel_Paint);
             // 
             // groupBox3
             // 
@@ -268,6 +259,16 @@
             // 
             this.Option.Width = 100;
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(6, 123);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 34);
+            this.button5.TabIndex = 6;
+            this.button5.Text = "gum";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // GameGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -303,7 +304,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel colorPanel;
-        private System.Windows.Forms.Button colorPicker;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button3;
@@ -320,5 +320,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button5;
     }
 }
