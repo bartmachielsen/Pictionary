@@ -42,6 +42,12 @@ namespace EindOpdrachtCsharp
                             Console.WriteLine("CLEARING PANEL");
                             panel1.CreateGraphics().Clear(Color.White);
                             break;
+                        case CommandsToSend.DRAWER:
+                            //StateLabel.Text = "Drawer";
+                            break;
+                        case CommandsToSend.NEW_SESSION:
+                            //StateLabel.Text = "Watcher";
+                            break;
                     }
                 }
                 if (data is DrawPoint)
@@ -56,6 +62,13 @@ namespace EindOpdrachtCsharp
         {
             listBox1.Items.Clear();
             listBox1.Items.AddRange(sessionDetails.options);
+            this.Text = sessionDetails.name;
+            if (client.drawer)
+                StateLabel.Text = "Drawer";
+            else
+                StateLabel.Text = "Watcher";
+            
+
         }
 
         private void GameGUI_Load(object sender, EventArgs e)

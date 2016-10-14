@@ -18,6 +18,13 @@ namespace EindOpdrachtCsharp
         public bool finished = false;
         public string drawer;
 
+
+        public static string[] randomUserNames =
+        {
+            "PirateHacker", "MasterDrawer", "DrawForLife", "RandomPlayer",
+            "Hacker"
+        };
+
         public GameSession()
         {
             options = File.ReadAllLines("../../Resources/options.txt");
@@ -25,7 +32,47 @@ namespace EindOpdrachtCsharp
             
         }
 
-        
+
+        public void uploadParticipants(List<GameServer> participants)
+        {
+            this.participants = participants;
+            foreach (var participant in participants)
+                if (participant.name == null)
+                    participant.name = getRandomUserName();
+                
+        }
+
+        private string getRandomUserName()
+        {
+            bool found = false;
+            string manual = null;
+            Random random = new Random();
+            List<string> alreadyTaken = new List<string>();
+            while (!found)
+            {
+                string guessed = randomUserNames[random.Next(0, randomUserNames.Length)];
+                if (manual != null)
+                    guessed = manual;
+                bool taken = false;
+                foreach (var participant in participants)
+                {
+                    taken = participant.name == guessed;
+                    if (taken)
+                        break;
+                }
+                if (!taken)
+                    return guessed;
+                else
+                {
+                    if(!alreadyTaken.Contains(guessed))
+                        alreadyTaken.Add(guessed);
+
+                    if (alreadyTaken.Count == randomUserNames.Length)
+                        manual = randomUserNames[random.Next(0, randomUserNames.Length)] + random.Next(0, 100);
+                }
+            }
+            return null;
+        }
 
         public void selectDrawer()
         {
@@ -58,9 +105,9 @@ namespace EindOpdrachtCsharp
             foreach (var participant in participants)
             {
                 if(participant.drawer)
-                    participant.sendData(new SessionDetails(options, hints, drawer, answer));
+                    participant.sendData(new SessionDetails(options, hints, drawer,participant.name));
                 else
-                    participant.sendData(new SessionDetails(options, hints, drawer));
+                    participant.sendData(new SessionDetails(options, hints, drawer, participant.name));
                 
             }
         }

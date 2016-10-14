@@ -30,10 +30,13 @@ namespace EindOpdrachtCsharp
                 
                 Console.WriteLine($"CREATED SESSION {sessions.Count}");
                 GameSession session = new GameSession();
-                session.participants = servers;
-                session.selectDrawer();
+                session.uploadParticipants(servers);
+               
                 sessions.Add(session);
                 new Thread(()=>waitUntilReady(session)).Start();
+                session.sendAllParticipants(CommandsToSend.NEW_SESSION);
+                session.selectDrawer();
+
             }
         }
 

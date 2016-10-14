@@ -17,6 +17,7 @@ namespace EindOpdrachtCsharp
 
         public bool drawer = false;
         public string answer = null;
+        public string name = "";
 
         public GameClient(TcpClient client) : base(client)
         {
@@ -56,15 +57,15 @@ namespace EindOpdrachtCsharp
     {
         public string[] options;
         public string[] hints;
-        public string answer;
         public string drawer;
+        public string name;
 
-        public SessionDetails(string[] options, string[] hints, string drawer, string answer = null)
+        public SessionDetails(string[] options, string[] hints, string drawer, string name)
         {
             this.options = options;
             this.hints = hints;
-            this.answer = answer;
             this.drawer = drawer;
+            this.name = name;
         }
     }
 

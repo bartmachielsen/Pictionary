@@ -14,6 +14,8 @@ namespace EindOpdrachtCsharp
         public bool ready { get; set; }
         public bool drawer { get; set; }
 
+        public string name { get; set; }
+
         public GameServer(TcpClient client) : base(client)
         {
 
