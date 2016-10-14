@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
             this.drawPanel = new System.Windows.Forms.Panel();
             this.StateLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.highScores = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.colorPanel = new System.Windows.Forms.Panel();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -50,7 +51,6 @@
             this.clearPanel = new System.Windows.Forms.Button();
             this.selectItems = new System.Windows.Forms.ListView();
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -96,7 +96,7 @@
             this.columnHeader1});
             this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5});
+            listViewItem1});
             this.highScores.Location = new System.Drawing.Point(7, 27);
             this.highScores.MultiSelect = false;
             this.highScores.Name = "highScores";
@@ -116,6 +116,16 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Brush";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(6, 123);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 34);
+            this.button5.TabIndex = 6;
+            this.button5.Text = "gum";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // colorPanel
             // 
@@ -258,16 +268,6 @@
             // Option
             // 
             this.Option.Width = 100;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(6, 123);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 34);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "gum";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // GameGUI
             // 
