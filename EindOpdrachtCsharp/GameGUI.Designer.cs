@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.drawPanel = new System.Windows.Forms.Panel();
             this.StateLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,6 +46,8 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.clearPanel = new System.Windows.Forms.Button();
+            this.selectItems = new System.Windows.Forms.ListView();
+            this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -54,32 +55,14 @@
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // drawPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(0, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1088, 463);
-            this.panel1.TabIndex = 0;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Items.AddRange(new object[] {
-            "Koe",
-            "ltoiqet",
-            "adfolbmxf",
-            "asdg",
-            "adfgomasdf",
-            "asdgomsad",
-            "Varken"});
-            this.listBox1.Location = new System.Drawing.Point(1094, 37);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(249, 584);
-            this.listBox1.TabIndex = 1;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.drawPanel.BackColor = System.Drawing.Color.White;
+            this.drawPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.drawPanel.Location = new System.Drawing.Point(0, 3);
+            this.drawPanel.Name = "drawPanel";
+            this.drawPanel.Size = new System.Drawing.Size(1088, 463);
+            this.drawPanel.TabIndex = 0;
             // 
             // StateLabel
             // 
@@ -236,11 +219,34 @@
             this.clearPanel.UseVisualStyleBackColor = true;
             this.clearPanel.Click += new System.EventHandler(this.clearPanel_click);
             // 
+            // selectItems
+            // 
+            this.selectItems.Alignment = System.Windows.Forms.ListViewAlignment.Default;
+            this.selectItems.AutoArrange = false;
+            this.selectItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Option});
+            this.selectItems.FullRowSelect = true;
+            this.selectItems.GridLines = true;
+            this.selectItems.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.selectItems.Location = new System.Drawing.Point(1094, 32);
+            this.selectItems.MultiSelect = false;
+            this.selectItems.Name = "selectItems";
+            this.selectItems.Size = new System.Drawing.Size(205, 612);
+            this.selectItems.TabIndex = 10;
+            this.selectItems.UseCompatibleStateImageBehavior = false;
+            this.selectItems.View = System.Windows.Forms.View.Details;
+            this.selectItems.SelectedIndexChanged += new System.EventHandler(this.selectItems_SelectedIndexChanged);
+            // 
+            // Option
+            // 
+            this.Option.Width = 100;
+            // 
             // GameGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1355, 642);
+            this.Controls.Add(this.selectItems);
             this.Controls.Add(this.clearPanel);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -248,8 +254,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.StateLabel);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.drawPanel);
             this.Name = "GameGUI";
             this.Text = "GameGUI";
             this.Load += new System.EventHandler(this.GameGUI_Load);
@@ -267,8 +272,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Panel drawPanel;
         private System.Windows.Forms.Label StateLabel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
@@ -286,5 +290,7 @@
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button clearPanel;
+        private System.Windows.Forms.ListView selectItems;
+        private System.Windows.Forms.ColumnHeader Option;
     }
 }

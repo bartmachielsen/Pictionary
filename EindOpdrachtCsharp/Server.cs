@@ -16,9 +16,16 @@ namespace EindOpdrachtCsharp
 
         public string name { get; set; }
 
+        public List<PlayerScore> scores = new List<PlayerScore>();
+
         public GameServer(TcpClient client) : base(client)
         {
 
+        }
+
+        public PlayerScore latestScore()
+        {
+            return scores.ElementAt(scores.Count - 1);
         }
 
         public override void sendData(object data)

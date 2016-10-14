@@ -13,12 +13,10 @@ namespace EindOpdrachtCsharp
     {
         public const int amountNeeded = 3;
         public const int amountToStart = 3;
-        public const int maxAmount = 20;
+        public const int maxAmount = 3;
 
         public List<GameServer> servers = new List<GameServer>();
         public List<GameSession> sessions = new List<GameSession>();
-        
-
        
 
         public void addServer(GameServer server)
@@ -85,7 +83,26 @@ namespace EindOpdrachtCsharp
         ANSWER,
         GUESS,
         WRONGANSWER,
-        CORRECTANSWER
+        CORRECTANSWER,
+        BLOCKEDFROMGUESSING
+    }
+
+
+    public class SessionScore
+    {
+        public string winner;
+        public TimeSpan totalTime;
+
+    }
+
+    public class PlayerScore
+    {
+        public string name;
+        public string answer;
+        public int hintGuessed = 0;
+        public List<string> wrongguesses = new List<string>();
+        public int totalScore => ((wrongguesses.Count+hintGuessed)*-200) + timeScore;
+        public int timeScore = 0;
     }
 
 }

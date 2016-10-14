@@ -5,23 +5,30 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using EindOpdrachtCsharp.ConnectionManagers;
 
 namespace EindOpdrachtCsharp
 {
     class GameSession
     {
+
+        public const int maximumGuesses = 3;
+
         public List<GameServer> participants = new List<GameServer>();
         public string[] alloptions;
         public string[] options = new string[100];
         public string[] hints;
+        public Timer timer;
         public Random random = new Random();
         public string answer;
         public bool finished = false;
         public string drawer;
 
+        private SessionScore score;
 
-        public static string[] randomUserNames =
+
+        private static string[] randomUserNames =
         {
             "PirateHacker", "MasterDrawer", "DrawForLife", "RandomPlayer",
             "Hacker"
@@ -35,6 +42,8 @@ namespace EindOpdrachtCsharp
                 int index = random.Next(0, alloptions.Length);
                 options[i] = alloptions[index];
             }
+
+            score = new SessionScore();
         }
 
 
@@ -42,9 +51,14 @@ namespace EindOpdrachtCsharp
         {
             this.participants = participants;
             foreach (var participant in participants)
+            {
+                participant.scores.Add(new PlayerScore());
+
                 if (participant.name == null)
                     participant.name = getRandomUserName();
-                
+
+            }
+
         }
 
         private string getRandomUserName()
@@ -126,23 +140,46 @@ namespace EindOpdrachtCsharp
                 message messag = (message)obj;
                 switch ((CommandsToSend)messag.command)
                 {
-                    
-
                     case CommandsToSend.GUESS:
-                        if (answer == messag.data.ToString())
+                        if (gameSender.latestScore().wrongguesses.Count >= 3)
+                        {
+                            gameSender.sendData(CommandsToSend.BLOCKEDFROMGUESSING);
+                            return;
+                        }
+                        if (answer != messag.data.ToString())
                         {
                             gameSender.sendMessage(CommandsToSend.WRONGANSWER,messag.data);
+                            gameSender.latestScore().wrongguesses.Add(messag.data.ToString());
+                            if (gameSender.latestScore().wrongguesses.Count >= maximumGuesses)
+                            {
+                                gameSender.sendData(CommandsToSend.BLOCKEDFROMGUESSING);
+                            }
                         }
                         else
                         {
                             gameSender.sendMessage(CommandsToSend.CORRECTANSWER, messag.data);
+                            finish(gameSender);
                         }
                         break;
                 }
             }
         }
 
+        public void finish(GameServer winner)
+        {
+            timer.Stop();
 
+            winner.latestScore().answer = answer;
+            winner.latestScore().timeScore = 1000 - ((int)score.totalTime.TotalSeconds*10);
+            if (winner.latestScore().timeScore < 200)
+                winner.latestScore().timeScore = 200;
+
+            foreach (var participant in participants)
+                if (winner != participant)
+                    if (participant.drawer)
+                        participant.latestScore().timeScore = winner.latestScore().timeScore;
+            finished = true;
+        }
 
         public void parseDataFromDrawer(object obj,object sender)
         {
@@ -165,12 +202,22 @@ namespace EindOpdrachtCsharp
                 {
                         case CommandsToSend.ANSWER:
                         answer = messag.data + "";
-                        Console.WriteLine("ANSWER SETTED AS " + answer);
+                        timer = new Timer(1000);
+                        timer.Elapsed += updatetime;
+                        timer.Enabled = true;
                         break;
 
                        
                 }
             }
+        }
+
+        public void updatetime(object sender, EventArgs args)
+        {
+            if(score.totalTime == null)
+                score.totalTime = new TimeSpan(0,0,0,0);
+            score.totalTime = score.totalTime.Add(new TimeSpan(0, 0, 0, 1));
+            Console.WriteLine(score.totalTime.TotalSeconds);
         }
 
         public void sendAllParticipants(object send)
