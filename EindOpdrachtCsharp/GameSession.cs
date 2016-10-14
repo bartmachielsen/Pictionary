@@ -231,7 +231,6 @@ namespace EindOpdrachtCsharp
             if(score.totalTime == null)
                 score.totalTime = new TimeSpan(0,0,0,0);
             score.totalTime = score.totalTime.Add(new TimeSpan(0, 0, 0, 1));
-            Console.WriteLine(score.totalTime.TotalSeconds);
         }
 
         public void sendAllParticipants(object send)

@@ -172,7 +172,7 @@ namespace EindOpdrachtCsharp
 
                         DrawPoint a = alreadySelected.ElementAt(0);
                         DrawPoint b = alreadySelected.ElementAt(1);
-                        DrawPoint c = new DrawPoint(b.x,b.y, a.x, a.y, color);
+                        DrawPoint c = new DrawPoint(b.x,b.y, a.x, a.y, color, (int)widthBox.Value);
                         DrawPoint(c);
                         if (client.drawer) client.sendData(c);
                         
@@ -191,9 +191,9 @@ namespace EindOpdrachtCsharp
                         DrawPoint b = alreadySelected.ElementAt(1);
 
 
-                        DrawPoint line1 = new DrawPoint(a.x, a.y, b.x, a.y, color);
-                        DrawPoint line2 = new DrawPoint(b.x, a.y, b.x, b.y, color);
-                        DrawPoint line3 = new DrawPoint(b.x, b.y, a.x, a.y, color);
+                        DrawPoint line1 = new DrawPoint(a.x, a.y, b.x, a.y, color, (int)widthBox.Value);
+                        DrawPoint line2 = new DrawPoint(b.x, a.y, b.x, b.y, color, (int)widthBox.Value);
+                        DrawPoint line3 = new DrawPoint(b.x, b.y, a.x, a.y, color, (int)widthBox.Value);
 
                         DrawPoint(line1);
                         DrawPoint(line2);
@@ -219,10 +219,10 @@ namespace EindOpdrachtCsharp
 
 
 
-                        DrawPoint line1 = new DrawPoint(a.x, a.y, a.x, b.y, color);
-                        DrawPoint line2 = new DrawPoint(a.x, b.y, b.x, b.y, color);
-                        DrawPoint line3 = new DrawPoint(b.x, b.y, b.x, a.y, color);
-                        DrawPoint line4 = new DrawPoint(b.x, a.y, a.x, a.y, color);
+                        DrawPoint line1 = new DrawPoint(a.x, a.y, a.x, b.y, color, (int)widthBox.Value);
+                        DrawPoint line2 = new DrawPoint(a.x, b.y, b.x, b.y, color, (int)widthBox.Value);
+                        DrawPoint line3 = new DrawPoint(b.x, b.y, b.x, a.y, color, (int)widthBox.Value);
+                        DrawPoint line4 = new DrawPoint(b.x, a.y, a.x, a.y, color, (int)widthBox.Value);
 
                         DrawPoint(line1);
                         DrawPoint(line2);
@@ -266,7 +266,7 @@ namespace EindOpdrachtCsharp
                             switch (currentmode)
                             {
                                 case mode.DRAW:
-                                    var point = new DrawPoint(currentx, currenty, x, y, color,30);
+                                    var point = new DrawPoint(currentx, currenty, x, y, color,(int)widthBox.Value);
                                     if (client.drawer) client.sendData(point);
                                     DrawPoint(point);
                                     x = currentx;
