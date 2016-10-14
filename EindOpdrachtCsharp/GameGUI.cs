@@ -194,7 +194,7 @@ namespace EindOpdrachtCsharp
             }
             else
             {
-                var g = panel1.CreateGraphics();
+                var g = drawPanel.CreateGraphics();
                 var pen = new Pen(drawpoint.color, paintWidth);
 
                 var totalx = (int) (drawpoint.x/100.0*drawPanel.Width);
@@ -213,7 +213,7 @@ namespace EindOpdrachtCsharp
 
         public void DrawLine(Point pointA, Point pointB)
         {
-            var g = panel1.CreateGraphics();
+            var g = drawPanel.CreateGraphics();
             var pen = new Pen(Color.Blue, paintWidth);
             g.DrawLine(pen, pointA, pointB);
         }
