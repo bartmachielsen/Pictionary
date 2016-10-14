@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -11,8 +12,10 @@ namespace EindOpdrachtCsharp
     {
         private double x = -1;
         private double y = -1;
+        private Point pointA, pointB;
 
-        
+        private enum mode { DRAW, RECT, CIRC, LINE };
+        mode currentmode = mode.DRAW;
 
         private int paintWidth = 1;
         private Color color = Color.Black;
@@ -153,11 +156,26 @@ namespace EindOpdrachtCsharp
                     if ((currentx != x) || (currenty != y))
                         if ((currentx >= 0) && (currenty >= 0) && (currenty <= 100.0) && (currentx <= 100.0))
                         {
-                            var point = new DrawPoint(currentx, currenty, x, y,color);
-                            if(client.drawer)client.sendData(point);
-                            DrawPoint(point);
-                            x = currentx;
-                            y = currenty;
+                            if(currentmode == mode.DRAW)
+                            {
+                                var point = new DrawPoint(currentx, currenty, x, y, color);
+                                if(client.drawer)client.sendData(point);
+                                DrawPoint(point);
+                                x = currentx;
+                                y = currenty;
+                            }
+                            if(currentmode == mode.RECT)
+                            {
+                                
+                            }
+                            if(currentmode == mode.CIRC)
+                            {
+
+                            }
+                            if(currentmode == mode.LINE)
+                            {
+                                
+                            }
                         }
                 }
                 else
@@ -165,7 +183,6 @@ namespace EindOpdrachtCsharp
                     x = -1;
                     y = -1;
                 }
-               
             }
         }
 
@@ -177,8 +194,7 @@ namespace EindOpdrachtCsharp
             }
             else
             {
-
-                var g = drawPanel.CreateGraphics();
+                var g = panel1.CreateGraphics();
                 var pen = new Pen(drawpoint.color, paintWidth);
 
                 var totalx = (int) (drawpoint.x/100.0*drawPanel.Width);
@@ -193,6 +209,13 @@ namespace EindOpdrachtCsharp
                 }
                 g.DrawLine(pen, totalx, totaly, prevx, prevy);
             }
+        }
+
+        public void DrawLine(Point pointA, Point pointB)
+        {
+            var g = panel1.CreateGraphics();
+            var pen = new Pen(Color.Blue, paintWidth);
+            g.DrawLine(pen, pointA, pointB);
         }
 
         private void clearPanel_click(object sender, EventArgs e)
@@ -246,7 +269,12 @@ namespace EindOpdrachtCsharp
 
         }
 
-        private void drawPanel_Paint(object sender, PaintEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            currentmode = mode.LINE;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
