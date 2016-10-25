@@ -10,6 +10,10 @@ namespace EindOpdrachtCsharp
 {
     public class GameServer : TCPConnector
     {
+        public delegate bool CheckName(string username);
+
+        public CheckName checkName;
+
         public int serverID = 0;
         
         public bool ready { get; set; }
@@ -17,7 +21,7 @@ namespace EindOpdrachtCsharp
 
         public string name { get; set; }
 
-        
+        public bool staticName { get; set; }= false;
 
         public List<PlayerScore> scores = new List<PlayerScore>();
 
@@ -52,6 +56,26 @@ namespace EindOpdrachtCsharp
                         break;
                 }
             }
+            if (obj is Message)
+            {
+                Message message = (Message) obj;
+                if (message.command == CommandsToSend.NEWUSERNAME)
+                {
+                    string username = message.data + "";
+                    if (username == "DELETE")
+                    { 
+                        this.staticName = false;
+                        return;
+                    }
+
+                    if (checkName != null && checkName.Invoke(username))
+                    {
+                        this.name = username;
+                        this.staticName = true;
+                    }
+                }
+            }
+            
         }
 
     }

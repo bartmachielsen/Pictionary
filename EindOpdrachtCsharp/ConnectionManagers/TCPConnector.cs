@@ -52,7 +52,7 @@ namespace EindOpdrachtCsharp.ConnectionManagers
 
         public virtual void sendMessage(CommandsToSend command, object data)
         {
-            sendData(new message(command,data));
+            sendData(new Message(command,data));
         }
 
         public virtual void sendData(object data)
@@ -129,12 +129,12 @@ namespace EindOpdrachtCsharp.ConnectionManagers
 
     }
     [Serializable]
-    public struct message
+    public struct Message
     {
         public CommandsToSend command;
         public object data;
 
-        public message(CommandsToSend command, object data)
+        public Message(CommandsToSend command, object data)
         {
             this.command = command;
             this.data = data;

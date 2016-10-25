@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EindOpdrachtCsharp.ConnectionManagers;
+using Message = EindOpdrachtCsharp.ConnectionManagers.Message;
 using Timer = System.Timers.Timer;
 
 namespace EindOpdrachtCsharp
@@ -99,7 +100,7 @@ namespace EindOpdrachtCsharp
                 participant.errorNotifier += participantError;
                 participant.scores.Add(new PlayerScore());
 
-                if (participant.name == null)
+                if(!participant.staticName || participant.name == null)
                     participant.name = getRandomUserName();
                 participant.latestScore().name = participant.name;
 
@@ -113,7 +114,7 @@ namespace EindOpdrachtCsharp
             if (finished) return;
             if (participant is GameServer && (int) errorLevel >= (int) TCPConnector.allowedErrorLevel)
             {
-                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SESSION \n errorlevel:{errorLevel} \n message:{message} \n server:{participant}");
+                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SESSION \n errorlevel:{errorLevel} \n Message:{message} \n server:{participant}");
                 GameServer server = (GameServer) participant;
                 server.close();
                 this.participants.RemoveAll((GameServer serverPart) => server.serverID == serverPart.serverID);
@@ -129,7 +130,7 @@ namespace EindOpdrachtCsharp
             }
             else
             {
-                Console.WriteLine($"SAFE ERROR WITHOUT CONS HAS OCCURED LEVEL: SESSION \n errorlevel:{errorLevel} \n message:{message} \n server:{participant}");
+                Console.WriteLine($"SAFE ERROR WITHOUT CONS HAS OCCURED LEVEL: SESSION \n errorlevel:{errorLevel} \n Message:{message} \n server:{participant}");
             }
         }
 
@@ -214,9 +215,9 @@ namespace EindOpdrachtCsharp
         {
             Console.WriteLine(sender);
             GameServer gameSender = (GameServer) sender;
-            if (obj is message)
+            if (obj is Message)
             {
-                message messag = (message)obj;
+                Message messag = (Message)obj;
                 switch ((CommandsToSend)messag.command)
                 {
                     case CommandsToSend.GUESS:
@@ -302,9 +303,9 @@ namespace EindOpdrachtCsharp
                         break;
                 }
             }
-            if (obj is message)
+            if (obj is Message)
             {
-                message messag = (message) obj;
+                Message messag = (Message) obj;
                 switch ((CommandsToSend)messag.command)
                 {
                         case CommandsToSend.ANSWER:

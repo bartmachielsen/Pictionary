@@ -27,6 +27,7 @@ namespace EindOpdrachtCsharp
         {
             servers.Add(server);
             server.errorNotifier += deleteSafely;
+            server.checkName += checkName;
             Console.WriteLine($"ADDING GAMESERVER {servers.Count} of {amountNeeded}");
             
             waiting.Add(server);
@@ -39,11 +40,19 @@ namespace EindOpdrachtCsharp
             }
         }
 
+        public bool checkName(string username)
+        {
+            foreach(GameServer server in servers)
+                if (server.name == username)
+                    return false;
+            return true;
+        }
+
         private void deleteSafely(TCPConnector.ErrorLevel errorlevel, string errormessage, object sender)
         {
             if (sender is GameServer && (int)errorlevel >= (int)TCPConnector.allowedErrorLevel)
             {
-                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SERVER \n errorlevel:{errorlevel} \n message:{errormessage} \n server:{sender}");
+                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SERVER \n errorlevel:{errorlevel} \n Message:{errormessage} \n server:{sender}");
                 GameServer server = (GameServer)sender;
                 server.close();
                 this.waiting.RemoveAll((GameServer serverPart) => server.serverID == serverPart.serverID);
@@ -51,7 +60,7 @@ namespace EindOpdrachtCsharp
             }
             else
             {
-                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SERVER \n errorlevel:{errorlevel} \n message:{errormessage} \n server:{sender}");
+                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SERVER \n errorlevel:{errorlevel} \n Message:{errormessage} \n server:{sender}");
             }
         }
 
@@ -130,7 +139,8 @@ namespace EindOpdrachtCsharp
         STARTGUESSING,
         PARTICIPANTSUPDATE,
         WAITINGFORSESSION,
-        REQUESTHINT
+        REQUESTHINT,
+        NEWUSERNAME
        
     }
 

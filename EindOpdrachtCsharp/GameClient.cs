@@ -12,7 +12,10 @@ namespace EindOpdrachtCsharp
 {
     public class GameClient : TCPConnector
     {
-        
+        public delegate bool NameChecker(string newName);
+
+
+        public NameChecker checkIfExists;
         
 
         public bool drawer = false;
@@ -28,8 +31,7 @@ namespace EindOpdrachtCsharp
             base.sendMessage(command, data);
             if (command == CommandsToSend.ANSWER)
                 answer = data + "";
-
-            Console.WriteLine("SENDING " + data);
+            
         }
 
 
@@ -49,6 +51,10 @@ namespace EindOpdrachtCsharp
                         break;
                         
                 }
+            }
+            if (obj is TCPConnector.Message)
+            {
+                
             }
         }
 
