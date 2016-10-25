@@ -13,13 +13,12 @@ namespace EindOpdrachtCsharp
     {
         private double x = -1;
         private double y = -1;
-        
 
+        private int requestedHints = 0;
         private List<DrawPoint> alreadySelected = new List<DrawPoint>();
 
         private enum mode { DRAW, RECT, TRIANGLE, LINE, GUM };
         mode currentmode = mode.DRAW;
-        
         private Color color = Color.Black;
         private GameClient client;
 
@@ -36,8 +35,8 @@ namespace EindOpdrachtCsharp
             client.notifyOnData += parseData;
             client.sendData(CommandsToSend.CONNECT);
             this.FormClosing += closed;
-            if(File.Exists("../../Resources/background.png"))
-                BackgroundImage = Image.FromFile("../../Resources/background.png");
+           // if(File.Exists("../../Resources/background.png"))
+             //   BackgroundImage = Image.FromFile("../../Resources/background.png");
         }
 
         public void closed(object sender, EventArgs args)
@@ -112,7 +111,13 @@ namespace EindOpdrachtCsharp
                             this.playerCount.Text = $"{list.Count} deelnemers";
                             this.listBox2.Items.AddRange(list.ToArray());
                             break;
-                        
+
+                        case CommandsToSend.REQUESTHINT:
+                            string hint = messag.data + "";
+                            
+                            
+                            break;
+
                     }
                 
                 }
@@ -179,8 +184,12 @@ namespace EindOpdrachtCsharp
             }
             else
                 StateLabel.Text = "Watcher";
+            requestedHints = 0;
+        }
 
-
+        public void hintRequest()
+        {
+            client.sendData(CommandsToSend.REQUESTHINT);
         }
 
         private void GameGUI_Load(object sender, EventArgs e)

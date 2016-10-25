@@ -57,7 +57,6 @@ namespace EindOpdrachtCsharp
     public class SessionDetails
     {
         public string[] options;
-        public string[] hints;
 
         public string drawer;
         public string name;

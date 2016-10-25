@@ -129,7 +129,9 @@ namespace EindOpdrachtCsharp
         BLOCKEDFROMGUESSING,
         STARTGUESSING,
         PARTICIPANTSUPDATE,
-        WAITINGFORSESSION
+        WAITINGFORSESSION,
+        REQUESTHINT
+       
     }
 
     [Serializable]
