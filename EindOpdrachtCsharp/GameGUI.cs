@@ -60,7 +60,10 @@ namespace EindOpdrachtCsharp
         public void waiting()
         {
             StateLabel.Text = "WAITING...";
+            waitingPicture.Visible = true;
+            waitingLabel.Visible = true;
         }
+
         public void parseData(object data, object sender)
         {
             if (this.InvokeRequired)
@@ -155,6 +158,8 @@ namespace EindOpdrachtCsharp
 
         public void LoadSessionDetails(SessionDetails sessionDetails)
         {
+            waitingPicture.Visible = false;
+            waitingLabel.Visible = false;
             client.answer = null;
             selectItems.Items.Clear();
             drawPanel.CreateGraphics().Clear(Color.White);  //  CLEARING PANEL
@@ -438,6 +443,11 @@ namespace EindOpdrachtCsharp
         }
 
         private void drawerLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

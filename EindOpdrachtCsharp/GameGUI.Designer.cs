@@ -53,17 +53,24 @@
             this.clearPanel = new System.Windows.Forms.Button();
             this.selectItems = new System.Windows.Forms.ListView();
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.waitingPicture = new System.Windows.Forms.PictureBox();
+            this.waitingLabel = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.drawPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.widthBox)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.waitingPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // drawPanel
             // 
             this.drawPanel.BackColor = System.Drawing.Color.White;
             this.drawPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.drawPanel.Controls.Add(this.waitingLabel);
+            this.drawPanel.Controls.Add(this.waitingPicture);
             this.drawPanel.Location = new System.Drawing.Point(-12, -9);
             this.drawPanel.Name = "drawPanel";
             this.drawPanel.Size = new System.Drawing.Size(1100, 475);
@@ -75,7 +82,7 @@
             this.StateLabel.BackColor = System.Drawing.Color.Transparent;
             this.StateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StateLabel.ForeColor = System.Drawing.Color.White;
-            this.StateLabel.Location = new System.Drawing.Point(1094, 3);
+            this.StateLabel.Location = new System.Drawing.Point(1110, 3);
             this.StateLabel.Name = "StateLabel";
             this.StateLabel.Size = new System.Drawing.Size(183, 26);
             this.StateLabel.TabIndex = 2;
@@ -283,7 +290,7 @@
             this.clearPanel.BackColor = System.Drawing.Color.White;
             this.clearPanel.Location = new System.Drawing.Point(998, 486);
             this.clearPanel.Name = "clearPanel";
-            this.clearPanel.Size = new System.Drawing.Size(90, 138);
+            this.clearPanel.Size = new System.Drawing.Size(90, 59);
             this.clearPanel.TabIndex = 9;
             this.clearPanel.Text = "Clear Panel";
             this.clearPanel.UseVisualStyleBackColor = false;
@@ -302,7 +309,7 @@
             this.selectItems.Location = new System.Drawing.Point(1106, 32);
             this.selectItems.MultiSelect = false;
             this.selectItems.Name = "selectItems";
-            this.selectItems.Size = new System.Drawing.Size(165, 592);
+            this.selectItems.Size = new System.Drawing.Size(165, 590);
             this.selectItems.TabIndex = 10;
             this.selectItems.UseCompatibleStateImageBehavior = false;
             this.selectItems.View = System.Windows.Forms.View.Details;
@@ -312,13 +319,48 @@
             // 
             this.Option.Width = 100;
             // 
+            // waitingPicture
+            // 
+            this.waitingPicture.Image = ((System.Drawing.Image)(resources.GetObject("waitingPicture.Image")));
+            this.waitingPicture.Location = new System.Drawing.Point(375, 40);
+            this.waitingPicture.Name = "waitingPicture";
+            this.waitingPicture.Size = new System.Drawing.Size(299, 293);
+            this.waitingPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.waitingPicture.TabIndex = 0;
+            this.waitingPicture.TabStop = false;
+            this.waitingPicture.Visible = false;
+            this.waitingPicture.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // waitingLabel
+            // 
+            this.waitingLabel.AutoSize = true;
+            this.waitingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.waitingLabel.Location = new System.Drawing.Point(255, 351);
+            this.waitingLabel.Name = "waitingLabel";
+            this.waitingLabel.Size = new System.Drawing.Size(559, 32);
+            this.waitingLabel.TabIndex = 1;
+            this.waitingLabel.Text = "You Are Waiting For An Available Lobby";
+            this.waitingLabel.Visible = false;
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.White;
+            this.button6.Location = new System.Drawing.Point(998, 563);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(90, 59);
+            this.button6.TabIndex = 11;
+            this.button6.Text = "Hint";
+            this.button6.UseVisualStyleBackColor = false;
+            // 
             // GameGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1289, 642);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.selectItems);
             this.Controls.Add(this.clearPanel);
             this.Controls.Add(this.groupBox5);
@@ -327,16 +369,20 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.StateLabel);
             this.Controls.Add(this.drawPanel);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "GameGUI";
             this.Text = "GameGUI";
             this.Load += new System.EventHandler(this.GameGUI_Load);
+            this.drawPanel.ResumeLayout(false);
+            this.drawPanel.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.widthBox)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.waitingPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -367,5 +413,8 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.NumericUpDown widthBox;
         private System.Windows.Forms.Label drawerLabel;
+        private System.Windows.Forms.Label waitingLabel;
+        private System.Windows.Forms.PictureBox waitingPicture;
+        private System.Windows.Forms.Button button6;
     }
 }
