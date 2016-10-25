@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using EindOpdrachtCsharp.ConnectionManagers;
 
 namespace EindOpdrachtCsharp
@@ -14,12 +10,10 @@ namespace EindOpdrachtCsharp
     {
         public delegate bool NameChecker(string newName);
 
+        public string answer;
 
-        
-        
 
-        public bool drawer = false;
-        public string answer = null;
+        public bool drawer;
         public string name = "";
 
         public GameClient(TcpClient client) : base(client)
@@ -31,7 +25,6 @@ namespace EindOpdrachtCsharp
             base.sendMessage(command, data);
             if (command == CommandsToSend.ANSWER)
                 answer = data + "";
-            
         }
 
 
@@ -39,56 +32,34 @@ namespace EindOpdrachtCsharp
         {
             base.parseReceivedObject(obj);
             if (obj is CommandsToSend)
-            {
-                switch ((CommandsToSend)obj)
+                switch ((CommandsToSend) obj)
                 {
-                        case CommandsToSend.DRAWER:
+                    case CommandsToSend.DRAWER:
                         drawer = true;
                         break;
 
-                        case CommandsToSend.NEW_SESSION:
+                    case CommandsToSend.NEW_SESSION:
                         drawer = false;
                         break;
-                        
                 }
-            }
-            
-          
         }
-
     }
+
     [Serializable]
     public class SessionDetails
     {
-        public string[] options;
-
         public string drawer;
+        public bool isDrawer;
         public string name;
+        public string[] options;
+        public List<string> participants;
 
         public int sessionid;
-        public List<string> participants;
-        public bool isDrawer;
-        
-
-        public SessionDetails()
-        {
-            
-        }
-
     }
 
     [Serializable]
     public class DrawPoint
     {
-        public double x { get; set; }
-        public double y { get; set; }
-        public double prevx { get; set; }
-        public double prevy { get; set; }
-        
-        public int width { get; set; }
-
-        public Color color { get; set; }
-
         public DrawPoint(double x, double y)
         {
             this.x = x;
@@ -104,5 +75,14 @@ namespace EindOpdrachtCsharp
             this.prevy = prevy;
             this.color = color;
         }
+
+        public double x { get; set; }
+        public double y { get; set; }
+        public double prevx { get; set; }
+        public double prevy { get; set; }
+
+        public int width { get; set; }
+
+        public Color color { get; set; }
     }
 }

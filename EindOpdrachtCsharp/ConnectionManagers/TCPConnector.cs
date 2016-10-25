@@ -1,24 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace EindOpdrachtCsharp.ConnectionManagers
 {
     public class TCPConnector
     {
-        private Stream stream;
-        private TcpClient client;
-        private bool connected = true;
+        public delegate void ConnectionError(ErrorLevel errorLevel, string errorMessage, object sender);
 
         public delegate void DataReceived(object data, object sender);
-        public DataReceived notifyOnData;
 
         public enum ErrorLevel
         {
@@ -26,11 +18,14 @@ namespace EindOpdrachtCsharp.ConnectionManagers
             SOCKETERROR,
             UKNOWN
         }
-        public static ErrorLevel allowedErrorLevel = ErrorLevel.SERIALIZATIONERROR;
 
-        public delegate void ConnectionError(ErrorLevel errorLevel, string errorMessage, object sender);
+        public static ErrorLevel allowedErrorLevel = ErrorLevel.SERIALIZATIONERROR;
+        private readonly TcpClient client;
+        private bool connected = true;
 
         public ConnectionError errorNotifier;
+        public DataReceived notifyOnData;
+        private readonly Stream stream;
 
 
         public TCPConnector(TcpClient client)
@@ -41,18 +36,19 @@ namespace EindOpdrachtCsharp.ConnectionManagers
 
         public void close()
         {
-
             connected = false;
             try
             {
                 client.Close();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         public virtual void sendMessage(CommandsToSend command, object data)
         {
-            sendData(new Message(command,data));
+            sendData(new Message(command, data));
         }
 
         public virtual void sendData(object data)
@@ -60,13 +56,13 @@ namespace EindOpdrachtCsharp.ConnectionManagers
             if (!connected) return;
             if (!data.GetType().IsSerializable)
             {
-                errorNotifier.Invoke(ErrorLevel.SERIALIZATIONERROR, data +"", this);
+                errorNotifier.Invoke(ErrorLevel.SERIALIZATIONERROR, data + "", this);
                 return;
             }
             try
 
             {
-                BinaryFormatter bf = new BinaryFormatter();
+                var bf = new BinaryFormatter();
                 bf.Serialize(stream, data);
             }
             catch (Exception e)
@@ -84,12 +80,11 @@ namespace EindOpdrachtCsharp.ConnectionManagers
                 }
                 errorNotifier.Invoke(ErrorLevel.UKNOWN, e.Message, this);
             }
-        
         }
 
         public object checkForData()
         {
-            BinaryFormatter bf = new BinaryFormatter();
+            var bf = new BinaryFormatter();
             try
             {
                 return bf.Deserialize(stream);
@@ -116,19 +111,19 @@ namespace EindOpdrachtCsharp.ConnectionManagers
         {
             while (connected)
             {
-                object received = checkForData();
-                if(received != null)
+                var received = checkForData();
+                if (received != null)
                     parseReceivedObject(received);
             }
         }
 
         public virtual void parseReceivedObject(object obj)
         {
-            if(notifyOnData != null)
-                notifyOnData.Invoke(obj,this);
+            if (notifyOnData != null)
+                notifyOnData.Invoke(obj, this);
         }
-
     }
+
     [Serializable]
     public struct Message
     {

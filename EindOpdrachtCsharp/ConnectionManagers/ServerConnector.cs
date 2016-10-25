@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EindOpdrachtCsharp
 {
     public abstract class ServerConnector
     {
-        private TcpListener listener;
-        public int port { get; set; }
+        private readonly TcpListener listener;
 
         public ServerConnector(int port)
         {
             this.port = port;
-            listener = new TcpListener(LocalIPAddress(),port);
+            listener = new TcpListener(LocalIPAddress(), port);
         }
+
+        public int port { get; set; }
 
         public void startChecking()
         {
@@ -31,23 +29,21 @@ namespace EindOpdrachtCsharp
                 //addServer(client);
 
 
-                var task = listener.AcceptTcpClientAsync();                     // LESSS DIED?
-                TcpClient client = task.Result;
+                var task = listener.AcceptTcpClientAsync(); // LESSS DIED?
+                var client = task.Result;
                 addServer(client);
             }
-
         }
+
         public abstract void addServer(TcpClient client);
 
 
         public static IPAddress LocalIPAddress()
         {
-            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
-            {
+            if (!NetworkInterface.GetIsNetworkAvailable())
                 return null;
-            }
 
-            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+            var host = Dns.GetHostEntry(Dns.GetHostName());
 
             return host
                 .AddressList
