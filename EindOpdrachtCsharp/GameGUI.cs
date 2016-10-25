@@ -35,8 +35,6 @@ namespace EindOpdrachtCsharp
             client.notifyOnData += parseData;
             client.sendData(CommandsToSend.CONNECT);
             this.FormClosing += closed;
-           // if(File.Exists("../../Resources/background.png"))
-             //   BackgroundImage = Image.FromFile("../../Resources/background.png");
         }
 
         public void closed(object sender, EventArgs args)
@@ -117,8 +115,19 @@ namespace EindOpdrachtCsharp
 
                         case CommandsToSend.REQUESTHINT:
                             string hint = messag.data + "";
-                            
-                            
+
+                            if (hint == "NO")
+                            {
+                                // TODO SHOW HINTS UP
+                            }
+                            else if (hint == "BLOCK")
+                            {
+                                // TODO SHOW HINT LIMIT REACHED
+                            }
+                            else
+                            {
+                                // TODO SHOW HINT
+                            }
                             break;
 
                     }
@@ -461,6 +470,11 @@ namespace EindOpdrachtCsharp
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            hintRequest();
         }
     }
 }

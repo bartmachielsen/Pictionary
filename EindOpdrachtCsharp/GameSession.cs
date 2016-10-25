@@ -18,10 +18,10 @@ namespace EindOpdrachtCsharp
 
         public SessionListener stateListener;
 
-        public struct Option
+        public class Option
         {
             public string option { get; set; }
-            private string[] hints { get; set; }
+            public string[] hints { get; set; }
 
             public Option(string option, string[] hints)
             {
@@ -31,6 +31,7 @@ namespace EindOpdrachtCsharp
         }
         public const int maximumGuesses = 3;
         public const int maxOptions = 100;
+        public const int maximumHints = 3;
 
         public List<GameServer> participants = new List<GameServer>();
         
@@ -40,6 +41,9 @@ namespace EindOpdrachtCsharp
         public int id { get; set; }
         public Random random = new Random();
         public string answer;
+
+        public Option answerOption;
+
         public bool finished = false;
         public string drawer;
 
@@ -221,14 +225,13 @@ namespace EindOpdrachtCsharp
                             gameSender.sendData(CommandsToSend.BLOCKEDFROMGUESSING);
                             return;
                         }
-                        if (answer != messag.data.ToString())
+                        if (answerOption != null && answerOption.option != messag.data.ToString())
                         {
                             gameSender.sendMessage(CommandsToSend.WRONGANSWER,messag.data);
                             gameSender.latestScore().wrongguesses.Add(messag.data.ToString());
                             if (gameSender.latestScore().wrongguesses.Count >= maximumGuesses)
-                            {
                                 gameSender.sendData(CommandsToSend.BLOCKEDFROMGUESSING);
-                            }
+                            
                         }
                         else
                         {
@@ -237,6 +240,25 @@ namespace EindOpdrachtCsharp
                         }
                         break;
                 }
+            }
+            if (obj is CommandsToSend)
+            {
+                switch ((CommandsToSend) obj)
+                {
+                    case CommandsToSend.REQUESTHINT:
+                        // SEND HINT OR SEND BLOCK OR SEND NO
+                        if(answerOption == null || answerOption.hints.Length == 0) 
+                            gameSender.sendMessage(CommandsToSend.REQUESTHINT, "NO");
+                        else if (gameSender.latestScore().hintGuessed >= maximumHints)
+                            gameSender.sendMessage(CommandsToSend.REQUESTHINT, "BLOCK");
+                        else
+                        {
+                            gameSender.sendMessage(CommandsToSend.REQUESTHINT, answerOption.hints[gameSender.latestScore().hintGuessed]);
+                            gameSender.latestScore().hintGuessed++;
+                        }
+                        break;
+                }
+                
             }
         }
 
@@ -286,11 +308,21 @@ namespace EindOpdrachtCsharp
                 switch ((CommandsToSend)messag.command)
                 {
                         case CommandsToSend.ANSWER:
-                        sendAllParticipants(CommandsToSend.STARTGUESSING);
-                        answer = messag.data + "";
-                        timer = new Timer(1000);
-                        timer.Elapsed += updatetime;
-                        timer.Enabled = true;
+                            sendAllParticipants(CommandsToSend.STARTGUESSING);
+
+
+                            foreach (var option in options)
+                                if (option.option == messag.data.ToString())
+                                {
+                                    answerOption = option;
+                                    break;
+                                }
+
+                           
+
+                            timer = new Timer(1000);
+                            timer.Elapsed += updatetime;
+                            timer.Enabled = true;
                         break;
 
                        
