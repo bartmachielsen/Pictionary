@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameGUI));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
             this.drawPanel = new System.Windows.Forms.Panel();
             this.hintLabel = new System.Windows.Forms.Label();
             this.waitingLabel = new System.Windows.Forms.Label();
@@ -75,7 +75,7 @@
             this.drawPanel.Controls.Add(this.hintLabel);
             this.drawPanel.Controls.Add(this.waitingLabel);
             this.drawPanel.Controls.Add(this.waitingPicture);
-            this.drawPanel.Location = new System.Drawing.Point(-12, -9);
+            this.drawPanel.Location = new System.Drawing.Point(-4, -9);
             this.drawPanel.Name = "drawPanel";
             this.drawPanel.Size = new System.Drawing.Size(1100, 475);
             this.drawPanel.TabIndex = 0;
@@ -131,7 +131,7 @@
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.highScores);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(336, 473);
+            this.groupBox1.Location = new System.Drawing.Point(344, 473);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(252, 157);
             this.groupBox1.TabIndex = 3;
@@ -148,7 +148,7 @@
             this.highScores.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.highScores.Location = new System.Drawing.Point(7, 27);
             this.highScores.MultiSelect = false;
             this.highScores.Name = "highScores";
@@ -168,7 +168,7 @@
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(0, 473);
+            this.groupBox2.Location = new System.Drawing.Point(8, 473);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(330, 157);
             this.groupBox2.TabIndex = 4;
@@ -263,7 +263,7 @@
             this.groupBox4.Controls.Add(this.playerCount);
             this.groupBox4.Controls.Add(this.sessionDetails);
             this.groupBox4.ForeColor = System.Drawing.Color.White;
-            this.groupBox4.Location = new System.Drawing.Point(787, 473);
+            this.groupBox4.Location = new System.Drawing.Point(795, 473);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(192, 118);
             this.groupBox4.TabIndex = 6;
@@ -313,7 +313,7 @@
             this.groupBox5.BackColor = System.Drawing.Color.Transparent;
             this.groupBox5.Controls.Add(this.listBox2);
             this.groupBox5.ForeColor = System.Drawing.Color.White;
-            this.groupBox5.Location = new System.Drawing.Point(594, 473);
+            this.groupBox5.Location = new System.Drawing.Point(602, 473);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(187, 157);
             this.groupBox5.TabIndex = 8;
@@ -323,7 +323,7 @@
             // clearPanel
             // 
             this.clearPanel.BackColor = System.Drawing.Color.White;
-            this.clearPanel.Location = new System.Drawing.Point(998, 473);
+            this.clearPanel.Location = new System.Drawing.Point(1006, 473);
             this.clearPanel.Name = "clearPanel";
             this.clearPanel.Size = new System.Drawing.Size(90, 118);
             this.clearPanel.TabIndex = 9;
@@ -344,7 +344,7 @@
             this.selectItems.Location = new System.Drawing.Point(1106, 32);
             this.selectItems.MultiSelect = false;
             this.selectItems.Name = "selectItems";
-            this.selectItems.Size = new System.Drawing.Size(165, 551);
+            this.selectItems.Size = new System.Drawing.Size(204, 559);
             this.selectItems.TabIndex = 10;
             this.selectItems.UseCompatibleStateImageBehavior = false;
             this.selectItems.View = System.Windows.Forms.View.Details;
@@ -357,9 +357,9 @@
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(1106, 590);
+            this.button6.Location = new System.Drawing.Point(1106, 597);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(165, 34);
+            this.button6.Size = new System.Drawing.Size(204, 27);
             this.button6.TabIndex = 11;
             this.button6.Text = "Hint";
             this.button6.UseVisualStyleBackColor = false;
@@ -368,7 +368,7 @@
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(787, 596);
+            this.button7.Location = new System.Drawing.Point(795, 596);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(154, 28);
             this.button7.TabIndex = 12;
@@ -377,7 +377,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(947, 597);
+            this.textBox1.Location = new System.Drawing.Point(955, 597);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(141, 26);
             this.textBox1.TabIndex = 13;
@@ -389,7 +389,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1289, 642);
+            this.ClientSize = new System.Drawing.Size(1320, 642);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
