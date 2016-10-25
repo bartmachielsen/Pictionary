@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<ArrayOfSessionScore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SessionScore>
+    <Created>2016-10-25T14:29:00.8808632+02:00</Created>
+    <drawer>DrawForLife</drawer>
+    <totalTime />
+    <players>
+      <PlayerScore>
+        <name>PirateHacker</name>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses>
+          <string>mop</string>
+          <string>teddies</string>
+          <string>fork</string>
+        </wrongguesses>
+        <timeScore>0</timeScore>
+      </PlayerScore>
+      <PlayerScore>
+        <name>RandomPlayer</name>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses>
+          <string>sandal</string>
+          <string>bottle cap</string>
+        </wrongguesses>
+        <timeScore>840</timeScore>
+      </PlayerScore>
+      <PlayerScore>
+        <name>DrawForLife</name>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>840</timeScore>
+      </PlayerScore>
+    </players>
+  </SessionScore>
+</ArrayOfSessionScore>

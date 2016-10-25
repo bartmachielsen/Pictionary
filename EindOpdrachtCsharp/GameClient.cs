@@ -15,7 +15,7 @@ namespace EindOpdrachtCsharp
         public delegate bool NameChecker(string newName);
 
 
-        public NameChecker checkIfExists;
+        
         
 
         public bool drawer = false;
@@ -52,10 +52,7 @@ namespace EindOpdrachtCsharp
                         
                 }
             }
-            if (obj is TCPConnector.Message)
-            {
-                
-            }
+          
         }
 
     }

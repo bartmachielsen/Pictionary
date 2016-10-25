@@ -48,7 +48,7 @@ namespace EindOpdrachtCsharp
         public bool finished = false;
         public GameServer drawer;
 
-        private SessionScore score;
+        public SessionScore score;
 
 
         private static string[] randomUserNames =
@@ -221,7 +221,7 @@ namespace EindOpdrachtCsharp
                 switch ((CommandsToSend)messag.command)
                 {
                     case CommandsToSend.GUESS:
-                        if (gameSender.latestScore().wrongguesses.Count >= 3 || finished)
+                        if (gameSender.latestScore().wrongguesses.Length >= 3 || finished)
                         {
                             gameSender.sendData(CommandsToSend.BLOCKEDFROMGUESSING);
                             return;
@@ -229,10 +229,28 @@ namespace EindOpdrachtCsharp
                         if (answerOption != null && answerOption.option != messag.data.ToString())
                         {
                             gameSender.sendMessage(CommandsToSend.WRONGANSWER,messag.data);
-                            gameSender.latestScore().wrongguesses.Add(messag.data.ToString());
-                            if (gameSender.latestScore().wrongguesses.Count >= maximumGuesses)
+                            List<string> guesses = new List<string>();
+                            guesses.AddRange(gameSender.latestScore().wrongguesses);
+                            guesses.Add(messag.data.ToString());
+                            gameSender.latestScore().wrongguesses = guesses.ToArray();
+
+                            if (gameSender.latestScore().wrongguesses.Length >= maximumGuesses)
+                            {
                                 gameSender.sendData(CommandsToSend.BLOCKEDFROMGUESSING);
-                            
+
+                                bool notUsed = false;
+                                foreach (var participant in participants)
+                                    if (!participant.drawer &&
+                                        participant.latestScore().wrongguesses.Length >= maximumGuesses)
+                                    {
+                                        notUsed = true;
+                                        break;
+                                    }
+                                
+                                if(!notUsed)
+                                    finish(null);
+                            }
+
                         }
                         else
                         {
@@ -273,18 +291,21 @@ namespace EindOpdrachtCsharp
                 if (winner.latestScore().timeScore < 200)
                     winner.latestScore().timeScore = 200;
 
+                score.players = new PlayerScore[participants.Count];
+                int index = 0;
                 foreach (var participant in participants)
                 {
                     if (participant.drawer)
                     {
                         participant.latestScore().timeScore = winner.latestScore().timeScore;
                     }
-                    score.players.Add(participant.latestScore());
+                    score.players[index] = participant.latestScore();
+                    index++;
                 }
 
             }
             sendAllParticipants(score);
-
+            score.drawer = drawer.name;
             finished = true;
             stateListener.Invoke(this);
         }

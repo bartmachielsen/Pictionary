@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Soap;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using EindOpdrachtCsharp.ConnectionManagers;
 
 namespace EindOpdrachtCsharp
@@ -12,6 +15,9 @@ namespace EindOpdrachtCsharp
 
     class DataServer
     {
+
+        public const string SessionScoreFile = "../../Resources/sessions.statistics";
+
         public static int amountNeeded = 3;
         public static int maxAmount = 3;
 
@@ -94,8 +100,30 @@ namespace EindOpdrachtCsharp
             waiting.AddRange(session.participants);
             foreach (var participant in session.participants)
                 participant.sendData(CommandsToSend.WAITINGFORSESSION);
+
+            writeSession(session.score);
             newSessionFromOldSession();
         }
+
+        public void writeSession(SessionScore session)
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(SessionScore[]));
+            
+            SessionScore[] scores = new SessionScore[0];
+            if (File.Exists(SessionScoreFile))
+                using (var stream = File.OpenRead(SessionScoreFile))
+                {
+                    scores = (SessionScore[])xs.Deserialize(stream);
+                }
+            List<SessionScore> scores2 = new List<SessionScore>(scores);
+            scores2.Add(session);
+            using (var stream = File.Create(SessionScoreFile))
+            {
+                xs.Serialize(stream,scores2.ToArray());
+            }
+
+        }
+
 
         public void waitUntilReady(GameSession session)
         {
@@ -147,13 +175,19 @@ namespace EindOpdrachtCsharp
     [Serializable]
     public class SessionScore
     {
-        public string winner;
+        public DateTime Created;
+        public string drawer;
         public TimeSpan totalTime;
-        public List<PlayerScore> players  = new List<PlayerScore>();
+        public PlayerScore[] players = new PlayerScore[5];
 
+        public SessionScore()
+        {
+            Created = DateTime.Now;
+        }
 
         public PlayerScore[] playerScore()
         {
+            List<PlayerScore> players = new List<PlayerScore>(this.players);
             players.Sort((delegate(PlayerScore score, PlayerScore score1)
             {
                 if (score.totalScore == score1.totalScore) return 0;
@@ -180,8 +214,8 @@ namespace EindOpdrachtCsharp
         public string name;
         public string answer;
         public int hintGuessed = 0;
-        public List<string> wrongguesses = new List<string>();
-        public int totalScore => ((wrongguesses.Count+hintGuessed)*-200) + timeScore;
+        public string[] wrongguesses = new string[0];
+        public int totalScore => ((wrongguesses.Length+hintGuessed)*-200) + timeScore;
         public int timeScore = 0;
 
         public override string ToString()
