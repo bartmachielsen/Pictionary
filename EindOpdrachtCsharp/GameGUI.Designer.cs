@@ -56,6 +56,7 @@
             this.waitingPicture = new System.Windows.Forms.PictureBox();
             this.waitingLabel = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
+            this.hintLabel = new System.Windows.Forms.Label();
             this.drawPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -69,6 +70,7 @@
             // 
             this.drawPanel.BackColor = System.Drawing.Color.White;
             this.drawPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.drawPanel.Controls.Add(this.hintLabel);
             this.drawPanel.Controls.Add(this.waitingLabel);
             this.drawPanel.Controls.Add(this.waitingPicture);
             this.drawPanel.Location = new System.Drawing.Point(-12, -9);
@@ -352,6 +354,17 @@
             this.button6.Text = "Hint";
             this.button6.UseVisualStyleBackColor = false;
             // 
+            // hintLabel
+            // 
+            this.hintLabel.AutoSize = true;
+            this.hintLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hintLabel.ForeColor = System.Drawing.Color.Red;
+            this.hintLabel.Location = new System.Drawing.Point(23, 16);
+            this.hintLabel.Name = "hintLabel";
+            this.hintLabel.Size = new System.Drawing.Size(75, 29);
+            this.hintLabel.TabIndex = 2;
+            this.hintLabel.Text = "{hint}";
+            // 
             // GameGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -416,5 +429,6 @@
         private System.Windows.Forms.Label waitingLabel;
         private System.Windows.Forms.PictureBox waitingPicture;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label hintLabel;
     }
 }
