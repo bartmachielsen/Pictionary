@@ -94,14 +94,14 @@ namespace EindOpdrachtCsharp
                 if (data is SessionScore)
                 {
                     updateScore((SessionScore) data);
-                    canGues = false;
+                    canGues = false;                                //  BLOCK GUESSING FROM ANSWERS
+                    drawPanel.CreateGraphics().Clear(Color.White);  //  CLEARING PANEL
                 }
                 if (data is DrawPoint)
                     DrawPoint((DrawPoint) data);
                 if (data is SessionDetails)
-                {
                     LoadSessionDetails((SessionDetails) data);
-                }
+                
 
             }
         }
@@ -133,15 +133,19 @@ namespace EindOpdrachtCsharp
         {
             client.answer = null;
             selectItems.Items.Clear();
+            drawPanel.CreateGraphics().Clear(Color.White);  //  CLEARING PANEL
             foreach (var value in sessionDetails.options)
             {
                 selectItems.Items.Add(value);
             }
 
-            this.sessionDetails.Text = $"sessie {sessionDetails.id}";
-            this.playerCount.Text = $"{sessionDetails.participants} deelnemers";
+            this.sessionDetails.Text = $"sessie {sessionDetails.sessionid}";
+            this.playerCount.Text = $"{sessionDetails.participants.Count} deelnemers";
+            this.drawerLabel.Text = $"{sessionDetails.drawer} is drawing!";
             this.Text = sessionDetails.name;
-            if (client.drawer)
+            this.connected.Items.Clear();
+            this.connected.Items.AddRange(sessionDetails.participants.ToArray());
+            if (sessionDetails.isDrawer)
             {
                 StateLabel.Text = "Drawer";
                 drawPanel.Enabled = false;
@@ -401,6 +405,11 @@ namespace EindOpdrachtCsharp
         private void button5_Click(object sender, EventArgs e)
         {
             currentmode = mode.GUM;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

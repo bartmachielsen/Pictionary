@@ -55,9 +55,9 @@ namespace EindOpdrachtCsharp
                 waiting = new List<GameServer>();
             }
             sessions.Add(session);
+            
             new Thread(() => waitUntilReady(session)).Start();
             session.sendAllParticipants(CommandsToSend.NEW_SESSION);
-            session.selectDrawer();
             session.stateListener += clearSessionandNew;
         }
 
@@ -75,6 +75,7 @@ namespace EindOpdrachtCsharp
                 
             }
             Console.WriteLine("ALL READY! START PLAYING MOTHAFOCKAS!");
+            session.selectDrawer();
             session.notifyAllParticipants();
         }
 

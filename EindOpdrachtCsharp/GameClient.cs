@@ -53,24 +53,24 @@ namespace EindOpdrachtCsharp
 
     }
     [Serializable]
-    public struct SessionDetails
+    public class SessionDetails
     {
         public string[] options;
         public string[] hints;
+
         public string drawer;
         public string name;
-        public int id;
-        public int participants;
 
-        public SessionDetails(int id, int participants, string[] options, string[] hints, string drawer, string name)
+        public int sessionid;
+        public List<string> participants;
+        public bool isDrawer;
+        
+
+        public SessionDetails()
         {
-            this.id = id;
-            this.participants = participants;
-            this.options = options;
-            this.hints = hints;
-            this.drawer = drawer;
-            this.name = name;
+            
         }
+
     }
 
     [Serializable]

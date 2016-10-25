@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
             this.drawPanel = new System.Windows.Forms.Panel();
             this.StateLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -46,11 +46,12 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.playerCount = new System.Windows.Forms.Label();
             this.sessionDetails = new System.Windows.Forms.Label();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.connected = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.clearPanel = new System.Windows.Forms.Button();
             this.selectItems = new System.Windows.Forms.ListView();
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.drawerLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.widthBox)).BeginInit();
@@ -96,7 +97,7 @@
             this.columnHeader1});
             this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7});
+            listViewItem1});
             this.highScores.Location = new System.Drawing.Point(7, 27);
             this.highScores.MultiSelect = false;
             this.highScores.Name = "highScores";
@@ -203,6 +204,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.drawerLabel);
             this.groupBox4.Controls.Add(this.playerCount);
             this.groupBox4.Controls.Add(this.sessionDetails);
             this.groupBox4.Location = new System.Drawing.Point(594, 473);
@@ -215,7 +217,7 @@
             // playerCount
             // 
             this.playerCount.AutoSize = true;
-            this.playerCount.Location = new System.Drawing.Point(31, 64);
+            this.playerCount.Location = new System.Drawing.Point(27, 72);
             this.playerCount.Name = "playerCount";
             this.playerCount.Size = new System.Drawing.Size(139, 20);
             this.playerCount.TabIndex = 1;
@@ -231,19 +233,19 @@
             this.sessionDetails.TabIndex = 0;
             this.sessionDetails.Text = "Sessie {0}";
             // 
-            // listBox2
+            // connected
             // 
-            this.listBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 20;
-            this.listBox2.Location = new System.Drawing.Point(9, 25);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(158, 124);
-            this.listBox2.TabIndex = 7;
+            this.connected.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.connected.FormattingEnabled = true;
+            this.connected.ItemHeight = 20;
+            this.connected.Location = new System.Drawing.Point(9, 25);
+            this.connected.Name = "connected";
+            this.connected.Size = new System.Drawing.Size(158, 124);
+            this.connected.TabIndex = 7;
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.listBox2);
+            this.groupBox5.Controls.Add(this.connected);
             this.groupBox5.Location = new System.Drawing.Point(792, 473);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(187, 157);
@@ -284,6 +286,16 @@
             // Option
             // 
             this.Option.Width = 100;
+            // 
+            // drawerLabel
+            // 
+            this.drawerLabel.AutoSize = true;
+            this.drawerLabel.Location = new System.Drawing.Point(27, 109);
+            this.drawerLabel.Name = "drawerLabel";
+            this.drawerLabel.Size = new System.Drawing.Size(136, 20);
+            this.drawerLabel.TabIndex = 2;
+            this.drawerLabel.Text = "{Player} is drawing";
+            this.drawerLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // GameGUI
             // 
@@ -327,7 +339,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label playerCount;
         private System.Windows.Forms.Label sessionDetails;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox connected;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button clearPanel;
         private System.Windows.Forms.ListView selectItems;
@@ -338,5 +350,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.NumericUpDown widthBox;
+        private System.Windows.Forms.Label drawerLabel;
     }
 }

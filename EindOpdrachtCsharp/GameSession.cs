@@ -105,15 +105,13 @@ namespace EindOpdrachtCsharp
             server.notifyOnData += parseDataFromDrawer;
             server.sendData(CommandsToSend.DRAWER);
             server.drawer = true;
-            drawer = server.ToString();
-
+            drawer = server.name;
+            Console.WriteLine("SELECTED DRAWER IS " + drawer + " " + server);
             foreach (var watcher in participants)
-            {
                 if (watcher != server)
-                {
                     watcher.notifyOnData += parseDataFromWatchers;
-                }
-            }
+                
+            
 
         }
 
@@ -126,9 +124,17 @@ namespace EindOpdrachtCsharp
 
         public void notifyAllParticipants()
         {
-            SessionDetails details = new SessionDetails(this.id, participants.Count, options, hints, drawer, null);
+            SessionDetails details = new SessionDetails();
+            details.participants = new List<string>();
+            foreach (var participant in participants)
+                details.participants.Add(participant.name);
+            
+            details.drawer = drawer;
+            details.options = options;
+            
             foreach (var participant in participants)
             {
+                details.isDrawer = drawer == participant.name;
                 details.name = participant.name;
                 participant.sendData(details);
 
