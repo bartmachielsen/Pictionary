@@ -101,7 +101,7 @@ namespace EindOpdrachtCsharp
             {
                 participant.errorNotifier += participantError;
                 participant.scores.Add(new PlayerScore());
-
+                participant.notifyOnData += parseDataFromAll;
                 if(!participant.staticName || participant.name == null)
                     participant.name = getRandomUserName();
                 participant.latestScore().name = participant.name;
@@ -116,7 +116,7 @@ namespace EindOpdrachtCsharp
             if (finished) return;
             if (participant is GameServer && (int) errorLevel >= (int) TCPConnector.allowedErrorLevel)
             {
-                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SESSION \n errorlevel:{errorLevel} \n Message:{message} \n server:{participant}");
+                
                 GameServer server = (GameServer) participant;
                 server.close();
                 this.participants.RemoveAll((GameServer serverPart) => server.serverID == serverPart.serverID);
@@ -129,10 +129,6 @@ namespace EindOpdrachtCsharp
                 {
                     finish(null);
                 }
-            }
-            else
-            {
-                Console.WriteLine($"SAFE ERROR WITHOUT CONS HAS OCCURED LEVEL: SESSION \n errorlevel:{errorLevel} \n Message:{message} \n server:{participant}");
             }
         }
 
@@ -171,7 +167,6 @@ namespace EindOpdrachtCsharp
         public void selectDrawer()
         {
             Random random = new Random();
-            Console.WriteLine(participants.Count + "OF TOTAL PEOPLE");
             GameServer server = participants.ElementAt(random.Next(0,participants.Count));
             server.notifyOnData += parseDataFromDrawer;
             server.sendData(CommandsToSend.DRAWER);
@@ -222,6 +217,7 @@ namespace EindOpdrachtCsharp
                 Message messag = (Message)obj;
                 switch ((CommandsToSend)messag.command)
                 {
+                    
                     case CommandsToSend.GUESS:
                         if (gameSender.latestScore().wrongguesses.Length >= 3 || finished)
                         {
@@ -349,7 +345,28 @@ namespace EindOpdrachtCsharp
                             timer.Enabled = true;
                         break;
 
-                       
+                    
+
+                }
+            }
+        }
+
+        public void parseDataFromAll(object obj, object sender)
+        {
+            if (obj is Message)
+            {
+                Message messag = (Message)obj;
+                switch ((CommandsToSend)messag.command)
+                {
+                    case CommandsToSend.NEWUSERNAME:
+                        Console.WriteLine("SENDING UPDATE");
+                        List<string> participants2 = new List<string>();
+                        foreach (var partici in this.participants)
+                            participants2.Add(partici.name);
+                        sendAllParticipants(CommandsToSend.PARTICIPANTSUPDATE, participants2);
+                        break;
+
+
                 }
             }
         }
@@ -359,8 +376,12 @@ namespace EindOpdrachtCsharp
             if(score.totalTime == null)
                 score.totalTime = new TimeSpan(0,0,0,0);
             score.totalTime = score.totalTime.Add(new TimeSpan(0, 0, 0, 1));
-            if(score.totalTime.TotalMinutes > maximumSessionLength)
+            if (score.totalTime.TotalMinutes > maximumSessionLength)
+            {
                 finish(null);
+                timer.Stop();
+            }
+
         }
 
         public void sendAllParticipants(object send)

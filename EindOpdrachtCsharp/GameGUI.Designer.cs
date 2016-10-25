@@ -58,7 +58,7 @@
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.usernameBox = new System.Windows.Forms.TextBox();
             this.drawPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.waitingPicture)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -374,13 +374,14 @@
             this.button7.TabIndex = 12;
             this.button7.Text = "Change Username";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // textBox1
+            // usernameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(955, 597);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(141, 26);
-            this.textBox1.TabIndex = 13;
+            this.usernameBox.Location = new System.Drawing.Point(955, 597);
+            this.usernameBox.Name = "usernameBox";
+            this.usernameBox.Size = new System.Drawing.Size(141, 26);
+            this.usernameBox.TabIndex = 13;
             // 
             // GameGUI
             // 
@@ -390,7 +391,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1320, 642);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.usernameBox);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.selectItems);
@@ -450,6 +451,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label hintLabel;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox usernameBox;
     }
 }

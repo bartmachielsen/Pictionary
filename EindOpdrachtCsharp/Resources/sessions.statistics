@@ -32,4 +32,16 @@
       </PlayerScore>
     </players>
   </SessionScore>
+  <SessionScore>
+    <Created>2016-10-25T14:46:40.6282792+02:00</Created>
+    <drawer>test51</drawer>
+    <totalTime />
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+  </SessionScore>
 </ArrayOfSessionScore>

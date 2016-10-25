@@ -45,7 +45,7 @@ namespace EindOpdrachtCsharp
 
         public override void parseReceivedObject(object obj)
         {
-            base.parseReceivedObject(obj);
+            
             
             if (obj is CommandsToSend)
             {
@@ -72,10 +72,11 @@ namespace EindOpdrachtCsharp
                     {
                         this.name = username;
                         this.staticName = true;
+                       this.sendMessage(CommandsToSend.NEWUSERNAME,name);
                     }
                 }
             }
-            
+            base.parseReceivedObject(obj);
         }
 
     }
