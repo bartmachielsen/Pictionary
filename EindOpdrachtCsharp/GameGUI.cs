@@ -71,7 +71,8 @@ namespace EindOpdrachtCsharp
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new MethodInvoker(() => parseData(data, sender)));
+                if(data != null && sender != null)
+                    this.Invoke(new MethodInvoker(() => parseData(data, sender)));
 
             }
             else
@@ -144,6 +145,10 @@ namespace EindOpdrachtCsharp
                             timer.Enabled = true;
                             
                             break;
+                        case CommandsToSend.NEWUSERNAME:
+                            this.Text = messag.data +"";
+                            client.name = messag.data + "";
+                            break;
 
                     }
                 
@@ -195,9 +200,8 @@ namespace EindOpdrachtCsharp
             selectItems.Items.Clear();
             drawPanel.CreateGraphics().Clear(Color.White);  //  CLEARING PANEL
             foreach (var value in sessionDetails.options)
-            {
                 selectItems.Items.Add(value);
-            }
+            
 
             this.sessionDetails.Text = $"sessie {sessionDetails.sessionid}";
             this.drawerLabel.Text = $"{sessionDetails.drawer} is Drawer!";
@@ -473,32 +477,15 @@ namespace EindOpdrachtCsharp
         }
 
 
-        public void changeUsername()
-        {
-            string newName = ShowDialog("New Username", client.name);
-            client.sendMessage(CommandsToSend.NEWUSERNAME,newName);
-        }
+        
+       
 
-        public static string ShowDialog(string text, string caption)
+        private void button7_Click(object sender, EventArgs e)
         {
-            Form prompt = new Form()
-            {
-                Width = 500,
-                Height = 150,
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                Text = caption,
-                StartPosition = FormStartPosition.CenterScreen
-            };
-            Label textLabel = new Label() { Left = 50, Top = 20, Text = text };
-            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
-            Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
-            confirmation.Click += (sender, e) => { prompt.Close(); };
-            prompt.Controls.Add(textBox);
-            prompt.Controls.Add(confirmation);
-            prompt.Controls.Add(textLabel);
-            prompt.AcceptButton = confirmation;
-
-            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
+            string newName = usernameBox.Text;
+            if (newName == "")
+                newName = "DELETE";
+            client.sendMessage(CommandsToSend.NEWUSERNAME, newName);
         }
     }
 }
