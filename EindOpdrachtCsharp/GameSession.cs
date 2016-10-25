@@ -243,7 +243,7 @@ namespace EindOpdrachtCsharp
                 {
                     case CommandsToSend.REQUESTHINT:
                         // SEND HINT OR SEND BLOCK OR SEND NO
-                        if ((answerOption == null) || (answerOption.hints == null) || (answerOption.hints.Length == 0))
+                        if ((answerOption == null) || (answerOption.hints == null) || (answerOption.hints.Length == 0) || answerOption.hints.Length <= gameSender.latestScore().hintGuessed)
                             gameSender.sendMessage(CommandsToSend.REQUESTHINT, "NO");
                         else if (gameSender.latestScore().hintGuessed >= maximumHints)
                             gameSender.sendMessage(CommandsToSend.REQUESTHINT, "BLOCK");
