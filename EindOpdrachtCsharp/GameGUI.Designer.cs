@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameGUI));
             this.drawPanel = new System.Windows.Forms.Panel();
             this.StateLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -70,7 +71,9 @@
             // StateLabel
             // 
             this.StateLabel.AutoSize = true;
+            this.StateLabel.BackColor = System.Drawing.Color.Transparent;
             this.StateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StateLabel.ForeColor = System.Drawing.Color.White;
             this.StateLabel.Location = new System.Drawing.Point(1112, 3);
             this.StateLabel.Name = "StateLabel";
             this.StateLabel.Size = new System.Drawing.Size(183, 26);
@@ -79,7 +82,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.highScores);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(336, 473);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(252, 157);
@@ -90,13 +95,14 @@
             // highScores
             // 
             this.highScores.AllowColumnReorder = true;
-            this.highScores.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.highScores.BackColor = System.Drawing.Color.White;
             this.highScores.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.highScores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
+            this.highScores.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7});
+            listViewItem1});
             this.highScores.Location = new System.Drawing.Point(7, 27);
             this.highScores.MultiSelect = false;
             this.highScores.Name = "highScores";
@@ -108,7 +114,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.widthBox);
             this.groupBox2.Controls.Add(this.button5);
@@ -116,7 +122,7 @@
             this.groupBox2.Controls.Add(this.colorPanel);
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(0, 473);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(330, 157);
@@ -127,6 +133,7 @@
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.White;
+            this.button4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button4.Location = new System.Drawing.Point(113, 90);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(95, 59);
@@ -137,7 +144,7 @@
             // 
             // widthBox
             // 
-            this.widthBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.widthBox.BackColor = System.Drawing.Color.White;
             this.widthBox.Location = new System.Drawing.Point(12, 79);
             this.widthBox.Name = "widthBox";
             this.widthBox.Size = new System.Drawing.Size(82, 26);
@@ -151,6 +158,7 @@
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button5.Location = new System.Drawing.Point(12, 117);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(82, 34);
@@ -162,6 +170,7 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button2.Location = new System.Drawing.Point(230, 90);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(94, 59);
@@ -182,6 +191,7 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button3.Location = new System.Drawing.Point(230, 25);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(94, 59);
@@ -193,6 +203,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button1.Location = new System.Drawing.Point(113, 25);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 59);
@@ -203,8 +214,10 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.BackColor = System.Drawing.Color.Transparent;
             this.groupBox4.Controls.Add(this.playerCount);
             this.groupBox4.Controls.Add(this.sessionDetails);
+            this.groupBox4.ForeColor = System.Drawing.Color.White;
             this.groupBox4.Location = new System.Drawing.Point(594, 473);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(192, 157);
@@ -224,7 +237,7 @@
             // sessionDetails
             // 
             this.sessionDetails.AutoSize = true;
-            this.sessionDetails.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.sessionDetails.ForeColor = System.Drawing.Color.White;
             this.sessionDetails.Location = new System.Drawing.Point(27, 33);
             this.sessionDetails.Name = "sessionDetails";
             this.sessionDetails.Size = new System.Drawing.Size(80, 20);
@@ -233,7 +246,7 @@
             // 
             // listBox2
             // 
-            this.listBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.listBox2.BackColor = System.Drawing.Color.White;
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 20;
             this.listBox2.Location = new System.Drawing.Point(9, 25);
@@ -243,7 +256,9 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.BackColor = System.Drawing.Color.Transparent;
             this.groupBox5.Controls.Add(this.listBox2);
+            this.groupBox5.ForeColor = System.Drawing.Color.White;
             this.groupBox5.Location = new System.Drawing.Point(792, 473);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(187, 157);
@@ -266,7 +281,7 @@
             // 
             this.selectItems.Alignment = System.Windows.Forms.ListViewAlignment.Default;
             this.selectItems.AutoArrange = false;
-            this.selectItems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.selectItems.BackColor = System.Drawing.Color.White;
             this.selectItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Option});
             this.selectItems.FullRowSelect = true;
@@ -290,6 +305,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1289, 642);
             this.Controls.Add(this.selectItems);
             this.Controls.Add(this.clearPanel);
