@@ -60,7 +60,7 @@ namespace EindOpdrachtCsharp
 
             for (int i = 0; i < alloptions.Length; i++)
             {
-                string keyword = alloptions[0];
+                string keyword = alloptions[i];
                 string hintsFullLength = null;
                 foreach (var hintslength in hints)
                     if (hintslength.Split('-').Length >= 0)
@@ -78,11 +78,13 @@ namespace EindOpdrachtCsharp
                 options.Add(new Option(keyword, hintsarray));
             }
             options.Sort((Option o1, Option o2) => random.Next(0, 2));
-            options = options.FindAll((Option o1) => random.Next(0, 1) == 1);
+            options = options.FindAll((Option o1) => random.Next(0, 2) >= 1);
+            Console.WriteLine(options.Count);
             int maxOptions2 = maxOptions;
             if (maxOptions2 > options.Count)
                 maxOptions2 = options.Count;
             options = options.GetRange(0, maxOptions2);
+            Console.WriteLine(options.Count);
             score = new SessionScore();
         }
 
