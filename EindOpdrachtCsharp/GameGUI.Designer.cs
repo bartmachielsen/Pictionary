@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameGUI));
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
             this.drawPanel = new System.Windows.Forms.Panel();
             this.hintLabel = new System.Windows.Forms.Label();
             this.waitingLabel = new System.Windows.Forms.Label();
@@ -57,6 +57,8 @@
             this.selectItems = new System.Windows.Forms.ListView();
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.drawPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.waitingPicture)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -146,7 +148,7 @@
             this.highScores.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem1});
             this.highScores.Location = new System.Drawing.Point(7, 27);
             this.highScores.MultiSelect = false;
             this.highScores.Name = "highScores";
@@ -261,9 +263,9 @@
             this.groupBox4.Controls.Add(this.playerCount);
             this.groupBox4.Controls.Add(this.sessionDetails);
             this.groupBox4.ForeColor = System.Drawing.Color.White;
-            this.groupBox4.Location = new System.Drawing.Point(594, 473);
+            this.groupBox4.Location = new System.Drawing.Point(787, 473);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(192, 157);
+            this.groupBox4.Size = new System.Drawing.Size(192, 118);
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Lobby Info";
@@ -271,7 +273,7 @@
             // drawerLabel
             // 
             this.drawerLabel.AutoSize = true;
-            this.drawerLabel.Location = new System.Drawing.Point(31, 90);
+            this.drawerLabel.Location = new System.Drawing.Point(6, 79);
             this.drawerLabel.Name = "drawerLabel";
             this.drawerLabel.Size = new System.Drawing.Size(102, 20);
             this.drawerLabel.TabIndex = 2;
@@ -280,7 +282,7 @@
             // playerCount
             // 
             this.playerCount.AutoSize = true;
-            this.playerCount.Location = new System.Drawing.Point(31, 64);
+            this.playerCount.Location = new System.Drawing.Point(6, 52);
             this.playerCount.Name = "playerCount";
             this.playerCount.Size = new System.Drawing.Size(139, 20);
             this.playerCount.TabIndex = 1;
@@ -290,7 +292,7 @@
             // 
             this.sessionDetails.AutoSize = true;
             this.sessionDetails.ForeColor = System.Drawing.Color.White;
-            this.sessionDetails.Location = new System.Drawing.Point(27, 33);
+            this.sessionDetails.Location = new System.Drawing.Point(6, 27);
             this.sessionDetails.Name = "sessionDetails";
             this.sessionDetails.Size = new System.Drawing.Size(80, 20);
             this.sessionDetails.TabIndex = 0;
@@ -303,7 +305,7 @@
             this.listBox2.ItemHeight = 20;
             this.listBox2.Location = new System.Drawing.Point(9, 25);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(158, 124);
+            this.listBox2.Size = new System.Drawing.Size(172, 124);
             this.listBox2.TabIndex = 7;
             // 
             // groupBox5
@@ -311,7 +313,7 @@
             this.groupBox5.BackColor = System.Drawing.Color.Transparent;
             this.groupBox5.Controls.Add(this.listBox2);
             this.groupBox5.ForeColor = System.Drawing.Color.White;
-            this.groupBox5.Location = new System.Drawing.Point(792, 473);
+            this.groupBox5.Location = new System.Drawing.Point(594, 473);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(187, 157);
             this.groupBox5.TabIndex = 8;
@@ -321,9 +323,9 @@
             // clearPanel
             // 
             this.clearPanel.BackColor = System.Drawing.Color.White;
-            this.clearPanel.Location = new System.Drawing.Point(998, 486);
+            this.clearPanel.Location = new System.Drawing.Point(998, 473);
             this.clearPanel.Name = "clearPanel";
-            this.clearPanel.Size = new System.Drawing.Size(90, 59);
+            this.clearPanel.Size = new System.Drawing.Size(90, 118);
             this.clearPanel.TabIndex = 9;
             this.clearPanel.Text = "Clear Panel";
             this.clearPanel.UseVisualStyleBackColor = false;
@@ -342,7 +344,7 @@
             this.selectItems.Location = new System.Drawing.Point(1106, 32);
             this.selectItems.MultiSelect = false;
             this.selectItems.Name = "selectItems";
-            this.selectItems.Size = new System.Drawing.Size(165, 590);
+            this.selectItems.Size = new System.Drawing.Size(165, 551);
             this.selectItems.TabIndex = 10;
             this.selectItems.UseCompatibleStateImageBehavior = false;
             this.selectItems.View = System.Windows.Forms.View.Details;
@@ -355,13 +357,30 @@
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(998, 563);
+            this.button6.Location = new System.Drawing.Point(1106, 590);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(90, 59);
+            this.button6.Size = new System.Drawing.Size(165, 34);
             this.button6.TabIndex = 11;
             this.button6.Text = "Hint";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click_1);
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.White;
+            this.button7.Location = new System.Drawing.Point(787, 596);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(154, 28);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Change Username";
+            this.button7.UseVisualStyleBackColor = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(947, 597);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(141, 26);
+            this.textBox1.TabIndex = 13;
             // 
             // GameGUI
             // 
@@ -371,6 +390,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1289, 642);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.selectItems);
             this.Controls.Add(this.clearPanel);
@@ -428,5 +449,7 @@
         private System.Windows.Forms.PictureBox waitingPicture;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label hintLabel;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
