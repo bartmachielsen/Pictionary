@@ -79,12 +79,10 @@ namespace EindOpdrachtCsharp
             }
             options.Sort((Option o1, Option o2) => random.Next(0, 2));
             options = options.FindAll((Option o1) => random.Next(0, 2) >= 1);
-            Console.WriteLine(options.Count);
             int maxOptions2 = maxOptions;
             if (maxOptions2 > options.Count)
                 maxOptions2 = options.Count;
             options = options.GetRange(0, maxOptions2);
-            Console.WriteLine(options.Count);
             score = new SessionScore();
         }
 
