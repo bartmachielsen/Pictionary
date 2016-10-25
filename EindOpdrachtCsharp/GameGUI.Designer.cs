@@ -359,7 +359,7 @@
             this.button6.BackColor = System.Drawing.Color.White;
             this.button6.Location = new System.Drawing.Point(1106, 597);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(204, 27);
+            this.button6.Size = new System.Drawing.Size(204, 33);
             this.button6.TabIndex = 11;
             this.button6.Text = "Hint";
             this.button6.UseVisualStyleBackColor = false;
@@ -370,7 +370,7 @@
             this.button7.BackColor = System.Drawing.Color.White;
             this.button7.Location = new System.Drawing.Point(795, 596);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(154, 28);
+            this.button7.Size = new System.Drawing.Size(164, 34);
             this.button7.TabIndex = 12;
             this.button7.Text = "Change Username";
             this.button7.UseVisualStyleBackColor = false;
@@ -378,9 +378,9 @@
             // 
             // usernameBox
             // 
-            this.usernameBox.Location = new System.Drawing.Point(955, 597);
+            this.usernameBox.Location = new System.Drawing.Point(965, 597);
             this.usernameBox.Name = "usernameBox";
-            this.usernameBox.Size = new System.Drawing.Size(141, 26);
+            this.usernameBox.Size = new System.Drawing.Size(131, 26);
             this.usernameBox.TabIndex = 13;
             // 
             // GameGUI
