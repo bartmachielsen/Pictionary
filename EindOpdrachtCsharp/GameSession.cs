@@ -18,12 +18,24 @@ namespace EindOpdrachtCsharp
 
         public SessionListener stateListener;
 
+        public struct Option
+        {
+            public string option { get; set; }
+            private string[] hints { get; set; }
+
+            public Option(string option, string[] hints)
+            {
+                this.option = option;
+                this.hints = hints;
+            }
+        }
         public const int maximumGuesses = 3;
+        public const int maxOptions = 100;
 
         public List<GameServer> participants = new List<GameServer>();
-        public string[] alloptions;
-        public string[] options = new string[100];
-        public string[] hints;
+        
+        private List<Option> options = new List<Option>();
+
         public Timer timer;
         public int id { get; set; }
         public Random random = new Random();
@@ -42,13 +54,35 @@ namespace EindOpdrachtCsharp
 
         public GameSession()
         {
-            alloptions = File.ReadAllLines("../../Resources/options.txt");
-            for (int i = 0; i < options.Length; i++)
-            {
-                int index = random.Next(0, alloptions.Length);
-                options[i] = alloptions[index];
-            }
+            string[] alloptions = File.ReadAllLines("../../Resources/options.txt");
+            string[] hints = File.ReadAllLines("../../Resources/hints.txt");
+            
 
+            for (int i = 0; i < alloptions.Length; i++)
+            {
+                string keyword = alloptions[0];
+                string hintsFullLength = null;
+                foreach (var hintslength in hints)
+                    if (hintslength.Split('-').Length >= 0)
+                        if (hintslength.Split('-')[0] == keyword)
+                            hintsFullLength = hintslength;
+
+                string[] hintsarray = null;
+                if (hintsFullLength != null)
+                {
+                    string[] splitted = hintsFullLength.Split('-');
+                    hintsarray = new string[splitted.Length-1];
+                    for (int j = 1; j < splitted.Length; j++)
+                        hintsarray[j - 1] = splitted[j];
+                }
+                options.Add(new Option(keyword, hintsarray));
+            }
+            options.Sort((Option o1, Option o2) => random.Next(0, 2));
+            options = options.FindAll((Option o1) => random.Next(0, 1) == 1);
+            int maxOptions2 = maxOptions;
+            if (maxOptions2 > options.Count)
+                maxOptions2 = options.Count;
+            options = options.GetRange(0, maxOptions2);
             score = new SessionScore();
         }
 
@@ -160,8 +194,9 @@ namespace EindOpdrachtCsharp
                 details.participants.Add(participant.name);
             
             details.drawer = drawer;
-            details.options = options;
-            
+            details.options = new string[options.Count];
+            for (int i = 0; i < details.options.Length; i++)
+                details.options[i] = options.ElementAt(i).option;
             foreach (var participant in participants)
             {
                 details.isDrawer = drawer == participant.name;
