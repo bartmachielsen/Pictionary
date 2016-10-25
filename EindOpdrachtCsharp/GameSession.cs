@@ -53,8 +53,9 @@ namespace EindOpdrachtCsharp
 
         private static string[] randomUserNames =
         {
-            "PirateHacker", "MasterDrawer", "DrawForLife", "RandomPlayer",
-            "Hacker"
+            "Jaap", "Kees", "Olaf", "Jan", "Piet", "Karin", "Els", "Mariet", "Kim",
+            "Bart", "Nard", "Sjaak", "Sjan", "Maarten", "Jamie", "Koen", "Anne", "Barbie",
+            "Eva", "Ilse", "Achmed", "Muis"
         };
 
         public GameSession()
