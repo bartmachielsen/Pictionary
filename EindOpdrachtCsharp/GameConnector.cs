@@ -11,6 +11,7 @@ namespace EindOpdrachtCsharp
     class GameConnector: ServerConnector
     {
         private DataServer server;
+        private int currentID = 0;
         public GameConnector(int port) : base(port)
         {
             this.server = new DataServer();
@@ -23,7 +24,8 @@ namespace EindOpdrachtCsharp
             
 
             GameServer server = new GameServer(client);
-
+            server.serverID = currentID;
+            currentID++;
             new Thread(() => server.checkInfinite()).Start();
 
 

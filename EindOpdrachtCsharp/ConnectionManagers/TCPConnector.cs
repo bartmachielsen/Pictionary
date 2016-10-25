@@ -20,10 +20,34 @@ namespace EindOpdrachtCsharp.ConnectionManagers
         public delegate void DataReceived(object data, object sender);
         public DataReceived notifyOnData;
 
+        public enum ErrorLevel
+        {
+            SERIALIZATIONERROR,
+            SOCKETERROR,
+            UKNOWN
+        }
+        public static ErrorLevel allowedErrorLevel = ErrorLevel.SERIALIZATIONERROR;
+
+        public delegate void ConnectionError(ErrorLevel errorLevel, string errorMessage, object sender);
+
+        public ConnectionError errorNotifier;
+
+
         public TCPConnector(TcpClient client)
         {
             this.client = client;
             stream = client.GetStream();
+        }
+
+        public void close()
+        {
+
+            connected = false;
+            try
+            {
+                client.Close();
+            }
+            catch (Exception) { }
         }
 
         public virtual void sendMessage(CommandsToSend command, object data)
@@ -33,7 +57,11 @@ namespace EindOpdrachtCsharp.ConnectionManagers
 
         public virtual void sendData(object data)
         {
-            if (!data.GetType().IsSerializable) return;
+            if (!data.GetType().IsSerializable)
+            {
+                errorNotifier.Invoke(ErrorLevel.SERIALIZATIONERROR, data +"", this);
+                return;
+            }
             try
 
             {
@@ -42,8 +70,20 @@ namespace EindOpdrachtCsharp.ConnectionManagers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                if (errorNotifier == null) return;
+                if (e is SerializationException)
+                {
+                    errorNotifier.Invoke(ErrorLevel.SERIALIZATIONERROR, e.Message, this);
+                    return;
+                }
+                if (e is SocketException)
+                {
+                    errorNotifier.Invoke(ErrorLevel.SOCKETERROR, e.Message, this);
+                    return;
+                }
+                errorNotifier.Invoke(ErrorLevel.UKNOWN, e.Message, this);
             }
+        
         }
 
         public object checkForData()
@@ -55,7 +95,18 @@ namespace EindOpdrachtCsharp.ConnectionManagers
             }
             catch (Exception e)
             {
-                //Console.Error.WriteLine(e);
+                if (errorNotifier == null) return null;
+                if (e is SerializationException)
+                {
+                    errorNotifier.Invoke(ErrorLevel.SERIALIZATIONERROR, e.Message, this);
+                    return null;
+                }
+                if (e is SocketException)
+                {
+                    errorNotifier.Invoke(ErrorLevel.SOCKETERROR, e.Message, this);
+                    return null;
+                }
+                errorNotifier.Invoke(ErrorLevel.UKNOWN, e.Message, this);
             }
             return null;
         }

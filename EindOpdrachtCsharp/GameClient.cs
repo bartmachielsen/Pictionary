@@ -32,6 +32,7 @@ namespace EindOpdrachtCsharp
             Console.WriteLine("SENDING " + data);
         }
 
+
         public override void parseReceivedObject(object obj)
         {
             base.parseReceivedObject(obj);

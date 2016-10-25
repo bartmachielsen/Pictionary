@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EindOpdrachtCsharp
 {
-    abstract class ServerConnector
+    public abstract class ServerConnector
     {
         private TcpListener listener;
         public int port { get; set; }

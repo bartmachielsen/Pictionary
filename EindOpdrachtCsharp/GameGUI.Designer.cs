@@ -45,6 +45,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.drawerLabel = new System.Windows.Forms.Label();
             this.playerCount = new System.Windows.Forms.Label();
             this.sessionDetails = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
@@ -52,7 +53,6 @@
             this.clearPanel = new System.Windows.Forms.Button();
             this.selectItems = new System.Windows.Forms.ListView();
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.drawerLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.widthBox)).BeginInit();
@@ -75,7 +75,7 @@
             this.StateLabel.BackColor = System.Drawing.Color.Transparent;
             this.StateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StateLabel.ForeColor = System.Drawing.Color.White;
-            this.StateLabel.Location = new System.Drawing.Point(1112, 3);
+            this.StateLabel.Location = new System.Drawing.Point(1094, 3);
             this.StateLabel.Name = "StateLabel";
             this.StateLabel.Size = new System.Drawing.Size(183, 26);
             this.StateLabel.TabIndex = 2;
@@ -227,6 +227,16 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Lobby Info";
             // 
+            // drawerLabel
+            // 
+            this.drawerLabel.AutoSize = true;
+            this.drawerLabel.Location = new System.Drawing.Point(31, 90);
+            this.drawerLabel.Name = "drawerLabel";
+            this.drawerLabel.Size = new System.Drawing.Size(102, 20);
+            this.drawerLabel.TabIndex = 2;
+            this.drawerLabel.Text = "{0} is Drawer!";
+            this.drawerLabel.Click += new System.EventHandler(this.drawerLabel_Click);
+            // 
             // playerCount
             // 
             this.playerCount.AutoSize = true;
@@ -301,15 +311,6 @@
             // Option
             // 
             this.Option.Width = 100;
-            // 
-            // drawerLabel
-            // 
-            this.drawerLabel.AutoSize = true;
-            this.drawerLabel.Location = new System.Drawing.Point(27, 109);
-            this.drawerLabel.Name = "drawerLabel";
-            this.drawerLabel.Size = new System.Drawing.Size(102, 20);
-            this.drawerLabel.TabIndex = 2;
-            this.drawerLabel.Text = "{0} is Drawer!";
             // 
             // GameGUI
             // 

@@ -30,9 +30,17 @@ namespace EindOpdrachtCsharp
             drawPanel.MouseMove += mouseEvent;
             drawPanel.MouseClick += mouseClick;
             colorPanel.MouseClick += selectColor;
+            waiting();
             this.client = client;
             client.notifyOnData += parseData;
             client.sendData(CommandsToSend.CONNECT);
+            this.FormClosing += closed;
+            
+        }
+
+        public void closed(object sender, EventArgs args)
+        {
+            client.close();
         }
 
         public void selectColor(object sender, EventArgs args)
@@ -45,7 +53,14 @@ namespace EindOpdrachtCsharp
                 colorPanel.BackColor = color;
             }
         }
-
+        /// <summary>
+        /// SHOW WAITER THAT HE IS WAITING FOR OTHER PLAYERS
+        /// TODO BETTER VISUALISE
+        /// </summary>
+        public void waiting()
+        {
+            StateLabel.Text = "WAITING...";
+        }
         public void parseData(object data, object sender)
         {
             if (this.InvokeRequired)
@@ -70,7 +85,9 @@ namespace EindOpdrachtCsharp
                         case CommandsToSend.STARTGUESSING:
                             canGues = true;
                             break;
-
+                        case CommandsToSend.WAITINGFORSESSION:
+                            waiting();
+                            break;
 
                     }
                 }
@@ -87,6 +104,13 @@ namespace EindOpdrachtCsharp
                         case CommandsToSend.WRONGANSWER:
                             answerResponse(messag.data.ToString(), false);
                             break;
+                        case CommandsToSend.PARTICIPANTSUPDATE:
+                            this.listBox2.Items.Clear();
+                            List<string> list = (List<string>) messag.data;
+                            this.playerCount.Text = $"{list.Count} deelnemers";
+                            this.listBox2.Items.AddRange(list.ToArray());
+                            break;
+                        
                     }
                 
                 }
@@ -140,11 +164,11 @@ namespace EindOpdrachtCsharp
             }
 
             this.sessionDetails.Text = $"sessie {sessionDetails.sessionid}";
-            this.playerCount.Text = $"{sessionDetails.participants.Count} deelnemers";
             this.drawerLabel.Text = $"{sessionDetails.drawer} is Drawer!";
             this.Text = sessionDetails.name;
+
             this.listBox2.Items.Clear();
-            
+            this.playerCount.Text = $"{sessionDetails.participants.Count} deelnemers";
             this.listBox2.Items.AddRange(sessionDetails.participants.ToArray());
             if (sessionDetails.isDrawer)
             {
@@ -409,6 +433,11 @@ namespace EindOpdrachtCsharp
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void drawerLabel_Click(object sender, EventArgs e)
         {
 
         }

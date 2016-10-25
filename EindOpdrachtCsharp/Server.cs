@@ -10,14 +10,18 @@ namespace EindOpdrachtCsharp
 {
     public class GameServer : TCPConnector
     {
+        public int serverID = 0;
         
         public bool ready { get; set; }
         public bool drawer { get; set; }
 
         public string name { get; set; }
 
+        
+
         public List<PlayerScore> scores = new List<PlayerScore>();
 
+        
         public GameServer(TcpClient client) : base(client)
         {
 

@@ -10,14 +10,14 @@ using EindOpdrachtCsharp.ConnectionManagers;
 
 namespace EindOpdrachtCsharp
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
 
             new Thread(()=> new GameConnector(180)).Start();
 
-            for (int i = 0; i < 3; i++)
+            /*for (int i = 0; i < 3; i++)
             {
                 GameClient connector = new GameClient(new TcpClient(ServerConnector.LocalIPAddress().ToString(), 180));
                 new Thread(() => connector.checkInfinite()).Start();
@@ -27,7 +27,19 @@ namespace EindOpdrachtCsharp
                     Application.EnableVisualStyles();
                     Application.Run(new GameGUI(connector));
                 }).Start();
-            }
+            }*/
+        }
+
+        public static void startClient()
+        {
+            GameClient connector = new GameClient(new TcpClient(ServerConnector.LocalIPAddress().ToString(), 180));
+            new Thread(() => connector.checkInfinite()).Start();
+
+            new Thread(() =>
+            {
+                Application.EnableVisualStyles();
+                Application.Run(new GameGUI(connector));
+            }).Start();
         }
     }
 }

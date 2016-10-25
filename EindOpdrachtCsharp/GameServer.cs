@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using EindOpdrachtCsharp.ConnectionManagers;
 
 namespace EindOpdrachtCsharp
 {
@@ -11,8 +12,8 @@ namespace EindOpdrachtCsharp
 
     class DataServer
     {
-        public const int amountNeeded = 3;
-        public const int maxAmount = 3;
+        public static int amountNeeded = 3;
+        public static int maxAmount = 3;
 
         public List<GameServer> servers = new List<GameServer>();
 
@@ -25,10 +26,12 @@ namespace EindOpdrachtCsharp
         public void addServer(GameServer server)
         {
             servers.Add(server);
+            server.errorNotifier += deleteSafely;
             Console.WriteLine($"ADDING GAMESERVER {servers.Count} of {amountNeeded}");
             
             waiting.Add(server);
 
+            server.sendData(CommandsToSend.WAITINGFORSESSION);
             
             if (waiting.Count >= amountNeeded)
             {
@@ -36,18 +39,34 @@ namespace EindOpdrachtCsharp
             }
         }
 
+        private void deleteSafely(TCPConnector.ErrorLevel errorlevel, string errormessage, object sender)
+        {
+            if (sender is GameServer && (int)errorlevel >= (int)TCPConnector.allowedErrorLevel)
+            {
+                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SERVER \n errorlevel:{errorlevel} \n message:{errormessage} \n server:{sender}");
+                GameServer server = (GameServer)sender;
+                server.close();
+                this.waiting.RemoveAll((GameServer serverPart) => server.serverID == serverPart.serverID);
+                this.servers.RemoveAll((GameServer serverPart) => server.serverID == serverPart.serverID);
+            }
+            else
+            {
+                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SERVER \n errorlevel:{errorlevel} \n message:{errormessage} \n server:{sender}");
+            }
+        }
+
+
         public void newSessionFromOldSession()
         {
-            Console.WriteLine($"CREATED SESSION {sessions.Count}");
-
+            Console.WriteLine($"CREATED SESSION {sessions.Count} WITH {waiting.Count} WAITING");
+            if (waiting.Count < amountNeeded)
+                return;
             GameSession session = new GameSession();
             session.id = sessions.Count;
             if (waiting.Count > maxAmount)
             {
-                List<GameServer> added = new List<GameServer>();
-                added.AddRange(waiting.GetRange(0,maxAmount));
-                added.RemoveRange(0,maxAmount);
-                session.uploadParticipants(added);
+                session.uploadParticipants(waiting.GetRange(0, maxAmount));
+                waiting.RemoveRange(0, maxAmount);
             }
             else
             {
@@ -64,6 +83,8 @@ namespace EindOpdrachtCsharp
         public void clearSessionandNew(GameSession session)
         {
             waiting.AddRange(session.participants);
+            foreach (var participant in session.participants)
+                participant.sendData(CommandsToSend.WAITINGFORSESSION);
             newSessionFromOldSession();
         }
 
@@ -106,7 +127,9 @@ namespace EindOpdrachtCsharp
         WRONGANSWER,
         CORRECTANSWER,
         BLOCKEDFROMGUESSING,
-        STARTGUESSING
+        STARTGUESSING,
+        PARTICIPANTSUPDATE,
+        WAITINGFORSESSION
     }
 
     [Serializable]

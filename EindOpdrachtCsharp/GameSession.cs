@@ -5,8 +5,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
+using System.Windows.Forms;
 using EindOpdrachtCsharp.ConnectionManagers;
+using Timer = System.Timers.Timer;
 
 namespace EindOpdrachtCsharp
 {
@@ -57,13 +58,41 @@ namespace EindOpdrachtCsharp
             this.participants = participants;
             foreach (var participant in participants)
             {
+                participant.errorNotifier += participantError;
                 participant.scores.Add(new PlayerScore());
 
                 if (participant.name == null)
                     participant.name = getRandomUserName();
                 participant.latestScore().name = participant.name;
+
+                
             }
 
+        }
+
+        public void participantError(TCPConnector.ErrorLevel errorLevel, string message, object participant)
+        {
+            if (finished) return;
+            if (participant is GameServer && (int) errorLevel >= (int) TCPConnector.allowedErrorLevel)
+            {
+                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SESSION \n errorlevel:{errorLevel} \n message:{message} \n server:{participant}");
+                GameServer server = (GameServer) participant;
+                server.close();
+                this.participants.RemoveAll((GameServer serverPart) => server.serverID == serverPart.serverID);
+                Console.WriteLine("PARTICIPANT REMOVED NEW SIZE:" + this.participants.Count);
+                List<string> participants = new List<string>();
+                foreach (var partici in this.participants)
+                    participants.Add(partici.name);
+                sendAllParticipants(CommandsToSend.PARTICIPANTSUPDATE,participants);
+                if (server.drawer || participants.Count < DataServer.amountNeeded)
+                {
+                    finish(null);
+                }
+            }
+            else
+            {
+                Console.WriteLine($"SAFE ERROR WITHOUT CONS HAS OCCURED LEVEL: SESSION \n errorlevel:{errorLevel} \n message:{message} \n server:{participant}");
+            }
         }
 
         private string getRandomUserName()
@@ -101,6 +130,7 @@ namespace EindOpdrachtCsharp
         public void selectDrawer()
         {
             Random random = new Random();
+            Console.WriteLine(participants.Count + "OF TOTAL PEOPLE");
             GameServer server = participants.ElementAt(random.Next(0,participants.Count));
             server.notifyOnData += parseDataFromDrawer;
             server.sendData(CommandsToSend.DRAWER);
@@ -177,23 +207,24 @@ namespace EindOpdrachtCsharp
 
         public void finish(GameServer winner)
         {
-            timer.Stop();
-
-            winner.latestScore().answer = answer;
-            winner.latestScore().timeScore = 1000 - ((int)score.totalTime.TotalSeconds*10);
-            if (winner.latestScore().timeScore < 200)
-                winner.latestScore().timeScore = 200;
-
-            foreach (var participant in participants)
+            timer?.Stop();
+            if (winner != null)
             {
-                if (participant.drawer)
-                {
-                    participant.latestScore().timeScore = winner.latestScore().timeScore;
-                }
-                score.players.Add(participant.latestScore());
-            }
+                winner.latestScore().answer = answer;
+                winner.latestScore().timeScore = 1000 - ((int) score.totalTime.TotalSeconds*10);
+                if (winner.latestScore().timeScore < 200)
+                    winner.latestScore().timeScore = 200;
 
-            
+                foreach (var participant in participants)
+                {
+                    if (participant.drawer)
+                    {
+                        participant.latestScore().timeScore = winner.latestScore().timeScore;
+                    }
+                    score.players.Add(participant.latestScore());
+                }
+
+            }
             sendAllParticipants(score);
 
             finished = true;
@@ -245,7 +276,11 @@ namespace EindOpdrachtCsharp
                 server.sendData(send);
         }
 
-
+        public void sendAllParticipants(CommandsToSend command, object send)
+        {
+            foreach (var server in participants)
+                server.sendMessage(command,send);
+        }
         public void pointDrawn(DrawPoint draw)
         {
             foreach (var server in participants)
