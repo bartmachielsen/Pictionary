@@ -52,6 +52,7 @@
             this.clearPanel = new System.Windows.Forms.Button();
             this.selectItems = new System.Windows.Forms.ListView();
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.drawerLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.widthBox)).BeginInit();
@@ -215,6 +216,7 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox4.Controls.Add(this.drawerLabel);
             this.groupBox4.Controls.Add(this.playerCount);
             this.groupBox4.Controls.Add(this.sessionDetails);
             this.groupBox4.ForeColor = System.Drawing.Color.White;
@@ -300,6 +302,15 @@
             // 
             this.Option.Width = 100;
             // 
+            // drawerLabel
+            // 
+            this.drawerLabel.AutoSize = true;
+            this.drawerLabel.Location = new System.Drawing.Point(27, 109);
+            this.drawerLabel.Name = "drawerLabel";
+            this.drawerLabel.Size = new System.Drawing.Size(102, 20);
+            this.drawerLabel.TabIndex = 2;
+            this.drawerLabel.Text = "{0} is Drawer!";
+            // 
             // GameGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -354,5 +365,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.NumericUpDown widthBox;
+        private System.Windows.Forms.Label drawerLabel;
     }
 }

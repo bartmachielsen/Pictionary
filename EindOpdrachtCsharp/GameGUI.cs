@@ -141,10 +141,11 @@ namespace EindOpdrachtCsharp
 
             this.sessionDetails.Text = $"sessie {sessionDetails.sessionid}";
             this.playerCount.Text = $"{sessionDetails.participants.Count} deelnemers";
-            this.drawerLabel.Text = $"{sessionDetails.drawer} is drawing!";
+            this.drawerLabel.Text = $"{sessionDetails.drawer} is Drawer!";
             this.Text = sessionDetails.name;
-            this.connected.Items.Clear();
-            this.connected.Items.AddRange(sessionDetails.participants.ToArray());
+            this.listBox2.Items.Clear();
+            
+            this.listBox2.Items.AddRange(sessionDetails.participants.ToArray());
             if (sessionDetails.isDrawer)
             {
                 StateLabel.Text = "Drawer";
