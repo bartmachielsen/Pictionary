@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameGUI));
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Player1:  1000 (3 pogingen)");
             this.drawPanel = new System.Windows.Forms.Panel();
+            this.hintLabel = new System.Windows.Forms.Label();
+            this.waitingLabel = new System.Windows.Forms.Label();
+            this.waitingPicture = new System.Windows.Forms.PictureBox();
             this.StateLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.highScores = new System.Windows.Forms.ListView();
@@ -53,17 +56,14 @@
             this.clearPanel = new System.Windows.Forms.Button();
             this.selectItems = new System.Windows.Forms.ListView();
             this.Option = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.waitingPicture = new System.Windows.Forms.PictureBox();
-            this.waitingLabel = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
-            this.hintLabel = new System.Windows.Forms.Label();
             this.drawPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.waitingPicture)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.widthBox)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.waitingPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // drawPanel
@@ -77,6 +77,40 @@
             this.drawPanel.Name = "drawPanel";
             this.drawPanel.Size = new System.Drawing.Size(1100, 475);
             this.drawPanel.TabIndex = 0;
+            // 
+            // hintLabel
+            // 
+            this.hintLabel.AutoSize = true;
+            this.hintLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hintLabel.ForeColor = System.Drawing.Color.Red;
+            this.hintLabel.Location = new System.Drawing.Point(18, 17);
+            this.hintLabel.Name = "hintLabel";
+            this.hintLabel.Size = new System.Drawing.Size(75, 29);
+            this.hintLabel.TabIndex = 2;
+            this.hintLabel.Text = "{hint}";
+            this.hintLabel.Visible = false;
+            // 
+            // waitingLabel
+            // 
+            this.waitingLabel.AutoSize = true;
+            this.waitingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.waitingLabel.Location = new System.Drawing.Point(255, 351);
+            this.waitingLabel.Name = "waitingLabel";
+            this.waitingLabel.Size = new System.Drawing.Size(559, 32);
+            this.waitingLabel.TabIndex = 1;
+            this.waitingLabel.Text = "You Are Waiting For An Available Lobby";
+            this.waitingLabel.Visible = false;
+            // 
+            // waitingPicture
+            // 
+            this.waitingPicture.Image = ((System.Drawing.Image)(resources.GetObject("waitingPicture.Image")));
+            this.waitingPicture.Location = new System.Drawing.Point(375, 40);
+            this.waitingPicture.Name = "waitingPicture";
+            this.waitingPicture.Size = new System.Drawing.Size(299, 293);
+            this.waitingPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.waitingPicture.TabIndex = 0;
+            this.waitingPicture.TabStop = false;
+            this.waitingPicture.Visible = false;
             // 
             // StateLabel
             // 
@@ -112,7 +146,7 @@
             this.highScores.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.highScores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.highScores.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem3});
             this.highScores.Location = new System.Drawing.Point(7, 27);
             this.highScores.MultiSelect = false;
             this.highScores.Name = "highScores";
@@ -120,7 +154,6 @@
             this.highScores.TabIndex = 0;
             this.highScores.UseCompatibleStateImageBehavior = false;
             this.highScores.View = System.Windows.Forms.View.Details;
-            this.highScores.SelectedIndexChanged += new System.EventHandler(this.highScores_SelectedIndexChanged);
             // 
             // groupBox2
             // 
@@ -196,7 +229,6 @@
             this.colorPanel.Name = "colorPanel";
             this.colorPanel.Size = new System.Drawing.Size(82, 45);
             this.colorPanel.TabIndex = 5;
-            this.colorPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.colorPanel_Paint);
             // 
             // button3
             // 
@@ -244,7 +276,6 @@
             this.drawerLabel.Size = new System.Drawing.Size(102, 20);
             this.drawerLabel.TabIndex = 2;
             this.drawerLabel.Text = "{0} is Drawer!";
-            this.drawerLabel.Click += new System.EventHandler(this.drawerLabel_Click);
             // 
             // playerCount
             // 
@@ -321,29 +352,6 @@
             // 
             this.Option.Width = 100;
             // 
-            // waitingPicture
-            // 
-            this.waitingPicture.Image = ((System.Drawing.Image)(resources.GetObject("waitingPicture.Image")));
-            this.waitingPicture.Location = new System.Drawing.Point(375, 40);
-            this.waitingPicture.Name = "waitingPicture";
-            this.waitingPicture.Size = new System.Drawing.Size(299, 293);
-            this.waitingPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.waitingPicture.TabIndex = 0;
-            this.waitingPicture.TabStop = false;
-            this.waitingPicture.Visible = false;
-            this.waitingPicture.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // waitingLabel
-            // 
-            this.waitingLabel.AutoSize = true;
-            this.waitingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.waitingLabel.Location = new System.Drawing.Point(255, 351);
-            this.waitingLabel.Name = "waitingLabel";
-            this.waitingLabel.Size = new System.Drawing.Size(559, 32);
-            this.waitingLabel.TabIndex = 1;
-            this.waitingLabel.Text = "You Are Waiting For An Available Lobby";
-            this.waitingLabel.Visible = false;
-            // 
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.White;
@@ -353,18 +361,7 @@
             this.button6.TabIndex = 11;
             this.button6.Text = "Hint";
             this.button6.UseVisualStyleBackColor = false;
-            // 
-            // hintLabel
-            // 
-            this.hintLabel.AutoSize = true;
-            this.hintLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hintLabel.ForeColor = System.Drawing.Color.Red;
-            this.hintLabel.Location = new System.Drawing.Point(23, 16);
-            this.hintLabel.Name = "hintLabel";
-            this.hintLabel.Size = new System.Drawing.Size(75, 29);
-            this.hintLabel.TabIndex = 2;
-            this.hintLabel.Text = "{hint}";
-            this.hintLabel.Visible = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
             // 
             // GameGUI
             // 
@@ -390,13 +387,13 @@
             this.Load += new System.EventHandler(this.GameGUI_Load);
             this.drawPanel.ResumeLayout(false);
             this.drawPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.waitingPicture)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.widthBox)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.waitingPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

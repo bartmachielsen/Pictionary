@@ -45,7 +45,7 @@ namespace EindOpdrachtCsharp
         public Option answerOption;
 
         public bool finished = false;
-        public string drawer;
+        public GameServer drawer;
 
         private SessionScore score;
 
@@ -173,7 +173,7 @@ namespace EindOpdrachtCsharp
             server.notifyOnData += parseDataFromDrawer;
             server.sendData(CommandsToSend.DRAWER);
             server.drawer = true;
-            drawer = server.name;
+            drawer = server;
             Console.WriteLine("SELECTED DRAWER IS " + drawer + " " + server);
             foreach (var watcher in participants)
                 if (watcher != server)
@@ -197,13 +197,13 @@ namespace EindOpdrachtCsharp
             foreach (var participant in participants)
                 details.participants.Add(participant.name);
             
-            details.drawer = drawer;
+            details.drawer = drawer.name;
             details.options = new string[options.Count];
             for (int i = 0; i < details.options.Length; i++)
                 details.options[i] = options.ElementAt(i).option;
             foreach (var participant in participants)
             {
-                details.isDrawer = drawer == participant.name;
+                details.isDrawer = drawer.serverID == participant.serverID;
                 details.name = participant.name;
                 participant.sendData(details);
 
@@ -247,7 +247,7 @@ namespace EindOpdrachtCsharp
                 {
                     case CommandsToSend.REQUESTHINT:
                         // SEND HINT OR SEND BLOCK OR SEND NO
-                        if(answerOption == null || answerOption.hints.Length == 0) 
+                        if(answerOption == null || answerOption.hints == null || answerOption.hints.Length == 0) 
                             gameSender.sendMessage(CommandsToSend.REQUESTHINT, "NO");
                         else if (gameSender.latestScore().hintGuessed >= maximumHints)
                             gameSender.sendMessage(CommandsToSend.REQUESTHINT, "BLOCK");

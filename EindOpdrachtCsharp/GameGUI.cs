@@ -4,8 +4,11 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Timers;
 using System.Windows.Forms;
 using EindOpdrachtCsharp.ConnectionManagers;
+using Timer = System.Windows.Forms.Timer;
 
 namespace EindOpdrachtCsharp
 {
@@ -115,19 +118,30 @@ namespace EindOpdrachtCsharp
 
                         case CommandsToSend.REQUESTHINT:
                             string hint = messag.data + "";
-
+                            hintLabel.Visible = true;
                             if (hint == "NO")
                             {
-                                // TODO SHOW HINTS UP
+                                hintLabel.Text = "No hints available!"; // TODO SHOW HINTS UP
                             }
                             else if (hint == "BLOCK")
                             {
-                                // TODO SHOW HINT LIMIT REACHED
+                                hintLabel.Text = "Hint limit reached!"; // TODO SHOW HINT LIMIT REACHED
                             }
                             else
                             {
-                                // TODO SHOW HINT
+                                hintLabel.Text = hint;
                             }
+                            button6.Enabled = false;
+                            var timer = new Timer();
+                            timer.Interval = 4000;
+                            timer.Tick += (object send, EventArgs args) =>
+                            {
+                                hintLabel.Visible = false;
+                                timer.Stop();
+                                button6.Enabled = true;
+                            };
+                            timer.Enabled = true;
+                            
                             break;
 
                     }
@@ -422,11 +436,7 @@ namespace EindOpdrachtCsharp
             }
         }
 
-        private void highScores_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
+      
         private void button4_Click(object sender, EventArgs e)
         {
             currentmode = mode.DRAW;
@@ -447,32 +457,16 @@ namespace EindOpdrachtCsharp
             currentmode = mode.TRIANGLE;
         }
 
-        private void colorPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+     
 
         private void button5_Click(object sender, EventArgs e)
         {
             currentmode = mode.GUM;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+       
 
-        }
-
-        private void drawerLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
+        private void button6_Click_1(object sender, EventArgs e)
         {
             hintRequest();
         }
