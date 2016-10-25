@@ -72,7 +72,7 @@ namespace EindOpdrachtCsharp
             if (this.InvokeRequired)
             {
                 if(data != null && sender != null)
-                    this.Invoke(new MethodInvoker(() => parseData(data, sender)));
+                    this.BeginInvoke(new MethodInvoker(() => this.parseData(data, sender)));
 
             }
             else

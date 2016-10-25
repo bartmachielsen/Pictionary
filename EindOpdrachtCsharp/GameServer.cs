@@ -176,7 +176,6 @@ namespace EindOpdrachtCsharp
     public class SessionScore
     {
         public DateTime Created;
-        public string drawer;
         public TimeSpan totalTime;
         public PlayerScore[] players = new PlayerScore[5];
 
@@ -198,6 +197,17 @@ namespace EindOpdrachtCsharp
             return players.ToArray();
         }
 
+        public void winner(out PlayerScore playerscore)
+        {
+            foreach (var player in players)
+            {
+                playerscore = player;
+                if (player.winner)
+                    return;
+            }
+            playerscore = null;
+        }
+
         public override string ToString()
         {
             string text = "";
@@ -212,7 +222,9 @@ namespace EindOpdrachtCsharp
     public class PlayerScore
     {
         public string name;
+        public bool drawer = false;
         public string answer;
+        public bool winner = false;
         public int hintGuessed = 0;
         public string[] wrongguesses = new string[0];
         public int totalScore => ((wrongguesses.Length+hintGuessed)*-200) + timeScore;

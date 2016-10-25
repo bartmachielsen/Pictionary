@@ -1,40 +1,187 @@
 <?xml version="1.0"?>
 <ArrayOfSessionScore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SessionScore>
-    <Created>2016-10-25T14:29:00.8808632+02:00</Created>
-    <drawer>DrawForLife</drawer>
+    <Created>2016-10-25T15:04:44.9994115+02:00</Created>
     <totalTime />
     <players>
       <PlayerScore>
-        <name>PirateHacker</name>
+        <name>Els</name>
+        <drawer>false</drawer>
+        <winner>false</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>870</timeScore>
+      </PlayerScore>
+      <PlayerScore>
+        <name>Ilse</name>
+        <drawer>false</drawer>
+        <winner>false</winner>
         <hintGuessed>0</hintGuessed>
         <wrongguesses>
-          <string>mop</string>
-          <string>teddies</string>
-          <string>fork</string>
+          <string>shawl</string>
+          <string>candle</string>
+          <string>lip gloss</string>
         </wrongguesses>
         <timeScore>0</timeScore>
       </PlayerScore>
       <PlayerScore>
-        <name>RandomPlayer</name>
-        <hintGuessed>0</hintGuessed>
-        <wrongguesses>
-          <string>sandal</string>
-          <string>bottle cap</string>
-        </wrongguesses>
-        <timeScore>840</timeScore>
-      </PlayerScore>
-      <PlayerScore>
-        <name>DrawForLife</name>
+        <name>Olaf</name>
+        <drawer>false</drawer>
+        <winner>true</winner>
         <hintGuessed>0</hintGuessed>
         <wrongguesses />
-        <timeScore>840</timeScore>
+        <timeScore>870</timeScore>
       </PlayerScore>
     </players>
   </SessionScore>
   <SessionScore>
-    <Created>2016-10-25T14:46:40.6282792+02:00</Created>
-    <drawer>test51</drawer>
+    <Created>2016-10-25T15:05:02.1316119+02:00</Created>
+    <totalTime />
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-10-25T15:07:05.3549247+02:00</Created>
+    <totalTime />
+    <players>
+      <PlayerScore>
+        <name>Sjan</name>
+        <drawer>false</drawer>
+        <winner>true</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>850</timeScore>
+      </PlayerScore>
+      <PlayerScore>
+        <name>Bart</name>
+        <drawer>false</drawer>
+        <winner>false</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses>
+          <string>mop</string>
+          <string>bottle cap</string>
+          <string>ice cube tray</string>
+        </wrongguesses>
+        <timeScore>0</timeScore>
+      </PlayerScore>
+      <PlayerScore>
+        <name>Ilse</name>
+        <drawer>false</drawer>
+        <winner>false</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>850</timeScore>
+      </PlayerScore>
+    </players>
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-10-25T15:07:25.6132564+02:00</Created>
+    <totalTime />
+    <players>
+      <PlayerScore>
+        <name>Koen</name>
+        <drawer>false</drawer>
+        <winner>false</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>0</timeScore>
+      </PlayerScore>
+      <PlayerScore>
+        <name>Jan</name>
+        <drawer>false</drawer>
+        <winner>true</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>990</timeScore>
+      </PlayerScore>
+      <PlayerScore>
+        <name>Kim</name>
+        <drawer>true</drawer>
+        <winner>false</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>990</timeScore>
+      </PlayerScore>
+    </players>
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-10-25T15:07:29.0713718+02:00</Created>
+    <totalTime />
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-10-25T15:08:49.336959+02:00</Created>
+    <totalTime />
+    <players>
+      <PlayerScore>
+        <name>Bart</name>
+        <drawer>false</drawer>
+        <winner>true</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>970</timeScore>
+      </PlayerScore>
+      <PlayerScore>
+        <name>Karin</name>
+        <drawer>false</drawer>
+        <winner>false</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>0</timeScore>
+      </PlayerScore>
+      <PlayerScore>
+        <name>Mariet</name>
+        <drawer>false</drawer>
+        <winner>false</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>970</timeScore>
+      </PlayerScore>
+    </players>
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-10-25T15:08:58.5262401+02:00</Created>
+    <totalTime />
+    <players>
+      <PlayerScore>
+        <name>Muis</name>
+        <drawer>false</drawer>
+        <winner>true</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>990</timeScore>
+      </PlayerScore>
+      <PlayerScore>
+        <name>Ilse</name>
+        <drawer>false</drawer>
+        <winner>false</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>0</timeScore>
+      </PlayerScore>
+      <PlayerScore>
+        <name>Kees</name>
+        <drawer>true</drawer>
+        <winner>false</winner>
+        <hintGuessed>0</hintGuessed>
+        <wrongguesses />
+        <timeScore>990</timeScore>
+      </PlayerScore>
+    </players>
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-10-25T15:09:03.4844393+02:00</Created>
     <totalTime />
     <players>
       <PlayerScore xsi:nil="true" />

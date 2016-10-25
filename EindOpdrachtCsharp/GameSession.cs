@@ -101,6 +101,7 @@ namespace EindOpdrachtCsharp
             {
                 participant.errorNotifier += participantError;
                 participant.scores.Add(new PlayerScore());
+                participant.latestScore().drawer = participant.drawer;
                 participant.notifyOnData += parseDataFromAll;
                 if(!participant.staticName || participant.name == null)
                     participant.name = getRandomUserName();
@@ -119,15 +120,19 @@ namespace EindOpdrachtCsharp
                 
                 GameServer server = (GameServer) participant;
                 server.close();
-                this.participants.RemoveAll((GameServer serverPart) => server.serverID == serverPart.serverID);
-                Console.WriteLine("PARTICIPANT REMOVED NEW SIZE:" + this.participants.Count);
-                List<string> participants = new List<string>();
-                foreach (var partici in this.participants)
-                    participants.Add(partici.name);
-                sendAllParticipants(CommandsToSend.PARTICIPANTSUPDATE,participants);
+                
                 if (server.drawer || participants.Count < DataServer.amountNeeded)
                 {
                     finish(null);
+                }
+                else
+                {
+                    this.participants.RemoveAll((GameServer serverPart) => server.serverID == serverPart.serverID);
+                    Console.WriteLine("PARTICIPANT REMOVED NEW SIZE:" + this.participants.Count);
+                    List<string> participants = new List<string>();
+                    foreach (var partici in this.participants)
+                        participants.Add(partici.name);
+                    sendAllParticipants(CommandsToSend.PARTICIPANTSUPDATE, participants);
                 }
             }
         }
@@ -285,6 +290,7 @@ namespace EindOpdrachtCsharp
             if (winner != null)
             {
                 winner.latestScore().answer = answer;
+                winner.latestScore().winner = true;
                 winner.latestScore().timeScore = 1000 - ((int) score.totalTime.TotalSeconds*10);
                 if (winner.latestScore().timeScore < 200)
                     winner.latestScore().timeScore = 200;
@@ -303,7 +309,6 @@ namespace EindOpdrachtCsharp
 
             }
             sendAllParticipants(score);
-            score.drawer = drawer.name;
             finished = true;
             stateListener.Invoke(this);
         }
