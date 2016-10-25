@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using EindOpdrachtCsharp.ConnectionManagers;
@@ -35,7 +36,8 @@ namespace EindOpdrachtCsharp
             client.notifyOnData += parseData;
             client.sendData(CommandsToSend.CONNECT);
             this.FormClosing += closed;
-            
+            if(File.Exists("../../Resources/background.png"))
+                BackgroundImage = Image.FromFile("../../Resources/background.png");
         }
 
         public void closed(object sender, EventArgs args)
