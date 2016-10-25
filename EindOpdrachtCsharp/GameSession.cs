@@ -33,6 +33,7 @@ namespace EindOpdrachtCsharp
         public const int maximumGuesses = 3;
         public const int maxOptions = 100;
         public const int maximumHints = 3;
+        public const int maximumSessionLength = 3;
 
         public List<GameServer> participants = new List<GameServer>();
         
@@ -358,6 +359,8 @@ namespace EindOpdrachtCsharp
             if(score.totalTime == null)
                 score.totalTime = new TimeSpan(0,0,0,0);
             score.totalTime = score.totalTime.Add(new TimeSpan(0, 0, 0, 1));
+            if(score.totalTime.TotalMinutes > maximumSessionLength)
+                finish(null);
         }
 
         public void sendAllParticipants(object send)
