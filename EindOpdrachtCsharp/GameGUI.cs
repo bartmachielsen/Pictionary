@@ -175,7 +175,8 @@ namespace EindOpdrachtCsharp
             highScores.Columns[0].Width = highScores.Width;
             foreach (var playerscore in score.playerScore())
             {
-                highScores.Items.Add(playerscore.ToString());
+                if(playerscore != null)
+                    highScores.Items.Add(playerscore + "");
             }
         }
 

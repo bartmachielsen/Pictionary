@@ -56,20 +56,19 @@ namespace EindOpdrachtCsharp
 
         private void deleteSafely(TCPConnector.ErrorLevel errorlevel, string errormessage, object sender)
         {
-            if (sender is GameServer && (int)errorlevel >= (int)TCPConnector.allowedErrorLevel)
+            if (sender is GameServer && (int) errorlevel >= (int) TCPConnector.allowedErrorLevel)
             {
-                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SERVER \n errorlevel:{errorlevel} \n Message:{errormessage} \n server:{sender}");
-                GameServer server = (GameServer)sender;
+                Console.WriteLine(
+                    $"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SERVER \n errorlevel:{errorlevel} \n Message:{errormessage} \n server:{sender}");
+                GameServer server = (GameServer) sender;
                 server.close();
+                server.notifyOnData = null;
+                
                 this.waiting.RemoveAll((GameServer serverPart) => server.serverID == serverPart.serverID);
                 this.servers.RemoveAll((GameServer serverPart) => server.serverID == serverPart.serverID);
             }
-            else
-            {
-                Console.WriteLine($"SAFE ERROR WITH CONS HAS OCCURED LEVEL: SERVER \n errorlevel:{errorlevel} \n Message:{errormessage} \n server:{sender}");
-            }
-        }
 
+        }
 
         public void newSessionFromOldSession()
         {
@@ -189,6 +188,8 @@ namespace EindOpdrachtCsharp
             List<PlayerScore> players = new List<PlayerScore>(this.players);
             players.Sort((delegate(PlayerScore score, PlayerScore score1)
             {
+                if (score == null) return 0;
+                if (score1 == null) return 1;
                 if (score.totalScore == score1.totalScore) return 0;
                 if(score.totalScore > score1.totalScore) return -1;
                 return 1;

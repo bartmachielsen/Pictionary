@@ -30,6 +30,9 @@ namespace EindOpdrachtCsharp
                 this.hints = hints;
             }
         }
+
+        public bool renewed = false;
+
         public const int maximumGuesses = 3;
         public const int maxOptions = 100;
         public const int maximumHints = 3;
@@ -286,7 +289,9 @@ namespace EindOpdrachtCsharp
 
         public void finish(GameServer winner)
         {
-            timer?.Stop();
+            if (finished) return;
+            if(timer != null)
+                timer.Stop();
             if (winner != null)
             {
                 winner.latestScore().answer = answer;
@@ -310,7 +315,16 @@ namespace EindOpdrachtCsharp
             }
             sendAllParticipants(score);
             finished = true;
+
+            foreach (var participant in participants)
+            {
+                participant.notifyOnData = null;
+            }
+
+
             stateListener.Invoke(this);
+
+
         }
 
         public void parseDataFromDrawer(object obj,object sender)

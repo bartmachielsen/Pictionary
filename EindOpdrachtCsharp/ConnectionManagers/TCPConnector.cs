@@ -57,6 +57,7 @@ namespace EindOpdrachtCsharp.ConnectionManagers
 
         public virtual void sendData(object data)
         {
+            if (!connected) return;
             if (!data.GetType().IsSerializable)
             {
                 errorNotifier.Invoke(ErrorLevel.SERIALIZATIONERROR, data +"", this);
