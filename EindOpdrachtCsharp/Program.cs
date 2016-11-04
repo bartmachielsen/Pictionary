@@ -10,7 +10,7 @@ namespace EindOpdrachtCsharp
         {
             new Thread(() => new GameConnector(180)).Start();
             for (int i = 0; i < 3; i++)
-             startClient();
+                startClient();
             /*for (int i = 0; i < 3; i++)
             {
                 GameClient connector = new GameClient(new TcpClient(ServerConnector.LocalIPAddress().ToString(), 180));

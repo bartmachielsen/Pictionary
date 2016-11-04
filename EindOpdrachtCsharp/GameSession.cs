@@ -100,23 +100,25 @@ namespace EindOpdrachtCsharp
         public void participantError(TCPConnector.ErrorLevel errorLevel, string message, object participant)
         {
             if (finished) return;
-            if (participant is GameServer && ((int) errorLevel >= (int) TCPConnector.allowedErrorLevel))
+            if (participant is GameServer && (errorLevel >= TCPConnector.allowedErrorLevel))
             {
                 var server = (GameServer) participant;
+                server.alive = false;
                 server.close();
 
-                if (server.drawer || (participants.Count < DataServer.amountNeeded))
+                this.participants.RemoveAll(serverPart => server.serverID == serverPart.serverID);
+
+                if (server.drawer || (participants.Count <= DataServer.amountNeeded))
                 {
                     finish(null);
                 }
                 else
                 {
-                    this.participants.RemoveAll(serverPart => server.serverID == serverPart.serverID);
                     Console.WriteLine("PARTICIPANT REMOVED NEW SIZE:" + this.participants.Count);
-                    var participants = new List<string>();
+                    var participantslist = new List<string>();
                     foreach (var partici in this.participants)
-                        participants.Add(partici.name);
-                    sendAllParticipants(CommandsToSend.PARTICIPANTSUPDATE, participants);
+                        participantslist.Add(partici.name);
+                    sendAllParticipants(CommandsToSend.PARTICIPANTSUPDATE, participantslist);
                 }
             }
         }

@@ -16,6 +16,7 @@ namespace EindOpdrachtCsharp
 
         public int serverID = 0;
 
+        public bool alive = true;
 
         public GameServer(TcpClient client) : base(client)
         {

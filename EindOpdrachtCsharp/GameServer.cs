@@ -62,9 +62,9 @@ namespace EindOpdrachtCsharp
 
         public void newSessionFromOldSession()
         {
-            Console.WriteLine($"CREATED SESSION {sessions.Count} WITH {waiting.Count} WAITING");
             if (waiting.Count < amountNeeded)
                 return;
+            Console.WriteLine($"CREATED SESSION {sessions.Count} WITH {waiting.Count} WAITING");
             var session = new GameSession();
             session.id = sessions.Count;
             if (waiting.Count > maxAmount)
@@ -87,6 +87,7 @@ namespace EindOpdrachtCsharp
         public void clearSessionandNew(GameSession session)
         {
             waiting.AddRange(session.participants);
+            waiting.AddRange(session.participants.FindAll((delegate(GameServer server) { return !server.alive; })));
             foreach (var participant in session.participants)
                 participant.sendData(CommandsToSend.WAITINGFORSESSION);
 

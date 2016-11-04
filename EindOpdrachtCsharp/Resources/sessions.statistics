@@ -8635,4 +8635,301 @@
     </players>
     <totalTime />
   </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T08:47:49.5030483+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T08:48:03.965137+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T08:48:44.5250443+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T08:50:26.9225931+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T08:51:51.4742176+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T08:51:57.687639+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T08:56:15.0548818+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T08:56:21.5905365+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T08:59:11.1673266+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T09:00:02.0145632+01:00</Created>
+    <players>
+      <PlayerScore>
+        <drawer>false</drawer>
+        <hintGuessed>0</hintGuessed>
+        <name>Maarten</name>
+        <timeScore>0</timeScore>
+        <winner>false</winner>
+        <wrongguesses />
+      </PlayerScore>
+      <PlayerScore>
+        <drawer>false</drawer>
+        <hintGuessed>0</hintGuessed>
+        <name>Els</name>
+        <timeScore>970</timeScore>
+        <winner>false</winner>
+        <wrongguesses />
+      </PlayerScore>
+      <PlayerScore>
+        <drawer>false</drawer>
+        <hintGuessed>0</hintGuessed>
+        <name>Koen</name>
+        <timeScore>970</timeScore>
+        <winner>true</winner>
+        <wrongguesses />
+      </PlayerScore>
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T09:00:12.5025351+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T09:00:15.1843639+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T09:01:07.9871302+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T09:01:16.9103527+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T09:01:19.7863449+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T09:02:04.5529779+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T09:02:36.6570056+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T09:02:43.2376469+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T09:02:49.8774757+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T09:03:43.7329466+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T10:07:10.7271043+01:00</Created>
+    <players>
+      <PlayerScore>
+        <drawer>false</drawer>
+        <hintGuessed>0</hintGuessed>
+        <name>Kees</name>
+        <timeScore>200</timeScore>
+        <winner>false</winner>
+        <wrongguesses />
+      </PlayerScore>
+      <PlayerScore>
+        <drawer>false</drawer>
+        <hintGuessed>0</hintGuessed>
+        <name>Anne</name>
+        <timeScore>200</timeScore>
+        <winner>true</winner>
+        <wrongguesses>
+          <string>coasters</string>
+        </wrongguesses>
+      </PlayerScore>
+      <PlayerScore>
+        <drawer>false</drawer>
+        <hintGuessed>1</hintGuessed>
+        <name>Koen</name>
+        <timeScore>0</timeScore>
+        <winner>false</winner>
+        <wrongguesses>
+          <string>puddle</string>
+          <string>magnet</string>
+          <string>thread</string>
+        </wrongguesses>
+      </PlayerScore>
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T10:09:22.6862464+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
+  <SessionScore>
+    <Created>2016-11-04T10:11:21.4741803+01:00</Created>
+    <players>
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+      <PlayerScore xsi:nil="true" />
+    </players>
+    <totalTime />
+  </SessionScore>
 </ArrayOfSessionScore>
